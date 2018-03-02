@@ -27,7 +27,7 @@ class App extends Component {
             </li>
           </ul>
         </p>
-
+        <a href="#">Browse Projects</a>
       </div>
     );
   }
