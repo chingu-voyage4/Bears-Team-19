@@ -9,25 +9,27 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        <h1 className="App-title">Projects</h1>
-        <p className="App-intro">
-          We connect developers over project ideas
-        </p>
-        <p>
-          This is for developers who:
-          <ul>
-            <li>
-              want to collaborate with other developers on open-source projects
+        <div className="container-fluid text-center py-3">
+          <h1>Projects</h1>
+          
+          <p className="lead">
+            Find your next collaborative project
+          </p>
+          
+          <ul className="list-unstyled my-4">
+            <li className="m-3">
+              Can't think what to build next? Browse our projects
             </li>
-            <li>
-              want to practice their skills on a real project but don't know what to build
+            <li className="m-3">
+              Join a project to collaborate with other developers
             </li>
-            <li>
-              need help from other developers to build their project
+            <li className="m-3">
+              Find collaborators for your projects
             </li>
           </ul>
-        </p>
-        <a href="#">Browse Projects</a>
+
+          <a className="btn btn-primary" href="#">Browse Projects</a>
+        </div>
       </div>
     );
   }
