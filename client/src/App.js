@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import Projects from './Components/Projects';
 import './App.css';
 
 class App extends Component {
@@ -10,6 +11,10 @@ class App extends Component {
     fetch('/api/authors')
       .then(res => res.json())
       .then(authors => this.setState({ authors }));
+// requesting projects to backend
+      fetch('/api/projects')
+        .then(res => res.json())
+        .then(projects => this.setState({ projects }));
   }
 
   render() {
@@ -29,7 +34,9 @@ class App extends Component {
         {this.state.authors.map(author =>
           <li key={author.id}>{author.name}</li>
         )}
+        <h1> Projects</h1>
         </ul>
+        <Projects projects={this.state.projects} />
       </div>
     );
   }
