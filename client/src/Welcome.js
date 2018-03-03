@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Welcome extends Component {
   render() {
     return (
-      <div className="container-fluid text-center py-3">
+      <div className="container-fluid text-center py-3 d-flex flex-column my-auto">
         <h1>Projects</h1>
         
         <p className="lead">
@@ -22,7 +22,9 @@ class Welcome extends Component {
           </li>
         </ul>
 
-        <a className="btn btn-primary" href="#">Browse Projects</a>
+        <div>
+          <a className="btn btn-primary" href="#">Browse Projects</a>
+        </div>
       </div>
     );
   }

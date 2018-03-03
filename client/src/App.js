@@ -10,7 +10,7 @@ class App extends Component {
       <div className="App text-center d-flex flex-column">
         <Header />
 
-        <div className="AppPage">
+        <div className="AppPage d-flex">
           <Welcome />
         </div>
         
