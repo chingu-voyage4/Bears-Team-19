@@ -26,7 +26,7 @@ class HeaderNavbar extends Component {
   }
   render() {
     return (
-      <Navbar color="faded" light expand="md" className="navbar-expand-md">
+      <Navbar color="faded" light expand="sm" className="navbar-expand-sm">
         <NavbarBrand href="/">
           <img src={logo} className="Header-logo" alt="logo" />
           Projects
