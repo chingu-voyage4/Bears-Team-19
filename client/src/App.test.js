@@ -4,6 +4,7 @@ import { shallow, mount, render } from 'enzyme';
 import App from './App';
 import Header from './Header';
 import Welcome from './Welcome';
+import Footer from './Footer';
 
 describe('App component', () => {
   it('renders without crashing', () => {
@@ -20,5 +21,10 @@ describe('App component', () => {
   it('contains the Welcome page', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.find(Welcome)).toHaveLength(1);
+  });
+
+  it('contains a Footer', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find(Footer)).toHaveLength(1);
   });
 });
