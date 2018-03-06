@@ -7,6 +7,7 @@ import {
   Nav,
   NavItem,
   NavLink } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import logo from './logo.svg';
 import './HeaderNavbar.css';
 
@@ -27,7 +28,7 @@ class HeaderNavbar extends Component {
   render() {
     return (
       <Navbar color="faded" light expand="sm" className="navbar-expand-sm">
-        <NavbarBrand href="/">
+        <NavbarBrand tag={Link} to="/">
           <img src={logo} className="Header-logo" alt="logo" />
           Projects
         </NavbarBrand>
@@ -35,13 +36,13 @@ class HeaderNavbar extends Component {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="#">About</NavLink>
+              <NavLink tag={Link} to="#">About</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Register</NavLink>
+              <NavLink tag={Link} to="#">Register</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Login</NavLink>
+              <NavLink tag={Link} to="#">Login</NavLink>
             </NavItem>
           </Nav>
         </Collapse>
