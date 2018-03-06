@@ -24,7 +24,7 @@ class Welcome extends Component {
         </ul>
 
         <div>
-          <Link to="./projects" className="btn btn-primary">Browse Projects</Link>
+          <Link to="/projects" className="btn btn-primary">Browse Projects</Link>
         </div>
       </div>
     );
