@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
 
 describe('App component', () => {
   it('renders without crashing', () => {
