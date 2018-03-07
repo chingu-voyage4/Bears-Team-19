@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -12,7 +13,10 @@ import HeaderNavbar from './HeaderNavbar';
 
 describe('HeaderNavbar component', () => {
   it('should create a Navbar', () => {
-    const wrapper = shallow(<HeaderNavbar />);
+    const wrapper = mount(
+      <MemoryRouter>
+        <HeaderNavbar />
+      </MemoryRouter>);
     expect(wrapper.find(Navbar)).toBeDefined();
   });
 });

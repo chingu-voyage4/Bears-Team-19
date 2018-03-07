@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Welcome extends Component {
   render() {
@@ -23,7 +24,7 @@ class Welcome extends Component {
         </ul>
 
         <div>
-          <a className="btn btn-primary" href="#">Browse Projects</a>
+          <Link to="/projects" className="btn btn-primary">Browse Projects</Link>
         </div>
       </div>
     );
