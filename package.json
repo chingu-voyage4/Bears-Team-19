@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "start": "node ./bin/www",
-        "lint": "./node_modules/.bin/eslint"
+        "lint": "./node_modules/.bin/eslint --fix ."
     },
     "dependencies": {
         "body-parser": "~1.18.2",
