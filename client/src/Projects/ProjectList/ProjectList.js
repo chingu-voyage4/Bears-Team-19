@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProjectItem from './ProjectItem';
+import ProjectItem from './ProjectItem/ProjectItem';
 
 class Projects extends Component {
 
