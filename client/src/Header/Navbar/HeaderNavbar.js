@@ -39,7 +39,7 @@ class HeaderNavbar extends Component {
               <NavLink tag={Link} to="#">About</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="#">Register</NavLink>
+              <NavLink tag={Link} to="/register">Register</NavLink>
             </NavItem>
             <NavItem>
               <NavLink tag={Link} to="#">Login</NavLink>
