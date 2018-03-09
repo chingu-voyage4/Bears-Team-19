@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import Header from './Header';
-import HeaderNavbar from './HeaderNavbar';
+import HeaderNavbar from './Navbar/HeaderNavbar';
 
 describe('Header component', () => {
   it('should render a header element', () => {
