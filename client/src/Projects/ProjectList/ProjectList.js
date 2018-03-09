@@ -5,12 +5,16 @@ class Projects extends Component {
 
   render() {
     let projectItems;
-    if (this.props.projects){
+    if (this.props.projects && this.props.projects.length > 0){
       projectItems = this.props.projects.map(project => {
         return (
           <ProjectItem key={project.title} project={project}/>
         );
       });
+    } else {
+      return(
+          <p className="mt-5">No projects found</p>
+        );
     }
 
     return (
