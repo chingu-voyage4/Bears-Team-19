@@ -20,7 +20,7 @@ class ProjectItem extends Component {
           <CardBody>
             <CardText className="ProjectDescription">{this.props.project.description}</CardText>
           </CardBody>
-          <CardFooter className="d-flex flex-row justify-content-between">
+          <CardFooter className="d-flex flex-row justify-content-between text-muted">
             <div className="ProjectOwner">{this.props.project.author}</div>
             <div className="ProjectDateSaved">
               {this.props.project.lastSaved? formatDate(this.props.project.lastSaved) : ''}
