@@ -12,7 +12,7 @@ class ProjectItem extends Component {
   render() {
     if (this.props.project) {
       return (
-        <Card className="Project mt-3">
+        <Card className="Project mt-3 text-left">
           <CardHeader>
             <CardTitle>{this.props.project.title ? this.props.project.title : 'Untitled'}</CardTitle>
             <KeywordList keywords={this.props.project.keywords} />

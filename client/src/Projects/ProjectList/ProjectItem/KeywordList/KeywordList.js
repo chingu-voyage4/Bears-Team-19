@@ -8,12 +8,12 @@ const KeywordList = (props) => {
 
   let keywords = props.keywords.map((keyword, id) => {
     return (
-        <li key={id} className="Keyword border rounded px-2 m-1">{keyword}</li>
+        <li key={id} className="Keyword border rounded px-2 mr-1">{keyword}</li>
       );
   });
 
   return (
-    <ul className="KeywordList list-unstyled d-flex justify-content-center mb-0">
+    <ul className="KeywordList list-unstyled d-flex justify-content-start mb-0">
       {keywords}
     </ul>  
   );    
