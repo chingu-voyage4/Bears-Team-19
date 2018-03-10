@@ -11,6 +11,7 @@ const ValidProject = (props) => {
         <KeywordList keywords={props.project.keywords} />
       </CardHeader>
       <CardBody>
+        <CardText className="ProjectDescription">{props.project.description}</CardText>
       </CardBody>
     </Card>
   );

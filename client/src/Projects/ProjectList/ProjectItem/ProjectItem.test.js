@@ -80,6 +80,37 @@ describe('ProjectItem component', () => {
   });
 
   // Description
+  it('should display the project\'s description', () => {
+    let project = { title: 'Title', keywords: ['one'], description: 'This is a description' };
+    const wrapper = mount(
+      <ErrorBoundary>
+        <ProjectItem project={project}/>
+      </ErrorBoundary>
+    );
+    expect(wrapper.find('.ProjectDescription')).not.toHaveLength(0);
+    expect(wrapper.text()).toContain(project.description);
+  });
+  
+  it('should display an empty card body if the project has no description', () => {
+    let project = { title: 'Title', keywords: ['one'] };
+    const wrapper = mount(
+      <ErrorBoundary>
+        <ProjectItem project={project}/>
+      </ErrorBoundary>
+    );
+    expect(wrapper.find('.ProjectDescription')).not.toHaveLength(0);
+  });
+
+  it('should display an empty card body if the project has an empty description', () => {
+    let project = { title: 'Title', keywords: ['one'], description: '' };
+    const wrapper = mount(
+      <ErrorBoundary>
+        <ProjectItem project={project}/>
+      </ErrorBoundary>
+    );
+    expect(wrapper.find('.ProjectDescription')).not.toHaveLength(0);
+  });
+
   // Owner
   // Date created
   // test the key as well
