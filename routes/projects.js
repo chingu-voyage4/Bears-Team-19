@@ -11,7 +11,8 @@ router.get('/', function(req, res, next) {
       author:'Bears 19', 
       category:['web' ,'development'], 
       keywords:['web', 'react', 'js'], 
-      description:'We want to create the ultimate to-do list! The project is already started and we need more developers.\nContact me for more info.'
+      description:'We want to create the ultimate to-do list! The project is already started and we need more developers.\nContact me for more info.',
+      lastSaved: new Date(Date.UTC(2018, 3, 15, 11, 32, 45))
     },
     {
       id:'2', 
@@ -19,7 +20,8 @@ router.get('/', function(req, res, next) {
       author:'Bears 19', 
       category:['gaming'], 
       keywords:['web','react', 'js'], 
-      description:'The idea is to create a platformer inspired by Mario and have it run in the browser. We need artists, javascript developers, level designers...'
+      description:'The idea is to create a platformer inspired by Mario and have it run in the browser. We need artists, javascript developers, level designers...',
+      lastSaved: new Date(Date.UTC(2018, 2, 27, 18, 3, 2))
     }
   ]);
 });

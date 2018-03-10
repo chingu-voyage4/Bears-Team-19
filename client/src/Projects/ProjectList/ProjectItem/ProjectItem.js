@@ -4,6 +4,10 @@ import { Card, CardHeader, CardText, CardBody,
 import KeywordList from './KeywordList/KeywordList';
 
 const ValidProject = (props) => {
+  function formatDate(jsonDate){
+    let date = new Date(jsonDate);
+    return date.toLocaleDateString();
+  }
   return (
     <Card className="Project">
       <CardHeader>
@@ -13,7 +17,12 @@ const ValidProject = (props) => {
       <CardBody>
         <CardText className="ProjectDescription">{props.project.description}</CardText>
       </CardBody>
-      <CardFooter className="ProjectOwner">{props.project.author}</CardFooter>
+      <CardFooter className="d-flex flex-row justify-content-between">
+        <div className="ProjectOwner">{props.project.author}</div>
+        <div className="ProjectDateSaved">
+          {props.project.lastSaved? formatDate(props.project.lastSaved) : ''}
+        </div>
+      </CardFooter>
     </Card>
   );
 };

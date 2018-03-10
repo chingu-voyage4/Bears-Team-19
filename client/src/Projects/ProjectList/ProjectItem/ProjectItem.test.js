@@ -123,6 +123,28 @@ describe('ProjectItem component', () => {
     expect(wrapper.text()).toContain(project.author);    
   });
 
-  // Date created
+  // Date modified
+  it('should not crash if the project post has no lastSaved property', () => {
+    let project = { title: 'Title', keywords: ['one'], description: 'This is a description', author: 'TheL0lz' };
+    const wrapper = mount(
+      <ErrorBoundary>
+        <ProjectItem project={project}/>
+      </ErrorBoundary>
+    );
+    expect(wrapper.find('.ProjectDateSaved')).not.toHaveLength(0);
+  });
+
+  it('should display the date the project post was last updated', () => {
+    let date = new Date(Date.UTC(2018, 3, 15, 15, 3, 34));
+    let project = { title: 'Title', keywords: ['one'], description: 'This is a description', author: 'TheL0lz', lastSaved: date.toJSON() };
+    const wrapper = mount(
+      <ErrorBoundary>
+        <ProjectItem project={project}/>
+      </ErrorBoundary>
+    );
+    expect(wrapper.find('.ProjectDateSaved')).not.toHaveLength(0);
+    expect(wrapper.text()).toContain(date.toLocaleDateString());    
+  });
+
   // test the key as well
 });
