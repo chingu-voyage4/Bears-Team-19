@@ -1,25 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardHeader, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
-
-const KeywordList = (props) => {
-  // if there are no keywords, don't add anything to the HTML
-  if (!props.keywords || props.keywords.length == 0){
-    return null;
-  }
-
-  let keywords = props.keywords.map((keyword, id) => {
-    return (
-        <li key={id} className="ProjectKeyword border rounded px-2 m-1">{keyword}</li>
-      );
-  });
-
-  return (
-    <ul className="ProjectKeywordList list-unstyled d-flex justify-content-center mb-0">
-      {keywords}
-    </ul>  
-  );    
-};
+import KeywordList from './KeywordList/KeywordList';
 
 const ValidProject = (props) => {
   return (

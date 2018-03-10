@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import ProjectItem from './ProjectItem';
+import KeywordList from './KeywordList/KeywordList';
 import ErrorBoundary from '../../../Utils/ErrorBoundary/ErrorBoundary';
 
 describe('ProjectItem component', () => {
@@ -46,8 +47,10 @@ describe('ProjectItem component', () => {
         <ProjectItem project={project}/>
       </ErrorBoundary>
     );
-    expect(wrapper.find('.ProjectKeywordList')).toHaveLength(1);
-    expect(wrapper.find('.ProjectKeyword')).toHaveLength(3);
+    const list = wrapper.find(KeywordList);
+    expect(list).toHaveLength(1);
+    expect(list.find('ul')).toHaveLength(1);
+    expect(list.find('li')).toHaveLength(3);
   });
 
   it('should not create HTML elements for keywords if there is no keyword list', () => {
@@ -57,8 +60,10 @@ describe('ProjectItem component', () => {
         <ProjectItem project={project}/>
       </ErrorBoundary>
     );
-    expect(wrapper.find('.ProjectKeywordList')).toHaveLength(0);
-    expect(wrapper.find('.ProjectKeyword')).toHaveLength(0);
+    const list = wrapper.find(KeywordList);
+    expect(list).toHaveLength(1);
+    expect(list.find('ul')).toHaveLength(0);
+    expect(list.find('li')).toHaveLength(0);
   });
 
   it('should not create HTML elements for keywords if the keyword list is empty', () => {
@@ -68,8 +73,10 @@ describe('ProjectItem component', () => {
         <ProjectItem project={project}/>
       </ErrorBoundary>
     );
-    expect(wrapper.find('.ProjectKeywordList')).toHaveLength(0);
-    expect(wrapper.find('.ProjectKeyword')).toHaveLength(0);
+    const list = wrapper.find(KeywordList);
+    expect(list).toHaveLength(1);
+    expect(list.find('ul')).toHaveLength(0);
+    expect(list.find('li')).toHaveLength(0);
   });
 
   // Description
