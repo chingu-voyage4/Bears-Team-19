@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardHeader, CardText, CardBody,
-  CardTitle, CardSubtitle, Button } from 'reactstrap';
+  CardTitle, CardFooter } from 'reactstrap';
 import KeywordList from './KeywordList/KeywordList';
 
 const ValidProject = (props) => {
@@ -13,6 +13,7 @@ const ValidProject = (props) => {
       <CardBody>
         <CardText className="ProjectDescription">{props.project.description}</CardText>
       </CardBody>
+      <CardFooter className="ProjectOwner">{props.project.author}</CardFooter>
     </Card>
   );
 };

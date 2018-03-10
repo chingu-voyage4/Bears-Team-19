@@ -112,6 +112,17 @@ describe('ProjectItem component', () => {
   });
 
   // Owner
+  it('should display the project owner', () => {
+    let project = { title: 'Title', keywords: ['one'], description: 'This is a description', author: 'TheL0lz' };
+    const wrapper = mount(
+      <ErrorBoundary>
+        <ProjectItem project={project}/>
+      </ErrorBoundary>
+    );
+    expect(wrapper.find('.ProjectOwner')).not.toHaveLength(0);
+    expect(wrapper.text()).toContain(project.author);    
+  });
+
   // Date created
   // test the key as well
 });
