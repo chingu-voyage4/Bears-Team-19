@@ -3,7 +3,6 @@ import avatar from './avatar.png';
 import './register.css';
 
 const Register = (props) => {
-    console.log(props, 'this is props');
     return (
         <div className="container-fluid d-flex flex-column my-auto">
                 <div className="d-flex flex-column col-lg-5 col-md-3 col-sm-8 mx-auto justify-content-center register-wrapper">
