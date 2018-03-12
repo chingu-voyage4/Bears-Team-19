@@ -5,7 +5,7 @@ import axios from 'axios';
 const defaultState = {
     username: '',
     password: '',
-    passwordMatch: ''
+    confirmPassword: ''
 };
 
 class Auth extends Component {
