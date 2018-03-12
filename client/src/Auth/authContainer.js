@@ -35,7 +35,7 @@ class Auth extends Component {
             .then(res => {
                 this.clearState();
                 return res;
-            })
+            }) 
     }
 
     render () {
