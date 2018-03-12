@@ -1,6 +1,5 @@
-var express = require('express');
-
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* GET authors listing. */
 router.get('/', (req, res, next) => {
@@ -9,13 +8,13 @@ router.get('/', (req, res, next) => {
 // demo code
   res.json([{
     id: 1,
-    name: 'guiprix'
+    name: 'guiprix',
   }, {
     id: 2,
-    name: 'sfiquet'
+    name: 'sfiquet',
   }, {
     id: 3,
-    name: 'ucanfil'
+    name: 'ucanfil',
   }]);
 });
 

@@ -1,7 +1,7 @@
 
-var express = require('express');
+const express = require('express');
 
-var router = express.Router();
+const router = express.Router();
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
       author: 'Bears 19',
       category: ['web', 'development'],
       keywords: ['web', 'react', 'js'],
-      description: 'lore ipsum....'
+      description: 'lore ipsum....',
     },
 
     {
@@ -21,8 +21,8 @@ router.get('/', (req, res, next) => {
       author: 'Bears 19',
       category: ['gaming'],
       keywords: ['web', 'react', 'js'],
-      description: 'lore ipsum....'
-    }
+      description: 'lore ipsum....',
+    },
 
   ]);
 });
