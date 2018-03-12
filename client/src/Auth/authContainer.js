@@ -12,11 +12,7 @@ class Auth extends Component {
     constructor (props) {
         super();
          
-        this.state = {
-            username: '',
-            password: '',
-            passwordMatch: ''
-        }
+        this.state = defaultState;
     }
 
     clearState = () => {
@@ -32,15 +28,15 @@ class Auth extends Component {
     handleSubmit = () => {
 
         axios.post('/api/register')
-            .then(res => {
-                this.clearState();
+            .then(res => {         
                 return res;
             }) 
+        return this.clearState();
     }
 
     render () {
         return(
-            <Register handleChange={this.handleChange} inputs={this.state} />
+            <Register handleChange={this.handleChange} inputs={this.state} handleSubmit={this.handleSubmit} />
         )
     }
 };
