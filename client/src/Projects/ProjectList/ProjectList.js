@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProjectItem from './ProjectItem/ProjectItem';
+import './ProjectList.css';
 
 class Projects extends Component {
 
@@ -18,7 +19,7 @@ class Projects extends Component {
     }
 
     return (
-      <div className="Projects">
+      <div className="ProjectList d-flex flex-column flex-lg-row flex-lg-wrap justify-content-start align-items-stretch">
         {projectItems}
       </div>
     );

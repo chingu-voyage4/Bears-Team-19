@@ -1,0 +1,16 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+.ProjectList {
+  @include media-breakpoint-up(lg){
+    margin-left: -1rem;
+  }
+}
+
+.ProjectList .Project {
+  @include media-breakpoint-up(lg){
+    width: calc(50% - 1rem);
+    margin-left: 1rem;
+  }
+}
