@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const KeywordList = (props) => {
   // if there are no keywords, don't add anything to the HTML
