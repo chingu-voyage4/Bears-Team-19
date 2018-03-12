@@ -165,9 +165,10 @@ describe('ProjectItem component', () => {
         <ProjectItem project={project}/>
       </ErrorBoundary>
     );
-    expect(wrapper.find('.ProjectDateSaved')).not.toHaveLength(0);
-    expect(wrapper.text()).toContain(date.toLocaleDateString());    
+    const dateWrapper = wrapper.find('.ProjectDateSaved');
+    expect(dateWrapper).not.toHaveLength(0);
+    expect(dateWrapper.text()).toContain(date.toLocaleDateString('en', {day: 'numeric'}));
+    expect(dateWrapper.text()).toContain(date.toLocaleDateString('en', {year: 'numeric'}));
+    expect(dateWrapper.text()).toContain(date.toLocaleDateString('en', {month: 'short'}));    
   });
-
-  // test the key as well
 });

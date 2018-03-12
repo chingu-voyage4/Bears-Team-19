@@ -3,9 +3,28 @@ import { Card, CardHeader, CardText, CardBody,
   CardTitle, CardFooter } from 'reactstrap';
 import KeywordList from './KeywordList/KeywordList';
 
+function toLocaleDateStringSupportsLocales() {
+  try {
+    new Date().toLocaleDateString('i');
+  } catch (e) {
+    return e.name === 'RangeError';
+  }
+  return false;
+}
+
 function formatDate(jsonDate){
   let date = new Date(jsonDate);
-  return date.toLocaleDateString();
+  let dateStr;
+  if (toLocaleDateStringSupportsLocales()){
+    let language_tag = window.navigator.browserLanguage || window.navigator.language || 'en';
+    if (!language_tag.startsWith('en')){
+      language_tag = 'en';
+    }
+    dateStr = date.toLocaleDateString(language_tag, {day: 'numeric', month: 'short', year: 'numeric'});
+  } else {
+    dateStr = date.toLocaleDateString();
+  }
+  return dateStr;
 }
 
 class ProjectItem extends Component {
