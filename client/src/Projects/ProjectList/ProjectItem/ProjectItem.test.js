@@ -1,4 +1,5 @@
 import React from 'react';
+import { CardText } from 'reactstrap';
 import { shallow, mount, render } from 'enzyme';
 import ProjectItem from './ProjectItem';
 import KeywordList from './KeywordList/KeywordList';
@@ -99,6 +100,7 @@ describe('ProjectItem component', () => {
       </ErrorBoundary>
     );
     expect(wrapper.find('.ProjectDescription')).not.toHaveLength(0);
+    expect(wrapper.find(CardText)).toHaveLength(0);
   });
 
   it('should display an empty card body if the project has an empty description', () => {
@@ -109,6 +111,27 @@ describe('ProjectItem component', () => {
       </ErrorBoundary>
     );
     expect(wrapper.find('.ProjectDescription')).not.toHaveLength(0);
+    expect(wrapper.find(CardText)).toHaveLength(0);
+  });
+
+  it('should display several paragraphs if there are new lines in the description', () => {
+    let project = { title: 'Title', keywords: ['one'], description: 'one\r\ntwo\r\nthree' };
+    const wrapper = mount(
+      <ErrorBoundary>
+        <ProjectItem project={project}/>
+      </ErrorBoundary>
+    );
+    expect(wrapper.find(CardText)).toHaveLength(3);
+  });
+
+  it('should not add paragraphs for empty lines in the description', () => {
+    let project = { title: 'Title', keywords: ['one'], description: 'one\r\ntwo\r\n\r\nthree\r\n \r\n\t' };
+    const wrapper = mount(
+      <ErrorBoundary>
+        <ProjectItem project={project}/>
+      </ErrorBoundary>
+    );
+    expect(wrapper.find(CardText)).toHaveLength(3);
   });
 
   // Owner
