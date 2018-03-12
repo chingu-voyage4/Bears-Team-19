@@ -21,7 +21,7 @@ const Register = (props) => {
                             <input type="password" placeholder="Confirm Password" className="form-control mb-2" value={props.inputs.confirmPassword} onChange={(e) => {props.handleChange('confirmPassword', e)} }/>
                         </div>
                     }
-                    <button disabled={props.inputs.password !== props.inputs.confirmPassword} className="btn btn-outline-primary" onClick={props.handleSubmit}>Submit</button>
+                    <button disabled={(props.inputs.username.length < 2) && (props.inputs.password !== props.inputs.confirmPassword)} className="btn btn-outline-primary" onClick={props.handleSubmit}>Submit</button>
                 </div>
         </div>
     )
