@@ -54,7 +54,7 @@ const Register = (props) => {
                         <input 
                             type="password" 
                             placeholder="Password" 
-                            className={`form-control mb-2 ${isDirty.password ? 'dirty' : '' } ${!errors.confirmPassword ? 'clean' : ''}`}
+                            className={`form-control mb-2 ${isDirty.password ? 'dirty' : '' } ${!errors.password ? 'clean' : ''}`}
                             value={props.inputs.password} 
                             onFocus={ (e) => {props.onFocus('password')}} 
                             onBlur={props.onBlur}
