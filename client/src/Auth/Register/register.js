@@ -3,12 +3,15 @@ import React from 'react';
 import avatar from './avatar.png';
 import './register.css';
 
+const USERNAME_LENGTH_MIN = 5
+const PASSWORD_LENGTH_MIN = 6
+
 // Checks whether state values meets valid criteria
 function validateInputs ({ username, password, confirmPassword }) {
     
     return {
-        username: username.length < 4,
-        password: password.length < 5,
+        username: username.length < USERNAME_LENGTH_MIN,
+        password: password.length < PASSWORD_LENGTH_MIN,
         confirmPassword: confirmPassword !== password
     }
 }
@@ -17,9 +20,9 @@ function validateInputs ({ username, password, confirmPassword }) {
 function checkDirty (focus, {username, password, confirmPassword}, errors) {
 
     return {
-        username: focus !== 'username' && errors.username && username.length > 1,
-        password: focus !== 'password' && errors.password && password.length > 1,
-        confirmPassword: focus !== 'confirmPassword' && errors.confirmPassword && password.length > 1
+        username: focus !== 'username' && errors.username && username.length > 0,
+        password: focus !== 'password' && errors.password && password.length > 0,
+        confirmPassword: focus !== 'confirmPassword' && errors.confirmPassword && password.length > 0
     }
 }
 
@@ -60,7 +63,7 @@ const Register = (props) => {
                             onBlur={props.onBlur}
                             onChange={(e) => {props.handleChange('password', e)} }
                         />
-                        {focus === 'password' && errors.password && <p className="error-text">Passwords must be over 6 characters</p>}
+                        {focus === 'password' && errors.password && <p className="error-text">Passwords must be over 5 characters</p>}
                     </div>
                     { props.inputs.password && 
                         <div>
