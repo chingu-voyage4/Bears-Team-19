@@ -7,3 +7,22 @@
 .register-text {
     color: #9E9E9E;
 }
+
+
+.error-text {
+    color: #CF000F;
+    align-self: flex-start;
+    padding-left: 1rem;
+}
+
+.dirty { 
+    outline: none;
+    border-color: #E2B13C;
+    box-shadow: 0 0 10px #E2B13C;
+}
+
+.clean { 
+    outline: none;
+    border-color: #26A65B;
+    box-shadow: 0 0 10px #26A65B;
+}
