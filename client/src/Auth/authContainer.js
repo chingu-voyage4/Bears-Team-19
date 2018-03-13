@@ -5,7 +5,8 @@ import axios from 'axios';
 const defaultState = {
     username: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    focus: ''
 };
 
 class Auth extends Component {
@@ -26,17 +27,35 @@ class Auth extends Component {
     }
 
     handleSubmit = () => {
-
-        axios.post('/api/register')
+        const {username, password } = this.state; 
+        axios.post('/api/register', {username, password})
             .then(res => {         
                 return res;
             }) 
         return this.clearState();
     }
 
+    onFocus = (element) => {
+        return this.setState({
+            focus: element
+        })
+    }
+
+    onBlur = () => {
+        return this.setState({
+            focus: ''
+        })
+    }
+
     render () {
         return(
-            <Register handleChange={this.handleChange} inputs={this.state} handleSubmit={this.handleSubmit} />
+            <Register 
+                handleChange={this.handleChange} 
+                inputs={this.state} 
+                handleSubmit={this.handleSubmit}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                />
         )
     }
 };
