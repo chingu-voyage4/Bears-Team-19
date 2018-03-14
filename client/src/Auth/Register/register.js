@@ -50,7 +50,7 @@ const Register = (props) => {
                             onBlur={props.onBlur}
                             onChange={(e) => {props.handleChange('username', e)} }
                          />
-                        {focus === 'username' && errors.username && <p className="error-text">Username must be over 4 characters</p>}
+                        {focus === 'username' && errors.username && <p className="error-text">{`Username must be ${USERNAME_LENGTH_MIN} characters or over.`}</p>}
                     </div>
                     <div>
                         <label>Password</label>
@@ -63,7 +63,7 @@ const Register = (props) => {
                             onBlur={props.onBlur}
                             onChange={(e) => {props.handleChange('password', e)} }
                         />
-                        {focus === 'password' && errors.password && <p className="error-text">Passwords must be over 5 characters</p>}
+                        {focus === 'password' && errors.password && <p className="error-text">{`Passwords must be ${PASSWORD_LENGTH_MIN} characters or over.`}</p>}
                     </div>
                     { props.inputs.password.length >= PASSWORD_LENGTH_MIN && 
                         <div>
