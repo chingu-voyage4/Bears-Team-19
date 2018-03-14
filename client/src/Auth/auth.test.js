@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
-import AuthContainer from './authContainer.js';
-import Register from './Register/register.js';
+import AuthContainer from './Auth.js';
+import Register from './Register/Register.js';
 
 
 describe('Register component', () => {
