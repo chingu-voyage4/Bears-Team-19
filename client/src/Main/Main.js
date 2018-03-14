@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Welcome from '../Welcome/Welcome';
 import Projects from '../Projects/Projects';
-import Auth from '../Auth/authContainer.js';
+import Auth from '../Auth/Auth.js';
 import './Main.css';
 
 const Main = () => (

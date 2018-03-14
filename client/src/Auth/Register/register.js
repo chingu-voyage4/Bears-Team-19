@@ -1,7 +1,7 @@
 import React from 'react';
 // https://www.flaticon.com/free-icon/circular-avatar_108331
 import avatar from './avatar.png';
-import './register.css';
+import './Register.css';
 
 const USERNAME_LENGTH_MIN = 5
 const PASSWORD_LENGTH_MIN = 6
@@ -35,7 +35,7 @@ const Register = (props) => {
 
     return (
         <div className="container-fluid d-flex flex-column my-auto">
-                <div className="d-flex flex-column col-lg-5 col-md-3 col-sm-8 mx-auto justify-content-center register-wrapper">
+                <div className="d-flex flex-column col-xl-4 col-lg-5 col-md-6 col-sm-8 col-9 mx-auto">
                     <div className="align-center pt-2 mb-3">
                         <h2 className="register-text">Register</h2>
                     </div>
@@ -44,7 +44,7 @@ const Register = (props) => {
                         <label>Username</label>
                         <input type="text"
                             placeholder="Username" 
-                            className={`form-control mb-2 ${isDirty.username ? 'dirty' : ''} ${!errors.username ? 'clean' : ''}`}
+                            className={`form-control mb-2 ${isDirty.username ? 'dirty' : ''}`}
                             value={props.inputs.username}
                             onFocus={ (e) => {props.onFocus('username')}} 
                             onBlur={props.onBlur}
@@ -57,7 +57,7 @@ const Register = (props) => {
                         <input 
                             type="password" 
                             placeholder="Password" 
-                            className={`form-control mb-2 ${isDirty.password ? 'dirty' : '' } ${!errors.password ? 'clean' : ''}`}
+                            className={`form-control mb-2 ${isDirty.password ? 'dirty' : '' }`}
                             value={props.inputs.password} 
                             onFocus={ (e) => {props.onFocus('password')}} 
                             onBlur={props.onBlur}
@@ -65,13 +65,13 @@ const Register = (props) => {
                         />
                         {focus === 'password' && errors.password && <p className="error-text">Passwords must be over 5 characters</p>}
                     </div>
-                    { props.inputs.password && 
+                    { props.inputs.password.length >= PASSWORD_LENGTH_MIN && 
                         <div>
                             <label>Confirm Password</label>
                             <input 
                                 type="password" 
                                 placeholder="Confirm Password" 
-                                className={`form-control mb-2 ${isDirty.confirmPassword ? 'dirty' : ''} ${!errors.confirmPassword ? 'clean' : ''}`} 
+                                className={`form-control mb-2 ${isDirty.confirmPassword ? 'dirty' : ''}`} 
                                 value={props.inputs.confirmPassword}
                                 onFocus={ (e) => {props.onFocus('confirmPassword')}}  
                                 onBlur={props.onBlur}
@@ -80,7 +80,7 @@ const Register = (props) => {
                             {focus === 'confirmPassword' && errors.confirmPassword && <p className="error-text">Passwords do not match</p>}
                         </div>
                     }
-                    <button disabled={isEnabled} className="btn btn-outline-primary" onClick={props.handleSubmit}>Submit</button>
+                    <button disabled={isEnabled} className={`btn btn-outline-primary ${errors.confirmPassword ? "mt-1" : "mt-3"}`} onClick={props.handleSubmit}>Submit</button>
                 </div>
         </div>
     )

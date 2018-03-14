@@ -1,4 +1,6 @@
-
+button:disabled {
+    cursor: not-allowed;
+}
 
 .register-container {
     background-color: black;
@@ -13,16 +15,19 @@
     color: #CF000F;
     align-self: flex-start;
     padding-left: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .dirty { 
     outline: none;
-    border-color: #E2B13C;
-    box-shadow: 0 0 10px #E2B13C;
+    border-color: #CF000F;
+    border-width: 1px;
+    box-shadow: none;
+    transition: border-color 1s ease-in-out;
 }
 
 .clean { 
     outline: none;
-    border-color: #26A65B;
-    box-shadow: 0 0 10px #26A65B;
+    border-color:none;
+    box-shadow: none;
 }
