@@ -3,8 +3,8 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "nodemon ./bin/www",
-        "lint": "./node_modules/.bin/eslint . || exit 0",
+        "start": "nodemon ./server/bin/www",
+        "lint": "./node_modules/.bin/eslint ./server || exit 0",
         "test": "jest"
     },
     "dependencies": {
