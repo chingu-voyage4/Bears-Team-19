@@ -1,9 +1,12 @@
 {
-    "extends": "airbnb",
+    "extends": ["airbnb"],
     "env": {
-        "browser": true
+        "browser": true,
+        "jest": true
     },
     "rules": {
-        "linebreak-style": 0
+        "linebreak-style": 0,
+        "jsx-a11y/href-no-hash": "off",
+        "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
     }
 }
