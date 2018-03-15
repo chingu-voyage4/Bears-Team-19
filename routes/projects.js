@@ -1,9 +1,9 @@
+const express = require('express');
 
-var express = require('express');
-var router = express.Router();
+const router = express.Router();
 
-/* GET users listing.*/
-router.get('/', function(req, res, next) {
+/* GET users listing. */
+router.get('/', (req, res, next) => {
   res.json([
     {
       id:'1', 
@@ -77,7 +77,7 @@ router.get('/', function(req, res, next) {
       \r\n
       Adipiscing tristique risus nec feugiat in fermentum posuere urna.`,
       lastSaved: new Date(Date.UTC(2018, 2, 27, 18, 3, 2))
-    }
+    },
   ]);
 });
 
