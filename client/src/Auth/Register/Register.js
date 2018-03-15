@@ -39,7 +39,7 @@ const Register = (props) => {
                     <div className="align-center pt-2 mb-3">
                         <h2 className="register-text">Register</h2>
                     </div>
-                    <img src={avatar} className="align-self-center my-3" width="120px" />
+                    <img alt="avatar icon" src={avatar} className="align-self-center my-3" width="120px" />
                     <div>
                         <label>Username</label>
                         <input type="text"
