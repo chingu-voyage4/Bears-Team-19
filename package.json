@@ -20,11 +20,11 @@
     },
     "devDependencies": {
         "babel-eslint": "^8.2.2",
-        "eslint": "^4.18.2",
+        "eslint": "^4.9.0",
         "eslint-config-airbnb": "^16.1.0",
-        "eslint-plugin-import": "^2.9.0",
-        "eslint-plugin-jsx-a11y": "^6.0.3",
-        "eslint-plugin-react": "^7.7.0",
+        "eslint-plugin-import": "^2.7.0",
+        "eslint-plugin-jsx-a11y": "^6.0.2",
+        "eslint-plugin-react": "^7.4.0",
         "jest": "^22.4.2",
         "nodemon": "^1.17.1",
         "superagent": "^3.8.2",
@@ -36,7 +36,10 @@
             "es6": true
         },
         "extends": "airbnb",
-        "parser": "babel-eslint"
+        "parser": "babel-eslint",
+        "rules": {
+            "linebreak-style": 0  
+        }
     },
     "jest": {
         "testPathIgnorePatterns": ["/client/", "/node_modules/"]
