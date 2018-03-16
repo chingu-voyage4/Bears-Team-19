@@ -39,6 +39,9 @@
         "parser": "babel-eslint"
     },
     "jest": {
-        "testPathIgnorePatterns": ["/client/", "/node_modules/"]
+        "testPathIgnorePatterns": [
+            "/client/",
+            "/node_modules/"
+        ]
     }
 }
