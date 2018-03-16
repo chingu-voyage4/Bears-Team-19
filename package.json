@@ -6,7 +6,7 @@
         "start": "nodemon ./bin/www",
         "lint": "./node_modules/.bin/eslint . || exit 0",
         "test": "jest",
-        "debug": "cross-env DEBUG=express:* nodemon ./bin/www"
+        "debug": "nodemon -r dotenv/config ./bin/www"
     },
     "dependencies": {
         "body-parser": "~1.18.2",
@@ -21,7 +21,6 @@
     },
     "devDependencies": {
         "babel-eslint": "^8.2.2",
-        "cross-env": "^5.1.4",
         "eslint": "^4.18.2",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-plugin-import": "^2.9.0",
