@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 //import ProjectItem from './ProjectItem/ProjectItem';
 
-class AddProject1 extends Component {
+class AddProject extends Component {
 
 constructor(){
   super();
@@ -27,6 +27,7 @@ handleSubmit(e){
 
     }},function(){
       this.props.addProject(this.state.newProject);
+      //console.log('porject obj' + this.props);
     });
 
   }
@@ -54,13 +55,12 @@ handleSubmit(e){
         </div>
         <div>
         <label>Description</label><br />
-        <input type="text" ref="description" />
+        <textarea ref="description" />
       </div>
       <div>
       <label>Keywords</label><br />
       <input type="text" ref="keywords" />
     </div>
-
 
         <div>
           <label>Category</label><br />
@@ -79,4 +79,4 @@ handleSubmit(e){
   }
 }
 
-export default AddProject1;
+export default AddProject;
