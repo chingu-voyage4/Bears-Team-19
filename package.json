@@ -22,6 +22,7 @@
         "babel-eslint": "^8.2.2",
         "eslint": "^4.9.0",
         "eslint-config-airbnb": "^16.1.0",
+        "eslint-config-airbnb-base": "^12.1.0",
         "eslint-plugin-import": "^2.7.0",
         "eslint-plugin-jsx-a11y": "^6.0.2",
         "eslint-plugin-react": "^7.4.0",
@@ -33,15 +34,18 @@
     "eslintConfig": {
         "env": {
             "node": true,
-            "es6": true
+            "jest": true
         },
-        "extends": "airbnb",
+        "extends": "airbnb-base",
         "parser": "babel-eslint",
         "rules": {
-            "linebreak-style": 0  
+            "linebreak-style": 0
         }
     },
     "jest": {
-        "testPathIgnorePatterns": ["/client/", "/node_modules/"]
+        "testPathIgnorePatterns": [
+            "/client/",
+            "/node_modules/"
+        ]
     }
 }
