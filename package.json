@@ -14,7 +14,6 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "node-sass-chokidar": "^1.1.0",
-    "npm": "^5.7.1",
     "serve-favicon": "~2.4.5"
   }
 }
