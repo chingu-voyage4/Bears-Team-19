@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "start": "nodemon ./bin/www",
-        "lint": "./node_modules/.bin/eslint . || exit 0"
+        "lint": "./node_modules/.bin/eslint . || exit 0",
+        "test": "jest"
     },
     "dependencies": {
         "body-parser": "~1.18.2",
@@ -25,7 +26,10 @@
         "eslint-plugin-import": "^2.9.0",
         "eslint-plugin-jsx-a11y": "^6.0.3",
         "eslint-plugin-react": "^7.7.0",
-        "nodemon": "^1.17.1"
+        "jest": "^22.4.2",
+        "nodemon": "^1.17.1",
+        "superagent": "^3.8.2",
+        "supertest": "^3.0.0"
     },
     "eslintConfig": {
         "env": {
@@ -34,5 +38,11 @@
         },
         "extends": "airbnb",
         "parser": "babel-eslint"
+    },
+    "jest": {
+        "testPathIgnorePatterns": [
+            "/client/",
+            "/node_modules/"
+        ]
     }
 }
