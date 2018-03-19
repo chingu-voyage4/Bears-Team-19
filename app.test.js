@@ -13,7 +13,7 @@ describe('Routes return data', () => {
     test('Get JSON response when requesting projects', async () => {
         const response = await request(app).get('/api/projects');
         expect(response.type).toEqual('application/json');
-        expect(response.body.length).toEqual(2);
+        expect(response.body.length).toEqual(5);
         expect(response.body).toMatchSnapshot();
     })
 });
