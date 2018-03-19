@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth Routes Auth Route returns response with post request 1`] = `
+Object {
+  "success": false,
+}
+`;
