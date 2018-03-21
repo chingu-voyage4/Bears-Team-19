@@ -29,8 +29,6 @@ passport.use(new LocalStrategy('local-login', (username, password, done) => {
 }));
 
 passport.use('local-register', new LocalStrategy(((username, password, done) => {
-  console.log(username, password, 'this is username and password');
-  
   User.findOne({ displayName: username })
     .then((user) => {
       if (!user) {
