@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "nodemon ./bin/www",
+        "start": "nodemon ./server/bin/www",
         "lint": "./node_modules/.bin/eslint . || exit 0",
         "test": "jest"
     },
@@ -14,7 +14,9 @@
         "debug": "~3.1.0",
         "dotenv": "^5.0.1",
         "express": "~4.16.2",
+        "express-session": "^1.15.6",
         "jade": "~1.11.0",
+        "joi": "^13.1.2",
         "mongoose": "^5.0.10",
         "morgan": "~1.9.0",
         "node-sass-chokidar": "^1.0.1",
