@@ -11,7 +11,7 @@ router.post(
       console.log(err, user, info, status, 'this is err and user');
       // if error return an internal server error
       if (err) return res.json(err);
-      // if user does not exist, send err message
+      // if user is not returned send info why
       if (!user) return res.json(info);
       // success
       return res.json(user.displayName);
