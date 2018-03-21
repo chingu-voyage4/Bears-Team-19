@@ -9,28 +9,35 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
   password: String,
   displayName: String,
-  email: { type: String, required: true },
+  email: { type: String },
   date_joined: { type: Date, default: Date.now },
 });
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', function save(next) {
   const user = this;
 
   if (!user.isModified('password')) return next();
 
-  bcrypt.getSalt(SALT_ROUNDS, (err, salt) => {
+  return bcrypt.genSalt(SALT_ROUNDS, (err, salt) => {
     if (err) return next(err);
 
     // hash password along with new salt
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) return next(err);
+    return bcrypt.hash(user.password, salt, (hashErr, hash) => {
+      if (hashErr) return next(hashErr);
 
       // rewrite password with hash
       user.password = hash;
-      next();
+      return next();
     });
   });
 });
+
+userSchema.methods.verifyPassword = function (userPassword, cb) {
+  bcrypt.compare(userPassword, this.password, (err, isMatch) => {
+    if (err) return cb(err);
+    return cb(null, isMatch);
+  });
+};
 
 const userModel = mongoose.model('User', userSchema);
 module.exports = userModel;
