@@ -41,7 +41,11 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // Authentication
 
 app.use(bodyParser());
-app.use(require('express-session')({ secret: process.env.SESSION_SECRET }));
+app.use(require('express-session')({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
