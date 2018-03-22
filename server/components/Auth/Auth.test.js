@@ -5,7 +5,6 @@ const User = require('../User/UserModel.js');
 
 describe('Register Route', () => {
   beforeEach(async () => {
-    // pass hashed === 'testpass' - hashed with https://bcrypt-generator.com/
     const testUser = {
       displayName: 'registeruser',
       password: 'registerpass',
@@ -148,7 +147,6 @@ describe('Register Route', () => {
 
 describe('Login Route', () => {
   beforeAll(async () => {
-    // pass hashed === 'testpass' - hashed with https://bcrypt-generator.com/
     const testUser = {
       displayName: 'loginuser',
       password: 'loginpass',
