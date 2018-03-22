@@ -29,7 +29,7 @@ router.post(
   '/register',
   validateForm,
   (req, res) => {
-    passport.authenticate('local-register', (err, user, info, status) => {
+    passport.authenticate('local-register', (err, user, info) => {
       // if error return an internal server error
       if (err) return res.json(err);
       // if user is not returned send info why
@@ -44,7 +44,7 @@ router.post(
   '/login',
   validateForm,
   (req, res) => {
-    passport.authenticate('local-login', (err, user, info, status) => {
+    passport.authenticate('local-login', (err, user, info) => {
       // if error return an internal server error
       if (err) return res.status(500).json(err);
       // if user does not exist, failure redirect

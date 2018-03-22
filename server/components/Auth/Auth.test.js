@@ -66,8 +66,6 @@ describe('Register Route', () => {
 
     const response = await request(app).post('/auth/register').send(user);
     expect(response.body).toEqual(user.username);
-
-    const newDbEntry = await User.findOne({ displayName: user.username });
   });
 
   test('Register route returns an error if username already exists', async () => {
@@ -114,6 +112,10 @@ describe('Login Route', () => {
 
     const newLoginUser = new User(testUser);
     await newLoginUser.save();
+  });
+
+  afterAll(async () => {
+    await User.remove({});
   });
 
   test('Login route returns an error when a get request is made', async () => {
@@ -172,7 +174,7 @@ describe('Login Route', () => {
     expect(response.body.message).toEqual('Password does not match');
   });
 
-  
+
   test('Login route returns a user object when both password and username match database object ', async () => {
     const correctUser = {
       username: 'loginuser',
@@ -183,5 +185,4 @@ describe('Login Route', () => {
     expect(response.body).toHaveProperty('displayName');
     expect(response.body.displayName).toEqual(correctUser.username);
   });
-  
 });
