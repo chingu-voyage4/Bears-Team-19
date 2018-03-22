@@ -13,14 +13,22 @@ const validateForm = (req, res, next) => {
   };
 
   const schema = Joi.object().keys({
-    username: Joi.string().min(5).required(),
-    password: Joi.string().min(6).required(),
+    username: Joi.string()
+      .regex(/^[a-z0-9]{5,15}/)
+      .required(),
+    password: Joi.string()
+      .alphanum()
+      .min(6)
+      .trim()
+      .required(),
   });
 
   Joi.validate(user, schema, (err, value) => {
     if (err) {
       return res.json(err.details[0]);
     }
+
+    if (!value) return false;
     return next();
   });
 };

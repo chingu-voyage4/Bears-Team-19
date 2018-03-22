@@ -100,6 +100,50 @@ describe('Register Route', () => {
     expect(response.statusCode).toEqual(200);
     expect(response.body).toHaveProperty('message');
   });
+
+  test('Register route returns an error message if username contains spaces', async () => {
+    const usernameSpace = {
+      username: 'abc def',
+      password: 'testpass',
+    };
+
+    const response = await request(app).post('/auth/register').send(usernameSpace);
+    expect(response.statusCode).toEqual(200);
+    expect(response.body).toHaveProperty('message');
+  });
+
+  test('Register route returns an error message if username contains uppercase characters', async () => {
+    const usernameUpper = {
+      username: 'ABCdef',
+      password: 'testpass',
+    };
+
+    const response = await request(app).post('/auth/register').send(usernameUpper);
+    expect(response.statusCode).toEqual(200);
+    expect(response.body).toHaveProperty('message');
+  });
+
+  test('Register route returns an error message if username contains symbols', async () => {
+    const usernameSymbol = {
+      username: '@{]`,.;;',
+      password: 'testpass',
+    };
+
+    const response = await request(app).post('/auth/register').send(usernameSymbol);
+    expect(response.statusCode).toEqual(200);
+    expect(response.body).toHaveProperty('message');
+  });
+
+  test('Register route returns an error message if password contains symbols', async () => {
+    const passwordSymbol = {
+      username: 'testuser',
+      password: '=_£$@%^&',
+    };
+
+    const response = await request(app).post('/auth/register').send(passwordSymbol);
+    expect(response.statusCode).toEqual(200);
+    expect(response.body).toHaveProperty('message');
+  });
 });
 
 describe('Login Route', () => {
@@ -153,7 +197,7 @@ describe('Login Route', () => {
 
   test('Login route returns an error when a post request is made with a username that does not exist ', async () => {
     const userDoesNotExist = {
-      username: 'notExists',
+      username: 'notexists',
       password: 'randompass',
     };
     const response = await request(app).post('/auth/login').send(userDoesNotExist);
