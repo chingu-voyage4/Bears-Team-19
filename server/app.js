@@ -29,8 +29,9 @@ const mongoDB = url.format({
   password: process.env.DB_PASSWORD,
   hostname: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  pathname: process.env.DB_PATH,
+  pathname: process.env.NODE_ENV === 'test' ? process.env.DB_TEST_PATH : process.env.DB_PATH,
 });
+
 console.log('Connecting to', mongoDB);
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
