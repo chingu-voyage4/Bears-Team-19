@@ -136,19 +136,19 @@ describe('ProjectItem component', () => {
 
   // Owner
   it('should display the project owner', () => {
-    let project = { title: 'Title', keywords: ['one'], description: 'This is a description', author: 'TheL0lz' };
+    let project = { title: 'Title', keywords: ['one'], description: 'This is a description', authorName: 'TheL0lz' };
     const wrapper = mount(
       <ErrorBoundary>
         <ProjectItem project={project}/>
       </ErrorBoundary>
     );
     expect(wrapper.find('.ProjectOwner')).not.toHaveLength(0);
-    expect(wrapper.text()).toContain(project.author);    
+    expect(wrapper.text()).toContain(project.authorName);    
   });
 
   // Date modified
-  it('should not crash if the project post has no lastSaved property', () => {
-    let project = { title: 'Title', keywords: ['one'], description: 'This is a description', author: 'TheL0lz' };
+  it('should not crash if the project post has no lastPublished property', () => {
+    let project = { title: 'Title', keywords: ['one'], description: 'This is a description', authorName: 'TheL0lz' };
     const wrapper = mount(
       <ErrorBoundary>
         <ProjectItem project={project}/>
@@ -157,9 +157,9 @@ describe('ProjectItem component', () => {
     expect(wrapper.find('.ProjectDateSaved')).not.toHaveLength(0);
   });
 
-  it('should display the date the project post was last updated', () => {
+  it('should display the date the project post was last published', () => {
     let date = new Date(Date.UTC(2018, 3, 15, 15, 3, 34));
-    let project = { title: 'Title', keywords: ['one'], description: 'This is a description', author: 'TheL0lz', lastSaved: date.toJSON() };
+    let project = { title: 'Title', keywords: ['one'], description: 'This is a description', authorName: 'TheL0lz', lastSaved: date.toJSON(), lastPublished: date.toJSON() };
     const wrapper = mount(
       <ErrorBoundary>
         <ProjectItem project={project}/>
