@@ -11,19 +11,21 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-passport.use(new LocalStrategy('local-login', (username, password, done) => {
+passport.use('local-login', new LocalStrategy((username, password, done) => {
   User.findOne({ displayName: username })
     .then((user) => {
       // User does not exist
       if (!user) {
-        return done(null, false);
+        return done(null, false, { message: 'Username does not exist' });
       }
 
       // Password does not match
-      if (!user.verifyPassword) return done(false);
-
-      // Logs in user
-      return done(null, user);
+      user.verifyPassword(password, (err, isMatch) => {
+        if (err) return done(null, false, { message: err });
+        if (!isMatch) return done(null, false, { message: 'Password does not match' });
+        // password matches return
+        return done(null, user);
+      });
     })
     .catch(err => done(err));
 }));
@@ -39,8 +41,7 @@ passport.use('local-register', new LocalStrategy(((username, password, done) => 
 
         const userSave = new User(newUser);
         userSave.save();
-        done(null, userSave);
-        return true;
+        return done(null, userSave);
       }
 
       const err = {

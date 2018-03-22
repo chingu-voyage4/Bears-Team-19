@@ -2,23 +2,24 @@ const request = require('supertest');
 const app = require('../../app.js');
 const User = require('../User/UserModel.js');
 
-describe('Auth Routes', () => {
+
+describe('Register Route', () => {
   beforeEach(async () => {
     // pass hashed === 'testpass' - hashed with https://bcrypt-generator.com/
     const testUser = {
-      displayName: 'testuser',
-      password: '$2y$10$j1vOGTmtiRYwhsGPNCDwZOi7dBqJJvxKdXAY.1V0L2jxDa1R4LKFi',
+      displayName: 'registeruser',
+      password: 'registerpass',
     };
 
-    const user = new User(testUser);
-    await user.save();
+    const newUser = new User(testUser);
+    await newUser.save();
   });
 
   afterEach(async () => {
     await User.remove({});
   });
 
-  test('Authentication routes return false with get request', async () => {
+  test('Authentication route return false with get request', async () => {
     const response = await request(app).get('/auth/register');
     expect(response.statusCode).toBe(404);
   });
@@ -44,7 +45,7 @@ describe('Auth Routes', () => {
 
   test('Auth Route returns error response with post request missing password field', async () => {
     const user = {
-      username: 'testuser',
+      username: 'loginuser',
     };
     const response = await request(app).post('/auth/register').send(user);
     expect(response.statusCode).toBe(200);
@@ -58,17 +59,20 @@ describe('Auth Routes', () => {
       username: 'heyjp',
       password: 'testpass',
     };
+
     // No entry in db before API test runs
     const dbEntry = await User.findOne({ displayName: user.username });
     expect(dbEntry).toBe(null);
 
     const response = await request(app).post('/auth/register').send(user);
     expect(response.body).toEqual(user.username);
+
+    const newDbEntry = await User.findOne({ displayName: user.username });
   });
 
   test('Register route returns an error if username already exists', async () => {
     const user = {
-      username: 'testuser',
+      username: 'registeruser',
       password: 'ilikepasswords',
     };
 
@@ -98,4 +102,86 @@ describe('Auth Routes', () => {
     expect(response.statusCode).toEqual(200);
     expect(response.body).toHaveProperty('message');
   });
+});
+
+describe('Login Route', () => {
+  beforeAll(async () => {
+    // pass hashed === 'testpass' - hashed with https://bcrypt-generator.com/
+    const testUser = {
+      displayName: 'loginuser',
+      password: 'loginpass',
+    };
+
+    const newLoginUser = new User(testUser);
+    await newLoginUser.save();
+  });
+
+  test('Login route returns an error when a get request is made', async () => {
+    const response = await request(app).get('/auth/login');
+    expect(response.statusCode).toBe(404);
+  });
+
+  test('Login route returns an error message when a post request is made with no object', async () => {
+    const response = await request(app).post('/auth/login');
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('message');
+  });
+
+  test('Login route returns an error when a post request is made without a username ', async () => {
+    const noUsername = {
+      username: '',
+      password: 'testpass',
+    };
+
+    const response = await request(app).post('/auth/login').send(noUsername);
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.message).toEqual('"username" is not allowed to be empty');
+  });
+
+  test('Login route returns an errormessage  when a post request is made without a password ', async () => {
+    const noPassword = {
+      username: 'withoutpass',
+      password: '',
+    };
+    const response = await request(app).post('/auth/login').send(noPassword);
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.message).toEqual('"password" is not allowed to be empty');
+  });
+
+  test('Login route returns an error when a post request is made with a username that does not exist ', async () => {
+    const userDoesNotExist = {
+      username: 'notExists',
+      password: 'randompass',
+    };
+    const response = await request(app).post('/auth/login').send(userDoesNotExist);
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.message).toEqual('Username does not exist');
+  });
+
+
+  test('Login route returns an error when a post request is made with a correct user but password that does not match ', async () => {
+    // duplicate of user in beforeEach without hashed pass and wrong pass
+    const existingUser = {
+      username: 'loginuser',
+      password: 'abcdefgh',
+    };
+
+    const response = await request(app).post('/auth/login').send(existingUser);
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.message).toEqual('Password does not match');
+  });
+
+  
+  test('Login route returns a user object when both password and username match database object ', async () => {
+    const correctUser = {
+      username: 'loginuser',
+      password: 'loginpass',
+    };
+
+    const response = await request(app).post('/auth/login').send(correctUser);
+    expect(response.body).toHaveProperty('displayName');
+    expect(response.body.displayName).toEqual(correctUser.username);
+  });
+  
 });

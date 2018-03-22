@@ -7,8 +7,8 @@ const SALT_ROUNDS = 10;
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  password: String,
-  displayName: String,
+  displayName: { type: String, required: true },
+  password: { type: String, required: true },
   email: { type: String },
   date_joined: { type: Date, default: Date.now },
 });
