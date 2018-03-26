@@ -5,7 +5,8 @@
     "scripts": {
         "start": "nodemon ./bin/www",
         "lint": "./node_modules/.bin/eslint . || exit 0",
-        "test": "jest"
+        "test": "jest",
+        "debug": "nodemon -r dotenv/config ./bin/www"
     },
     "dependencies": {
         "body-parser": "~1.18.2",
