@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "start": "node ./bin/www",
+        "dev:start": "nodemon ./bin/www",
         "lint": "./node_modules/.bin/eslint . || exit 0",
         "test": "jest",
         "heroku-postbuild": "cd client && npm install && npm run build"
