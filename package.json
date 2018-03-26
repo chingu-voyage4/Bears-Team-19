@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "nodemon ./server/bin/www",
+        "start": "nodemon ./bin/www",
         "lint": "./node_modules/.bin/eslint . || exit 0",
         "test": "cross-env NODE_ENV=test jest"
     },
