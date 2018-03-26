@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "nodemon ./bin/www",
+        "start": "node ./bin/www",
         "lint": "./node_modules/.bin/eslint . || exit 0",
         "test": "jest",
         "heroku-postbuild": "cd client && npm install && npm run build"
