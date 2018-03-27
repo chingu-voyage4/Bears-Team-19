@@ -5,7 +5,8 @@
     "scripts": {
         "start": "nodemon ./bin/www",
         "lint": "./node_modules/.bin/eslint . || exit 0",
-        "test": "cross-env NODE_ENV=test jest"
+        "test": "jest",
+        "debug": "nodemon -r dotenv/config ./bin/www"
     },
     "dependencies": {
         "bcrypt": "^1.0.3",
