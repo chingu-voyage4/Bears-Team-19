@@ -24,7 +24,7 @@ const mongoDB = url.format({
   password: process.env.DB_PASSWORD,
   hostname: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  pathname: process.env.NODE_ENV === 'testint' ? process.env.DB_TEST_PATH : process.env.DB_PATH,
+  pathname: process.env.NODE_ENV && process.env.NODE_ENV.startsWith('test') ? process.env.DB_TEST_PATH : process.env.DB_PATH,
 });
 debug(`Connecting to ${mongoDB}`);
 mongoose.connect(mongoDB);

@@ -5,7 +5,7 @@
     "scripts": {
         "start": "nodemon ./bin/www",
         "lint": "./node_modules/.bin/eslint . || exit 0",
-        "test": "jest",
+        "test": "cross-env NODE_ENV=test jest unit",
         "testint": "cross-env NODE_ENV=testint jest int"
     },
     "dependencies": {
