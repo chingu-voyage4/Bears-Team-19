@@ -5,6 +5,18 @@ const Project = require('./projectmodel');
 const router = express.Router();
 
 function getAllProjects(req, res, next) {
+  // make sure the user agent accepts json
+  if (!req.accepts('json')) {
+    res.status(406).send('Not acceptable: This API supports only json');
+    return;
+  }
+
+  // check that we haven't got query parameters since we don't support them for now
+  if (JSON.stringify(req.query) !== '{}') {
+    res.status(422).send('Unprocessable entity: query parameters are not supported at this time');
+    return;
+  }
+
   Project.find({ isPublic: true }, (err, projects) => {
     if (err) {
       debug(`Find projects failed: ${err}`);
