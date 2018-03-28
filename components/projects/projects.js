@@ -28,15 +28,17 @@ function getAllProjects(req, res, next) {
   });
 }
 
-function postProject(req, res /* , next */) {
+function postProject(req /* , res, next */) {
   // display data in console
   debug(req.body);
 
   // make sure we have the correct Content-Type
+  /*
   if (req.get('Content-Type') !== 'application/json') {
     res.status(415).send('Unsupported media type: expecting "application/json"');
     return;
   }
+  */
 
   // TO DO:
   // validate data - reject if invalid

@@ -5,7 +5,7 @@ const ProjectModel = require('./projectmodel.js');
 
 // test data
 const { ObjectId } = mongoose.Types;
-const authorId = new ObjectId;
+const authorId = new ObjectId();
 const authorName = 'Bears 19';
 
 const publicProjects = [
