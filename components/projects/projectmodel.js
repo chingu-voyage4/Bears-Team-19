@@ -4,9 +4,18 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const ProjectSchema = new Schema({
-  title: String,
-  authorId: Schema.Types.ObjectId,
-  authorName: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  authorId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+  },
+  authorName: {
+    type: String,
+    required: true,
+  },
   keywords: [String],
   description: String,
   lastSaved: Date,
