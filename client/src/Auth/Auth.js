@@ -3,6 +3,7 @@ import Register from './Register/Register.js';
 import axios from 'axios';
 
 const defaultState = {
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -27,8 +28,8 @@ class Auth extends Component {
     }
 
     handleSubmit = () => {
-        const {email, password } = this.state; 
-        axios.post('/api/auth/register', {email, password})
+        const {username, email, password } = this.state; 
+        axios.post('/api/auth/register', {username, email, password})
             .then(res => {    
                 console.log(res, 'this is res on handlesubmit');     
                 return res;

@@ -11,12 +11,17 @@ const bodyParser = require('body-parser');
 const index = require('./routes/index');
 const projects = require('./routes/projects');
 
+const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // Passport
 const passport = require('passport');
-require('./components/Auth/Passport.js');
-const auth = require('./components/Auth/Auth.js');
+require('./components/auth/passport.js');
 
-const app = express();
+const auth = require('./components/auth/auth.js');
+const users = require('./components/user/user.js');
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
@@ -41,7 +46,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Authentication
 
-app.use(bodyParser());
 app.use(require('express-session')({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -60,15 +64,15 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public/build')));
 
 app.use('/', index);
 app.use('/api/projects', projects);
 app.use('/api/auth', auth);
+app.use('/api/user', users);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
