@@ -72,7 +72,7 @@ app.use(express.static(path.join(__dirname, 'public/build')));
 app.use('/', index);
 app.use('/api/projects', projects);
 app.use('/api/auth', auth);
-app.use('/api/user', users);
+app.use('/api/users', users);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

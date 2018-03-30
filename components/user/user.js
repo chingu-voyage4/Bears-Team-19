@@ -32,6 +32,7 @@ const validateForm = (req, res, next) => {
     }
 
     if (!value) return false;
+    console.log(err, value);
     return next();
   });
 };
@@ -71,6 +72,7 @@ router.post(
   validateForm,
   (req, res) => {
     createUser(req, (err, user, message) => {
+      console.log('creating user');
       // if error return an internal server error
       if (err) return res.json(err);
       // if user is not returned send info why
