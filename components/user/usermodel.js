@@ -7,10 +7,13 @@ const SALT_ROUNDS = 10;
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  displayName: String,
+  username: { type: String, required: true },
   password: { type: String, required: true },
   email: { type: String, required: true },
-  date_joined: { type: Date, default: Date.now },
+}, {
+  timestamps: {
+    createdAt: 'date_joined',
+  },
 });
 
 userSchema.pre('save', function save(next) {
@@ -40,4 +43,5 @@ userSchema.methods.verifyPassword = function (userPassword, cb) {
 };
 
 const userModel = mongoose.model('User', userSchema);
+
 module.exports = userModel;
