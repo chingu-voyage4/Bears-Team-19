@@ -22,6 +22,7 @@ class Auth extends Component {
     }
 
     handleChange = (input, e) => {
+        console.log(input, e , 'this is handlechange')
         this.setState({
             [input]: e.target.value
         })
@@ -29,11 +30,14 @@ class Auth extends Component {
 
     handleSubmit = () => {
         const {username, email, password } = this.state; 
-        axios.post('/api/auth/register', {username, email, password})
+        axios.post('/api/user/create', {username, email, password})
             .then(res => {    
                 console.log(res, 'this is res on handlesubmit');     
                 return res;
-            }) 
+            })
+            .catch(err => {
+                console.log(err, 'this is err');
+            })
         return this.clearState();
     }
 

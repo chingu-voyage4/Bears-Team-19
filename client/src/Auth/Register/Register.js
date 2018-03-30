@@ -8,7 +8,7 @@ const EMAIL_LENGTH_MIN = 5
 const PASSWORD_LENGTH_MIN = 6
 
 // Checks whether state values meets valid criteria
-function validateInputs ({ email, password, confirmPassword }) {
+function validateInputs ({ username, email, password, confirmPassword }) {
     
     return {
         username: username.length < USERNAME_LENGTH_MIN,
@@ -47,13 +47,13 @@ const Register = (props) => {
                         <label>Username</label>
                         <input type="text"
                             placeholder="Username" 
-                            className={`form-control mb-2 ${isDirty.email ? 'dirty' : ''}`}
-                            value={props.inputs.email}
+                            className={`form-control mb-2 ${isDirty.username ? 'dirty' : ''}`}
+                            value={props.inputs.username}
                             onFocus={ (e) => {props.onFocus('username')}} 
                             onBlur={props.onBlur}
                             onChange={(e) => {props.handleChange('username', e)} }
                          />
-                        {focus === 'username' && errors.username && <p className="error-text">{`username must be ${USERNAME_LENGTH_MIN} characters or over.`}</p>}
+                        {focus === 'username' && errors.username && <p className="error-text">{`Username must be ${USERNAME_LENGTH_MIN} characters or over.`}</p>}
                     </div>
                     <div>
                         <label>Email</label>
@@ -65,7 +65,6 @@ const Register = (props) => {
                             onBlur={props.onBlur}
                             onChange={(e) => {props.handleChange('email', e)} }
                          />
-                        {focus === 'email' && errors.email && <p className="error-text">{`Email must be ${EMAIL_LENGTH_MIN} characters or over.`}</p>}
                     </div>
                     <div>
                         <label>Password</label>
