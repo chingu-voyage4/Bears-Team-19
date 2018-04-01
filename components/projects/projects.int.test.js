@@ -111,73 +111,93 @@ async function setupProjects(projects) {
 // the actual tests
 describe('Projects routes', () => {
   describe('GET route', () => {
-    test('it returns a 406 status when the client doesn\'t accept json', async () => {
-      await setupProjects(allProjects);
-      await request(app)
-        .get('/api/projects')
-        .set('Accept', 'text/plain')
-        .expect(406);
+    describe('on a table with data', () => {
+      beforeAll(async () => {
+        await setupProjects(allProjects);
+      });
+      afterAll(async () => {
+        await removeAllProjects();
+      });
+
+      test('it returns a 406 status when the client doesn\'t accept json', async () => {
+        await request(app)
+          .get('/api/projects')
+          .set('Accept', 'text/plain')
+          .expect(406);
+      });
+
+      test('it returns a 200 status and data in json format when there are no query parameters', async () => {
+        const response = await request(app)
+          .get('/api/projects')
+          .set('Accept', 'application/json');
+
+        expect(response.type).toMatch(/json/);
+        expect(response.status).toEqual(200);
+        expect(Array.isArray(response.body)).toBe(true);
+        expect(response.body).toHaveLength(publicProjects.length);
+      });
+
+
+      test('it only returns projects with the isPublic flag set', async () => {
+        const response = await request(app)
+          .get('/api/projects')
+          .set('Accept', 'application/json');
+
+        expect(response.type).toMatch(/json/);
+        expect(response.status).toEqual(200);
+        expect(Array.isArray(response.body)).toBe(true);
+        expect(response.body).not.toHaveLength(allProjects.length);
+        expect(response.body).toHaveLength(publicProjects.length);
+        expect(response.body[0].isPublic).toBe(true);
+      });
+
+      // 422 rather than 404 so that there is no confusion if the parameters would actually be valid
+      // if parameters were accepted
+      test('it returns a 422 status when query parameters are supplied', async () => {
+        await request(app)
+          .get('/api/projects')
+          .set('Accept', 'application/json')
+          .query('authorName=Joe')
+          .expect(422);
+      });
     });
 
-    test('it returns a 200 status and data in json format when there are no query parameters', async () => {
-      await setupProjects(publicProjects);
-      const response = await request(app)
-        .get('/api/projects')
-        .set('Accept', 'application/json');
+    describe('on an empty table', () => {
+      beforeAll(async () => {
+        await removeAllProjects();
+      });
 
-      expect(response.type).toMatch(/json/);
-      expect(response.status).toEqual(200);
-      expect(Array.isArray(response.body)).toBe(true);
-      expect(response.body).toHaveLength(publicProjects.length);
+      test('it returns a 200 status and an empty array when there are no projects in the database', async () => {
+        const response = await request(app)
+          .get('/api/projects')
+          .set('Accept', 'application/json');
+
+        expect(response.type).toMatch(/json/);
+        expect(response.status).toEqual(200);
+        expect(Array.isArray(response.body)).toBe(true);
+        expect(response.body).toHaveLength(0);
+      });
     });
 
-    test('it returns a 200 status and an empty array when there are no projects in the database', async () => {
-      await removeAllProjects();
-      const response = await request(app)
-        .get('/api/projects')
-        .set('Accept', 'application/json');
+    describe('on a table with no published projects', async () => {
+      beforeAll(async () => {
+        await setupProjects(privateProjects);
+      });
 
-      expect(response.type).toMatch(/json/);
-      expect(response.status).toEqual(200);
-      expect(Array.isArray(response.body)).toBe(true);
-      expect(response.body).toHaveLength(0);
-    });
+      afterAll(async () => {
+        await removeAllProjects();
+      });
 
-    test('it only returns projects with the isPublic flag set', async () => {
-      await setupProjects(allProjects);
-      const response = await request(app)
-        .get('/api/projects')
-        .set('Accept', 'application/json');
+      test('it returns a 200 status and an empty array when there are no public projects in the database', async () => {
+        const response = await request(app)
+          .get('/api/projects')
+          .set('Accept', 'application/json');
 
-      expect(response.type).toMatch(/json/);
-      expect(response.status).toEqual(200);
-      expect(Array.isArray(response.body)).toBe(true);
-      expect(response.body).not.toHaveLength(allProjects.length);
-      expect(response.body).toHaveLength(publicProjects.length);
-      expect(response.body[0].isPublic).toBe(true);
-    });
-
-    test('it returns a 200 status and an empty array when there are no public projects in the database', async () => {
-      await setupProjects(privateProjects);
-      const response = await request(app)
-        .get('/api/projects')
-        .set('Accept', 'application/json');
-
-      expect(response.type).toMatch(/json/);
-      expect(response.status).toEqual(200);
-      expect(Array.isArray(response.body)).toBe(true);
-      expect(response.body).toHaveLength(0);
-    });
-
-    // 422 rather than 404 so that there is no confusion if the parameters would actually be valid
-    // if parameters were accepted
-    test('it returns a 422 status when query parameters are supplied', async () => {
-      await setupProjects(allProjects);
-      await request(app)
-        .get('/api/projects')
-        .set('Accept', 'application/json')
-        .query('authorName=Joe')
-        .expect(422);
+        expect(response.type).toMatch(/json/);
+        expect(response.status).toEqual(200);
+        expect(Array.isArray(response.body)).toBe(true);
+        expect(response.body).toHaveLength(0);
+      });
     });
   });
 
