@@ -17,15 +17,31 @@ function getAllProjects(req, res, next) {
     return;
   }
 
-  Project.find({ isPublic: true }, (err, projects) => {
-    if (err) {
-      debug(`Find projects failed: ${err}`);
-      return next(err, req, res);
-    }
+  Project.where('published')
+    .exists()
+    .sort({ 'published.updatedAt': -1 })
+    .select('published')
+    .exec((err, data) => {
+      if (err) {
+        debug(`Find projects failed: ${err}`);
+        return next(err, req, res);
+      }
 
-    // success: return the data as json
-    return res.json(projects);
-  });
+      // flatten the result
+      const projects = data.map(el => ({
+        id: el._id,
+        title: el.published.title,
+        authorId: el.published.authorId,
+        authorName: el.published.authorName,
+        keywords: el.published.keywords,
+        description: el.published.description,
+        lastPublished: el.published.updatedAt,
+        created: el.published.createdAt,
+      }));
+
+      // success: return the data as json
+      return res.json(projects);
+    });
 }
 
 function postProject(req /* , res, next */) {

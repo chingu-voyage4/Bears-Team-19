@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Define the schema
 const { Schema } = mongoose;
 
-const ProjectSchema = new Schema({
+const ProjectVersionSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -18,9 +18,13 @@ const ProjectSchema = new Schema({
   },
   keywords: [String],
   description: String,
-  lastSaved: Date,
-  lastPublished: Date,
-  isPublic: Boolean,
+}, {
+  timestamps: true,
+});
+
+const ProjectSchema = new Schema({
+  draft: ProjectVersionSchema,
+  published: ProjectVersionSchema,
 });
 
 // Define the model
