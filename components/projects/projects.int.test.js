@@ -10,49 +10,43 @@ const authorName = 'Bears 19';
 
 const publicProjects = [
   {
+    authorId,
+    authorName,
     draft: {
       title: 'Ultimate to-do list',
-      authorId,
-      authorName,
       keywords: ['web', 'react', 'js'],
       description: 'We want to create the ultimate to-do list! The project is already started and we need more developers.\nContact me for more info.',
     },
     published: {
       title: 'Ultimate to-do list',
-      authorId,
-      authorName,
       keywords: ['web', 'react', 'js'],
       description: 'We want to create the ultimate to-do list! The project is already started and we need more developers.\nContact me for more info.',
     },
   },
   {
+    authorId,
+    authorName,
     draft: {
       title: 'Mario-inspired game for the web',
-      authorId,
-      authorName,
       keywords: ['web', 'react', 'js'],
       description: 'The idea is to create a platformer inspired by Mario and have it run in the browser. We need artists, javascript developers, level designers...',
     },
     published: {
       title: 'Mario-inspired game for the web',
-      authorId,
-      authorName,
       keywords: ['web', 'react', 'js'],
       description: 'The idea is to create a platformer inspired by Mario and have it run in the browser. We need artists, javascript developers, level designers...',
     },
   },
   {
+    authorId,
+    authorName,
     draft: {
       title: 'Test project',
-      authorId,
-      authorName,
       keywords: ['web', 'game', 'python'],
       description: 'Not sure what this is about yet.',
     },
     published: {
       title: 'Test project',
-      authorId,
-      authorName,
       keywords: ['web', 'game', 'python'],
       description: 'Not sure what this is about yet.',
     },
@@ -61,10 +55,10 @@ const publicProjects = [
 
 const privateProjects = [
   {
+    authorId,
+    authorName,
     draft: {
       title: 'A project with two paragraphs',
-      authorId,
-      authorName,
       keywords: ['web', 'react', 'js'],
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
       aliqua. Est lorem ipsum dolor sit amet consectetur adipiscing elit. Odio euismod lacinia at quis. Gravida dictum fusce ut placerat 
@@ -83,10 +77,10 @@ const privateProjects = [
     },
   },
   {
+    authorId,
+    authorName,
     draft: {
       title: 'A project with lots of short paragraphs',
-      authorId,
-      authorName,
       keywords: ['web', 'react', 'js'],
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
       aliqua. Est lorem ipsum dolor sit amet consectetur adipiscing elit.\r\n

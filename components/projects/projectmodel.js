@@ -8,6 +8,13 @@ const ProjectVersionSchema = new Schema({
     type: String,
     required: true,
   },
+  keywords: [String],
+  description: String,
+}, {
+  timestamps: true,
+});
+
+const ProjectSchema = new Schema({
   authorId: {
     type: Schema.Types.ObjectId,
     required: true,
@@ -16,14 +23,10 @@ const ProjectVersionSchema = new Schema({
     type: String,
     required: true,
   },
-  keywords: [String],
-  description: String,
-}, {
-  timestamps: true,
-});
-
-const ProjectSchema = new Schema({
-  draft: ProjectVersionSchema,
+  draft: {
+    type: ProjectVersionSchema,
+    required: true,
+  },
   published: ProjectVersionSchema,
 });
 

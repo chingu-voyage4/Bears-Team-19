@@ -20,7 +20,7 @@ function getAllProjects(req, res, next) {
   Project.where('published')
     .exists()
     .sort({ 'published.updatedAt': -1 })
-    .select('published')
+    .select('authorId authorName published')
     .exec((err, data) => {
       if (err) {
         debug(`Find projects failed: ${err}`);
@@ -30,9 +30,9 @@ function getAllProjects(req, res, next) {
       // flatten the result
       const projects = data.map(el => ({
         id: el._id,
+        authorId: el.authorId,
+        authorName: el.authorName,
         title: el.published.title,
-        authorId: el.published.authorId,
-        authorName: el.published.authorName,
         keywords: el.published.keywords,
         description: el.published.description,
         lastPublished: el.published.updatedAt,
