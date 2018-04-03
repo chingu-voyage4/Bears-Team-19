@@ -78,7 +78,12 @@ router.post(
       // if user is not returned send info why
       if (!user) return res.status(400).json(message);
       // success
-      return res.status(201).json(user.email);
+
+      const success = {
+        success: 'User successfully registered.',
+      };
+
+      return res.status(201).json(success);
     });
   },
 );

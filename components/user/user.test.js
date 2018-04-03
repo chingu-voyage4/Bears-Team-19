@@ -69,7 +69,7 @@ describe('Register Route', () => {
 
     const response = await request(app).post('/api/user/create').send(user);
     expect(response.statusCode).toEqual(201);
-    expect(response.body).toEqual(user.email);
+    expect(response.body).toEqual('User successfully registered');
   });
 
   test('Register route returns an error if email already exists', async () => {
