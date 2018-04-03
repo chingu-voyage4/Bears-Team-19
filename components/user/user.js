@@ -14,15 +14,17 @@ const validateForm = (req, res, next) => {
   };
 
   const schema = Joi.object().keys({
+    username: Joi.string()
+      .regex(/^[a-z0-9]{5,15}/)
+      .min(5)
+      .max(15)
+      .required(),
     email: Joi.string()
       .email()
       .required(),
-    username: Joi.string()
-      .regex(/^[a-z0-9]{5,15}/)
-      .required(),
     password: Joi.string()
-      .alphanum()
       .min(6)
+      .max(15)
       .required(),
   });
 
@@ -32,7 +34,6 @@ const validateForm = (req, res, next) => {
     }
 
     if (!value) return false;
-    console.log(err, value);
     return next();
   });
 };
@@ -72,7 +73,6 @@ router.post(
   validateForm,
   (req, res) => {
     createUser(req, (err, user, message) => {
-      console.log('creating user');
       // if error return an internal server error
       if (err) return res.json(err);
       // if user is not returned send info why
