@@ -32,7 +32,7 @@ class Auth extends Component {
         const {username, email, password } = this.state; 
         axios.post('/api/users/create', {username, email, password})
             .then(res => {    
-                console.log(res, 'this is res on handlesubmit');     
+                console.log(res.data, 'this is res on handlesubmit');     
                 return res;
             })
             .catch(err => {
