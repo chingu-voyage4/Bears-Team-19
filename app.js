@@ -6,10 +6,11 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const debug = require('debug')('bears-team-19:server');
 
 // Routes
 const index = require('./routes/index');
-const projects = require('./routes/projects');
+const projects = require('./components/projects/projects');
 
 const app = express();
 
@@ -34,10 +35,9 @@ const mongoDB = url.format({
   password: process.env.DB_PASSWORD,
   hostname: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  pathname: process.env.NODE_ENV === 'test' ? process.env.DB_TEST_PATH : process.env.DB_PATH,
+  pathname: process.env.NODE_ENV && process.env.NODE_ENV.startsWith('test') ? process.env.DB_TEST_PATH : process.env.DB_PATH,
 });
-
-console.log('Connecting to', mongoDB);
+debug(`Connecting to ${mongoDB}`);
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 

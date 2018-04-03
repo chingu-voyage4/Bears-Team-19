@@ -48,9 +48,9 @@ const ProjectItem = (props) => {
         </CardHeader>
         <CardBody className="ProjectDescription">{descriptionItems}</CardBody>
         <CardFooter className="d-flex flex-row justify-content-between text-muted">
-          <div className="ProjectOwner">{props.project.author}</div>
+          <div className="ProjectOwner">{props.project.authorName}</div>
           <div className="ProjectDateSaved">
-            {props.project.lastSaved? formatDate(props.project.lastSaved) : ''}
+            {props.project.lastPublished? formatDate(props.project.lastPublished) : ''}
           </div>
         </CardFooter>
       </Card>
