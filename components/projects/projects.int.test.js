@@ -384,6 +384,29 @@ describe('Projects routes', () => {
       expect(response.body.published.keywords).toEqual(response.body.draft.keywords);
     });
 
+    test('it ignores any extra fields', async () => {
+      const response = await request(app)
+        .post('/api/projects')
+        .send({
+          user: {
+            name: authorName,
+            id: authorId,
+            email: 'nobody@example.com',
+          },
+          project: {
+            title: 'Example',
+            description: 'this is a description',
+            keywords: ['one', 'two'],
+            otherstuff: 'This shouln\'t be here',
+          },
+        })
+        .expect(201);
+      expect(response.body).toBeDefined();
+      expect(response.body).not.toHaveProperty('email');
+      expect(response.body.draft).not.toHaveProperty('otherstuff');
+      expect(response.body.published).not.toHaveProperty('otherstuff');
+    });
+
     test('it returns a 401 status when the user is not authenticated');
   });
 });
