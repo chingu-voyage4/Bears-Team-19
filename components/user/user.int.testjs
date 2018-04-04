@@ -71,7 +71,7 @@ describe('Create users route', () => {
     const user = {
       username: '',
       password: 'testpass',
-      email: 'loginuser@loginemail.com'
+      email: 'loginuser@loginemail.com',
     };
 
     const response = await request(app).post('/api/users/create').send(user);
@@ -163,7 +163,7 @@ describe('Create users route', () => {
     expect(response.statusCode).toBe(400);
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('User exists');
-  })
+  });
 
   // passwords
 
@@ -255,6 +255,7 @@ describe('Create users route', () => {
 
     const response = await request(app).post('/api/users/create').send(user);
     expect(response.statusCode).toEqual(201);
-    expect(response.body).toEqual(user.email);
+    expect(response.body).toHaveProperty('success');
+    expect(response.body.success).toEqual('User successfully registered.');
   });
 });
