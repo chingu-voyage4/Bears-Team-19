@@ -3,7 +3,7 @@ const app = require('../../app.js');
 const User = require('../user/usermodel.js');
 
 describe('Login Route', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     const testUser = {
       username: 'loginuser',
       email: 'login@test.com',
@@ -14,7 +14,7 @@ describe('Login Route', () => {
     await newLoginUser.save();
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await User.remove({});
   });
 
@@ -65,7 +65,6 @@ describe('Login Route', () => {
 
 
   test('Login route returns an error when a post request is made with a correct user but password that does not match ', async () => {
-    // duplicate of user in beforeEach without hashed pass and wrong pass
     const existingUser = {
       username: 'loginuser',
       password: 'abcdefgh',

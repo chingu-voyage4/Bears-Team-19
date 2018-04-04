@@ -4,11 +4,16 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../user/usermodel.js');
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
 passport.deserializeUser((user, done) => {
-  done(null, user);
+  User.find({ _id: user._id })
+    .select('-password')
+    .then((doc) => {
+      console.log(doc, 'this is doc on desearlaize');
+      done(null, doc);
+    });
 });
 
 // https://github.com/RisingStack/nodehero-authentication/blob/master/app/authentication/init.js

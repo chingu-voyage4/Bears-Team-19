@@ -50,13 +50,14 @@ app.use(require('express-session')({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  secure: false,
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
- 
-/* 
+
+/*
   view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

@@ -42,7 +42,23 @@ router.post(
       // if user is not returned send info why
       if (!user) return res.status(400).json(message);
       // success
-      return res.status(200).json(user.email);
+
+      req.logIn(user, (err) => {
+        if (err) { return next(err); }
+
+        const {
+          username, email, date_joined, updatedAt,
+        } = req.user;
+
+        const results = {
+          username,
+          email,
+          date_joined,
+          updatedAt,
+        };
+
+        return res.status(200).json(results);
+      });
     })(req, res);
   },
 );
