@@ -242,8 +242,8 @@ describe('Projects routes', () => {
         .expect(415);
     });
 
-    test('it returns a 201 status when a project was successfully created', async () => {
-      await request(app)
+    test('it returns a 200 status when a project was successfully created', async () => {
+      const response = await request(app)
         .post('/api/projects')
         .send({
           user: {
@@ -256,12 +256,21 @@ describe('Projects routes', () => {
             keywords: ['one', 'two'],
           },
         })
-        .expect(201)
-        .expect('Location', /http.+\/api\/projects\/\d+/);
+        .expect(200);
+      expect(response.body).toBeDefined();
+      expect(response.body).toHaveProperty('authorName');
+      expect(response.body).toHaveProperty('authorId');
+      expect(response.body).toHaveProperty('_id');
+      expect(response.body).toHaveProperty('draft');
+      expect(response.body.draft).toHaveProperty('title');
+      expect(response.body.draft).toHaveProperty('keywords');
+      expect(response.body.draft).toHaveProperty('description');
+      expect(response.body.draft).toHaveProperty('_id');
+      expect(response.body.draft).toHaveProperty('createdAt');
     });
 
-    test('it returns a 201 status when a project is created without a description or keywords', async () => {
-      await request(app)
+    test('it returns a 200 status when a project is created without a description or keywords', async () => {
+      const response = await request(app)
         .post('/api/projects')
         .send({
           user: {
@@ -272,8 +281,19 @@ describe('Projects routes', () => {
             title: 'Example',
           },
         })
-        .expect(201)
-        .expect('Location', /http.+\/api\/projects\/\d+/);
+        .expect(200);
+      expect(response.body).toBeDefined();
+      expect(response.body).toHaveProperty('authorName');
+      expect(response.body).toHaveProperty('authorId');
+      expect(response.body).toHaveProperty('_id');
+      expect(response.body).toHaveProperty('draft');
+      expect(response.body.draft).toHaveProperty('title');
+      // keywords is an array - by default Mongoose creates an empty array
+      expect(response.body.draft).toHaveProperty('keywords');
+      expect(response.body.draft.keywords).toHaveLength(0);
+      expect(response.body.draft).not.toHaveProperty('description');
+      expect(response.body.draft).toHaveProperty('_id');
+      expect(response.body.draft).toHaveProperty('createdAt');
     });
 
     test('it returns a 400 status when no data is provided', async () => {
@@ -400,7 +420,7 @@ describe('Projects routes', () => {
             otherstuff: 'This shouln\'t be here',
           },
         })
-        .expect(201);
+        .expect(200);
       expect(response.body).toBeDefined();
       expect(response.body).not.toHaveProperty('email');
       expect(response.body.draft).not.toHaveProperty('otherstuff');

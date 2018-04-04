@@ -1,5 +1,4 @@
 const express = require('express');
-const url = require('url');
 const debug = require('debug')('bears-team-19:server');
 const Project = require('./projectmodel');
 
@@ -85,12 +84,7 @@ function postProject(req, res, next) {
       return next(err, req, res);
     }
 
-    const location = url.format({
-      protocol: req.protocol,
-      host: req.get('host'),
-      pathname: `${req.originalUrl}/${project._id}`,
-    });
-    return res.location(location).status(201).send(project);
+    return res.status(200).send(project);
   });
 }
 
