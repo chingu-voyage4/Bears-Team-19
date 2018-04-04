@@ -1,4 +1,5 @@
 const express = require('express');
+const url = require('url');
 const debug = require('debug')('bears-team-19:server');
 const Project = require('./projectmodel');
 
@@ -44,21 +45,53 @@ function getAllProjects(req, res, next) {
     });
 }
 
-function postProject(req /* , res, next */) {
+function postProject(req, res, next) {
   // display data in console
   debug(req.body);
 
   // make sure we have the correct Content-Type
-  /*
   if (req.get('Content-Type') !== 'application/json') {
     res.status(415).send('Unsupported media type: expecting "application/json"');
     return;
   }
+
+  // authenticate user
+  /*
+  if (!req.user) {
+    res.status(401).send('Authentication failed: Please log in');
+    return;
+  }
+  const authorName = req.user.username;
+  const authorId = req.user._id;
   */
 
-  // TO DO:
   // validate data - reject if invalid
+  if (!req.body || !req.body.user || !req.body.user.name || !req.body.user.id ||
+    !req.body.project || !req.body.project.title) {
+    res.sendStatus(400);
+    return;
+  }
+
   // insert into database
+  // for the time being, we're automatically publishing the project
+  const newProject = new Project({
+    authorId: req.body.user.id,
+    authorName: req.body.user.name,
+    draft: req.body.project,
+    published: req.body.project,
+  });
+  newProject.save((err, project) => {
+    if (err) {
+      return next(err, req, res);
+    }
+
+    const location = url.format({
+      protocol: req.protocol,
+      host: req.get('host'),
+      pathname: `${req.originalUrl}/${project._id}`,
+    });
+    return res.location(location).status(201).send(project);
+  });
 }
 
 router.get('/', getAllProjects);

@@ -226,6 +226,164 @@ describe('Projects routes', () => {
   });
 
   describe('POST route', () => {
-    test('it replies with a 415 status if the Content-Type is anything other than "application/json"');
+    beforeAll(async () => {
+      await removeAllProjects();
+    });
+
+    afterAll(async () => {
+      await removeAllProjects();
+    });
+
+    test('it replies with a 415 status if the Content-Type is anything other than "application/json"', async () => {
+      await request(app)
+        .post('/api/projects')
+        .type('form')
+        .send({ title: 'Example' })
+        .expect(415);
+    });
+
+    test('it returns a 201 status when a project was successfully created', async () => {
+      await request(app)
+        .post('/api/projects')
+        .send({
+          user: {
+            name: authorName,
+            id: authorId,
+          },
+          project: {
+            title: 'Example',
+            description: 'this is a description',
+            keywords: ['one', 'two'],
+          },
+        })
+        .expect(201)
+        .expect('Location', /http.+\/api\/projects\/\d+/);
+    });
+
+    test('it returns a 201 status when a project is created without a description or keywords', async () => {
+      await request(app)
+        .post('/api/projects')
+        .send({
+          user: {
+            name: authorName,
+            id: authorId,
+          },
+          project: {
+            title: 'Example',
+          },
+        })
+        .expect(201)
+        .expect('Location', /http.+\/api\/projects\/\d+/);
+    });
+
+    test('it returns a 400 status when no data is provided', async () => {
+      await request(app)
+        .post('/api/projects')
+        .set('Content-Type', 'application/json')
+        .send()
+        .expect(400);
+    });
+
+    test('it returns a 400 status when an empty object is provided', async () => {
+      await request(app)
+        .post('/api/projects')
+        .send({})
+        .expect(400);
+    });
+
+    test('it returns a 400 status when the user data is not provided', async () => {
+      await request(app)
+        .post('/api/projects')
+        .send({
+          project: {
+            title: 'Example',
+            description: 'this is a description',
+            keywords: ['one', 'two'],
+          },
+        })
+        .expect(400);
+    });
+
+    test('it returns a 400 status when the user name is not provided', async () => {
+      await request(app)
+        .post('/api/projects')
+        .send({
+          user: {
+            id: authorId,
+          },
+          project: {
+            title: 'Example',
+            description: 'this is a description',
+            keywords: ['one', 'two'],
+          },
+        })
+        .expect(400);
+    });
+
+    test('it returns a 400 status when the user id is not provided', async () => {
+      await request(app)
+        .post('/api/projects')
+        .send({
+          user: {
+            name: authorName,
+          },
+          project: {
+            title: 'Example',
+            description: 'this is a description',
+            keywords: ['one', 'two'],
+          },
+        })
+        .expect(400);
+    });
+
+    test('it returns a 400 status when the project data is not provided', async () => {
+      await request(app)
+        .post('/api/projects')
+        .send({
+          user: {
+            name: authorName,
+            id: authorId,
+          },
+        })
+        .expect(400);
+    });
+
+    test('it returns a 400 status when the project title is not provided', async () => {
+      await request(app)
+        .post('/api/projects')
+        .send({
+          user: {
+            name: authorName,
+            id: authorId,
+          },
+          project: {
+            description: 'this is a description',
+            keywords: ['one', 'two'],
+          },
+        })
+        .expect(400);
+    });
+
+    test('it publishes the project (temporary behaviour)', async () => {
+      const response = await request(app)
+        .post('/api/projects')
+        .send({
+          user: {
+            name: authorName,
+            id: authorId,
+          },
+          project: {
+            title: 'Example',
+            description: 'this is a description',
+            keywords: ['one', 'two'],
+          },
+        });
+      expect(response.body.published).toBeDefined();
+      expect(response.body.published.title).toEqual(response.body.draft.title);
+      expect(response.body.published.description).toEqual(response.body.draft.description);
+      expect(response.body.published.keywords).toEqual(response.body.draft.keywords);
+    });
+
+    test('it returns a 401 status when the user is not authenticated');
   });
 });
