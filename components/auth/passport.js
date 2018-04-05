@@ -24,7 +24,6 @@ passport.use('local-login', new LocalStrategy((username, password, done) => {
       if (!user) {
         return done(null, false, { message: 'Username does not exist' });
       }
-
       // Password does not match
       return user.verifyPassword(password, (err, isMatch) => {
         if (err) return done(null, false, { message: err });

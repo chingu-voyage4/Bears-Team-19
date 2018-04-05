@@ -83,7 +83,7 @@ describe('Login Route', () => {
 
     const response = await request(app).post('/api/auth/login').send(correctUser);
     expect(response.statusCode).toEqual(200);
-    expect(response.body).toHaveProperty('date_joined');
+    expect(response.body).toHaveProperty('dateJoined');
     expect(response.body).toHaveProperty('email');
     expect(response.body).toHaveProperty('updatedAt');
     expect(response.body).toHaveProperty('username');
