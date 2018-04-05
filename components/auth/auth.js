@@ -43,17 +43,20 @@ router.post(
       if (!user) return res.status(400).json(message);
       // success
 
-      req.logIn(user, (err) => {
-        if (err) { return next(err); }
+      return req.logIn(user, (loginErr) => {
+        if (err) { return loginErr; }
 
         const {
-          username, email, date_joined, updatedAt,
+          username,
+          email,
+          date_joined: dateJoined,
+          updatedAt,
         } = req.user;
 
         const results = {
           username,
           email,
-          date_joined,
+          dateJoined,
           updatedAt,
         };
 

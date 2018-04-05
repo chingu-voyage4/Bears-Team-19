@@ -62,7 +62,6 @@ function createUser(req, done) {
       return done(null, false, err);
     })
     .catch((err) => {
-      console.log(err, 'this is err');
       done(err);
     });
 }

@@ -52,7 +52,6 @@ describe('Login Route', () => {
   });
 
   test('Login route returns an error when a post request is made with a username that does not exist ', async () => {
-    
     const userDoesNotExist = {
       username: 'testuser',
       password: 'randompass',
@@ -84,6 +83,10 @@ describe('Login Route', () => {
 
     const response = await request(app).post('/api/auth/login').send(correctUser);
     expect(response.statusCode).toEqual(200);
-    expect(response.body).toEqual('login@test.com');
+    expect(response.body).toHaveProperty('date_joined');
+    expect(response.body).toHaveProperty('email');
+    expect(response.body).toHaveProperty('updatedAt');
+    expect(response.body).toHaveProperty('username');
+    expect(response.body).not.toHaveProperty('password');
   });
 });

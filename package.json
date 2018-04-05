@@ -51,6 +51,9 @@
         "plugins": [
             "jest"
         ],
+        "rules": {
+            "no-underscore-dangle": 0
+        },
         "extends": "airbnb",
         "parser": "babel-eslint"
     },
