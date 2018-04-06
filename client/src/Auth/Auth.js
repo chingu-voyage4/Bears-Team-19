@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const defaultState = {
     username: '',
+    email: '',
     password: '',
     confirmPassword: '',
     focus: ''
@@ -21,17 +22,21 @@ class Auth extends Component {
     }
 
     handleChange = (input, e) => {
+        console.log(input, e , 'this is handlechange')
         this.setState({
             [input]: e.target.value
         })
     }
 
     handleSubmit = () => {
-        const {username, password } = this.state; 
-        axios.post('/api/register', {username, password})
-            .then(res => {         
-                return res;
-            }) 
+        const {username, email, password } = this.state; 
+        axios.post('/api/users', {username, email, password})
+            .then(res => {       
+                return res.data;
+            })
+            .catch(err => {
+                console.log(err, 'this is err');
+            })
         return this.clearState();
     }
 
