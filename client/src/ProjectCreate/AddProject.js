@@ -47,17 +47,17 @@ class AddProject extends Component {
       <div>
         <h1>Add New Project</h1>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <div>
-            <label className="d-block">Title</label>
-            <input type="text" ref="title" />
+          <div className="form-group">
+            <label className="d-block" htmlFor="title">Title</label>
+            <input className="form-control" type="text" ref="title" id="title" />
           </div>
-          <div>
-            <label className="d-block">Description</label>
-            <textarea ref="description" />
+          <div className="form-group">
+            <label className="d-block" htmlFor="description">Description</label>
+            <textarea className="form-control" ref="description" id="description" />
           </div>
-          <div>
-            <label className="d-block">Keywords</label>
-            <input type="text" ref="keywords" />
+          <div className="form-group">
+            <label className="d-block" htmlFor="keywords">Keywords</label>
+            <input className="form-control" type="text" ref="keywords" id="keywords" />
           </div>
 
           {/*} TODO
@@ -68,7 +68,7 @@ class AddProject extends Component {
           </div>
           */}
 
-          <input type="submit" value="submit" />
+          <input className="btn btn-primary" type="submit" value="Submit" />
         </form>
       </div>
     );
