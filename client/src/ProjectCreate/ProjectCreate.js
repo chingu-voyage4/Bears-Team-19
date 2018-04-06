@@ -8,10 +8,13 @@ class ProjectCreate extends Component {
   }
 
   handleAddProject(project) {
+    // TO DO redirect to Browse Projects page
+    /*
     let projects = this.state.projects;
     projects.push(project);
     this.setState({ projects: projects });
     console.log(project); //see the object added, in console
+    */
   }
 
   render() {
