@@ -5,9 +5,38 @@ class AddProject extends Component {
   constructor() {
     super();
     this.state = {
-      newProject: {},
+      title: '',
+      description: '',
+      keywords: [''],
+      canSubmit: false,
       error: '',
     };
+
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handleKeywordsChange = this.handleKeywordsChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleError = this.handleError.bind(this);
+  }
+
+  handleTitleChange(event) {
+    const title = event.target.value;
+    this.setState({ 
+      title: title, 
+      canSubmit: (title.length > 0),
+    });
+  }
+
+  handleDescriptionChange(event) {
+    this.setState({ 
+      description: event.target.value, 
+    });
+  }
+
+  handleKeywordsChange(event) {
+    this.setState({ 
+      keywords: [event.target.value],
+    });
   }
 
   handleError(err) {
@@ -27,51 +56,52 @@ class AddProject extends Component {
   }
 
   handleSubmit(e) {
-    /*
-    if (this.refs.title.value === '') {
-      alert('Title is required');
-    } else {
-      this.setState(
-        {
-          newProject: {
-            title: this.refs.title.value,
-            description: this.refs.description.value,
-            keywords: this.refs.keywords.value
-          }
-        },
-        function() {
-          this.props.addProject(this.state.newProject);
-          //console.log('porject obj' + this.props);
-        }
-      );
-    }
-    e.preventDefault();
-    */
-    axios.post('/api/projects', this.state.newProject)
+    axios.post('/api/projects', {
+      title: this.state.title,
+      description: this.state.description,
+      keywords: this.state.keywords,
+    })
       // if successful, call the success function (will redirect to browse)
       .then(res => this.props.addProject(res.body))
       // if failed, change state to display error message
-      .catch(this.handleError.bind(this));
+      .catch(this.handleError);
   }
 
   render() {
     return (
       <div>
         <h1>Add New Project</h1>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label className="d-block" htmlFor="title">Title</label>
-            <input className="form-control" type="text" ref="title" id="title" />
+            <input
+              className="form-control"
+              type="text"
+              id="title"
+              value={this.state.title} 
+              onChange={this.handleTitleChange}
+            />
           </div>
           <div className="form-group">
             <label className="d-block" htmlFor="description">Description</label>
-            <textarea className="form-control" ref="description" id="description" />
+            <textarea 
+              className="form-control" 
+              id="description"
+              value={this.state.description}
+              onChange={this.handleDescriptionChange}
+            />
           </div>
           <div className="form-group">
             <label className="d-block" htmlFor="keywords">Keywords</label>
-            <input className="form-control" type="text" ref="keywords" id="keywords" />
+            <input 
+              className="form-control"
+              type="text"
+              id="keywords"
+              value={this.state.keywords[0]}
+              onChange={this.handleKeywordsChange}
+            />
           </div>
-          <input className="btn btn-primary" type="submit" value="Submit" />
+          <input className="btn btn-primary" type="submit" value="Submit" disabled={!this.state.canSubmit} />
         </form>
       </div>
     );
