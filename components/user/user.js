@@ -68,7 +68,7 @@ function createUser(req, done) {
 
 /* GET home page. */
 router.post(
-  '/create',
+  '/',
   validateForm,
   (req, res) => {
     createUser(req, (err, user, message) => {

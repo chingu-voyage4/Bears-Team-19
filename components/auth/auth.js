@@ -36,11 +36,11 @@ router.post(
   '/login',
   validateForm,
   (req, res) => {
-    passport.authenticate('local-login', (err, user, message, status) => {
+    passport.authenticate('local-login', (err, user, info) => {
       // if error return an internal server error
-      if (err) return res.status(status).json(err);
+      if (err) return res.status(500).json(err);
       // if user is not returned send info why
-      if (!user) return res.status(400).json(message);
+      if (!user) return res.status(400).json(info);
       // success
 
       return req.logIn(user, (loginErr) => {
@@ -49,7 +49,7 @@ router.post(
         const {
           username,
           email,
-          date_joined: dateJoined,
+          dateJoined,
           updatedAt,
         } = req.user;
 

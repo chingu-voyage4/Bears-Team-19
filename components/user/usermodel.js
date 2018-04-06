@@ -12,7 +12,7 @@ const userSchema = new Schema({
   email: { type: String, required: true },
 }, {
   timestamps: {
-    createdAt: 'date_joined',
+    createdAt: 'dateJoined',
   },
 });
 

@@ -19,7 +19,6 @@ describe('Create users route', () => {
   afterEach(async () => {
     await User.remove({});
   });
-
   test('/api/users/create route returns a 404 status with get request', async () => {
     const response = await request(app).get('/api/users/create');
     expect(response.statusCode).toBe(404);
