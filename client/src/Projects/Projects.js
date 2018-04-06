@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProjectList from './ProjectList/ProjectList';
+import './Projects.css';
 
 
 class Projects extends Component {
@@ -18,8 +19,7 @@ class Projects extends Component {
 
   render() {
     return (
-      <div className="container text-center">
-
+      <div className="Projects container text-center">
         <h1>Browse All Projects</h1>
         <ProjectList projects={ this.state.projects } />
       </div>
