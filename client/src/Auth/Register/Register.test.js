@@ -1,10 +1,11 @@
 import React from 'react';
-import {mount, shallow} from 'enzyme';
+import { mount } from 'enzyme';
 import Register from './Register';
 
 const defaultInputs = {
   username: '',
   password: '',
+  email: '',
   confirmPassword: '',
   focus: ''
 };
@@ -20,18 +21,18 @@ const defaultInputs = {
 describe('Register Component', () => {
   
 
-  it('Component renders 2 inputs', () => {
-    const wrapper = shallow(
+  it('Component renders 3 inputs', () => {
+    const wrapper = mount(
       <Register {...props} /> 
     );
 
     const inputs = wrapper.find('input');
-    expect(inputs.length).toEqual(2);
+    expect(inputs.length).toEqual(3);
     
   });
 
   it('Component renders 1 button', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <Register {...props} /> 
     );
 
@@ -39,10 +40,11 @@ describe('Register Component', () => {
     expect(button.length).toEqual(1);
   })
 
-  it('Component renders third input once password field is 6 or more characters long', () => {
+  it.only('Component renders fourth input once password field is 6 or more characters long', () => {
     const newInputs = {
       username: '',
-      password: 'passw',
+      password: 'passwo',
+      email: '',
       confirmPassword: '',
       focus: ''
     };
@@ -54,12 +56,13 @@ describe('Register Component', () => {
     const inputs = wrapper.find('input');
     const secondInput = inputs.at(1);
 
-    expect(inputs.length).toEqual(2);
+    expect(inputs.length).toEqual(4);
     expect(secondInput.props().value.length).toEqual(5);
 
     const longerInputs = {
       username: '',
       password: 'passwo',
+      email: '',
       confirmPassword: '',
       focus: ''
     }
@@ -72,7 +75,7 @@ describe('Register Component', () => {
 
   it('Inputs are empty by default', () => {
 
-    const wrapper = shallow(
+    const wrapper = mount(
     <Register {...props} />
     );
 
@@ -87,11 +90,12 @@ describe('Register Component', () => {
     const newInputs = {
       username: 'foo',
       password: '',
+      email: '',
       confirmPassword: '',
       focus: 'username'
     };
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <Register {...props} inputs={newInputs} /> 
     );
 
@@ -103,6 +107,7 @@ describe('Register Component', () => {
     const newInputs = {
       username: 'fooo',
       password: '',
+      email: '',
       confirmPassword: '',
       focus: 'username'
     };
@@ -123,6 +128,7 @@ describe('Register Component', () => {
     const newInputs = {
       username: 'foob',
       password: '',
+      email: '',
       confirmPassword: '',
       focus: 'username'
     };
@@ -141,6 +147,7 @@ describe('Register Component', () => {
     const longerInputs = {
       username: 'foobar',
       password: '',
+      email: '',
       confirmPassword: '',
       focus: 'username'
     }
@@ -159,11 +166,12 @@ describe('Register Component', () => {
     const newInputs = {
       username: 'foo',
       password: '',
+      email: '',
       confirmPassword: '',
       focus: ''
     };
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <Register {...props} inputs={newInputs} /> 
     );
     const username = wrapper.find('input').at(0);
@@ -176,11 +184,12 @@ describe('Register Component', () => {
     const newInputs = {
       username: 'foo',
       password: '',
+      email: '',
       confirmPassword: '',
       focus: ''
     };
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <Register {...props} inputs={newInputs} /> 
     );
 
@@ -190,7 +199,7 @@ describe('Register Component', () => {
 
   it('Button is by default disabled', () => {
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <Register {...props} /> 
     );
 
@@ -202,11 +211,12 @@ describe('Register Component', () => {
     const newInputs = {
       username: 'heyjp',
       password: 'password',
+      email: '',
       confirmPassword: '',
       focus: ''
     };
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <Register {...props} inputs={newInputs} />
     );
 
@@ -218,11 +228,12 @@ describe('Register Component', () => {
     const newInputs = {
       username: 'heyjpp',
       password: 'password',
+      email: '',
       confirmPassword: 'password',
       focus: ''
     };
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <Register {...props} inputs={newInputs} />
     );
 
@@ -234,6 +245,7 @@ describe('Register Component', () => {
     const newInputs = {
       username: 'heyjpp',
       password: 'password',
+      email: '',
       confirmPassword: 'password',
       focus: ''
     };

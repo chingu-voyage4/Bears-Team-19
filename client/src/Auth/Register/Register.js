@@ -4,23 +4,26 @@ import avatar from './avatar.png';
 import './Register.css';
 
 const USERNAME_LENGTH_MIN = 5
+const EMAIL_LENGTH_MIN = 5
 const PASSWORD_LENGTH_MIN = 6
 
 // Checks whether state values meets valid criteria
-function validateInputs ({ username, password, confirmPassword }) {
+function validateInputs ({ username, email, password, confirmPassword }) {
     
     return {
         username: username.length < USERNAME_LENGTH_MIN,
+        email: email.length < EMAIL_LENGTH_MIN,
         password: password.length < PASSWORD_LENGTH_MIN,
         confirmPassword: confirmPassword !== password
     }
 }
 
 // If an input is not focused has value but not complete returns false
-function checkDirty (focus, {username, password, confirmPassword}, errors) {
+function checkDirty (focus, {username, email, password, confirmPassword}, errors) {
 
     return {
         username: focus !== 'username' && errors.username && username.length > 0,
+        email: focus !== 'email' && errors.email && email.length > 0,
         password: focus !== 'password' && errors.password && password.length > 0,
         confirmPassword: focus !== 'confirmPassword' && errors.confirmPassword && password.length > 0
     }
@@ -51,6 +54,17 @@ const Register = (props) => {
                             onChange={(e) => {props.handleChange('username', e)} }
                          />
                         {focus === 'username' && errors.username && <p className="error-text">{`Username must be ${USERNAME_LENGTH_MIN} characters or over.`}</p>}
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="email"
+                            placeholder="Email" 
+                            className={`form-control mb-2 ${isDirty.email ? 'dirty' : ''}`}
+                            value={props.inputs.email}
+                            onFocus={ (e) => {props.onFocus('email')}} 
+                            onBlur={props.onBlur}
+                            onChange={(e) => {props.handleChange('email', e)} }
+                         />
                     </div>
                     <div>
                         <label>Password</label>
