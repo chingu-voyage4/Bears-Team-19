@@ -9,7 +9,11 @@ class AddProject extends Component {
       description: '',
       keywords: [''],
       canSubmit: false,
-      error: '',
+      saving: {
+        isSaving: false,
+        messageType: '',
+        messageText: '',
+      },
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -40,7 +44,6 @@ class AddProject extends Component {
   }
 
   handleError(err) {
-    console.log('handleError');
     let error = 'Error: The project was not saved. ';
     if (err.response) {
       error += `${err.response.status} ${err.response.body}`;
@@ -52,10 +55,19 @@ class AddProject extends Component {
       error += err.message;
     }
 
-    this.setState({ error: error });
+    const saving = { isSaving: false, messageType: 'error', messageText: error };
+    this.setState({ saving: saving });
   }
 
   handleSubmit(e) {
+    const saving = { isSaving: true, messageType: 'info', messageText: 'Saving...'};
+    this.setState({ saving: saving }, () => {
+      setTimeout(() => {
+        const saving = { isSaving: true, messageType: 'info', messageText: 'Waiting for confirmation...'};
+        this.setState({ saving: saving });
+      }, 2000);      
+    });
+    // post
     axios.post('/api/projects', {
       title: this.state.title,
       description: this.state.description,
@@ -68,10 +80,11 @@ class AddProject extends Component {
   }
 
   render() {
+    const isError = (this.state.saving.messageType === 'error');
     return (
       <div>
         <h1>Add New Project</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <div className="form-group">
             <label className="d-block" htmlFor="title">Title</label>
             <input
@@ -80,6 +93,7 @@ class AddProject extends Component {
               id="title"
               value={this.state.title} 
               onChange={this.handleTitleChange}
+              disabled={this.state.saving.isSaving}
             />
           </div>
           <div className="form-group">
@@ -89,6 +103,7 @@ class AddProject extends Component {
               id="description"
               value={this.state.description}
               onChange={this.handleDescriptionChange}
+              disabled={this.state.saving.isSaving}
             />
           </div>
           <div className="form-group">
@@ -99,9 +114,20 @@ class AddProject extends Component {
               id="keywords"
               value={this.state.keywords[0]}
               onChange={this.handleKeywordsChange}
+              disabled={this.state.saving.isSaving}
             />
           </div>
-          <input className="btn btn-primary" type="submit" value="Submit" disabled={!this.state.canSubmit} />
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={this.handleSubmit}
+            disabled={this.state.saving.isSaving || !this.state.canSubmit}
+          >Submit</button>
+          {this.state.saving.messageText !== ''
+            ? isError 
+              ? <div className="text-danger mt-3">{this.state.saving.messageText}</div> 
+              : <div className="mt-3">{this.state.saving.messageText}</div>
+            : null}
         </form>
       </div>
     );
