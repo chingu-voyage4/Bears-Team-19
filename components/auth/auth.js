@@ -14,7 +14,7 @@ const validateForm = (req, res, next) => {
 
   const schema = Joi.object().keys({
     username: Joi.string()
-      .regex(/^[a-z0-9]{5,15}/)
+      .regex(/^[a-zA-Z0-9]{5,15}/)
       .required(),
     password: Joi.string()
       .alphanum()
@@ -44,7 +44,7 @@ router.post(
       // success
 
       return req.logIn(user, (loginErr) => {
-        if (err) { return loginErr; }
+        if (loginErr) { return loginErr; }
 
         const {
           username,
