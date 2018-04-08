@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import LabelledInput from '../../Form/LabelledInput';
 import LabelledTextarea from '../../Form/LabelledTextarea';
-import SpinnerBox from '../../Form/SpinnerBox';
-import ErrorBox from '../../Form/ErrorBox';
 
 class AddProjectForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       title: '',
       description: '',
       keywords: [''],
       canSubmit: false,
-      saving: {
-        isSaving: false,
-        messageType: '',
-        messageText: '',
-      },
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleKeywordsChange = this.handleKeywordsChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleError = this.handleError.bind(this);
   }
 
   handleTitleChange(event) {
@@ -47,85 +38,45 @@ class AddProjectForm extends Component {
     });
   }
 
-  handleError(err) {
-    let error = 'Error: The project was not saved. ';
-    if (err.response) {
-      error += `${err.response.status} ${err.response.body}`;
-    } else if (err.request) {
-      // no response was received
-      error += 'No response from server';
-    } else {
-      // something else happened
-      error += err.message;
-    }
-
-    const saving = { isSaving: false, messageType: 'error', messageText: error };
-    this.setState({ saving: saving });
-  }
-
   handleSubmit(e) {
-    const saving = { isSaving: true, messageType: 'info', messageText: 'Saving...'};
-    this.setState({ saving: saving }, () => {
-      setTimeout(() => {
-        const saving = { isSaving: true, messageType: 'info', messageText: 'Waiting for confirmation...'};
-        this.setState({ saving: saving });
-      }, 2000);      
-    });
-    // post
-    axios.post('/api/projects', {
+    this.props.addProject({
       title: this.state.title,
       description: this.state.description,
       keywords: this.state.keywords,
-    })
-      // if successful, call the success function (will redirect to browse)
-      .then(res => this.props.addProject(res.body))
-      // if failed, change state to display error message
-      .catch(this.handleError);
+    });
   }
 
   render() {
-    const isError = (this.state.saving.messageType === 'error');
     return (
       <div>
-        <h1>Add New Project</h1>
         <form>
           <LabelledInput
             inputId="title" 
             label="Title" 
             inputText={this.state.title} 
             onChange={this.handleTitleChange} 
-            disabled={this.state.saving.isSaving}
+            disabled={this.props.disabled}
           />
           <LabelledTextarea
             inputId="description" 
             label="Description" 
             inputText={this.state.description} 
             onChange={this.handleDescriptionChange} 
-            disabled={this.state.saving.isSaving}
+            disabled={this.props.disabled}
           />
           <LabelledInput
             inputId="keywords" 
             label="Keywords" 
             inputText={this.state.keywords[0]} 
             onChange={this.handleKeywordsChange} 
-            disabled={this.state.saving.isSaving}
+            disabled={this.props.disabled}
           />
           <button
             className="btn btn-primary"
             type="button"
             onClick={this.handleSubmit}
-            disabled={this.state.saving.isSaving || !this.state.canSubmit}
+            disabled={this.props.disabled || !this.state.canSubmit}
           >Submit</button>
-          {
-            this.state.saving.isSaving ?
-            <SpinnerBox message={this.state.saving.messageText} /> :
-            null
-          }
-          {
-            isError ?
-            <ErrorBox errorMsg={this.state.saving.messageText} /> :
-            null
-          }
         </form>
       </div>
     );
