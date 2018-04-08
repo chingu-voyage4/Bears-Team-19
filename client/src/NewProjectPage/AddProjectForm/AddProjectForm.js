@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import LabelledInput from '../../Form/LabelledInput';
 import LabelledTextarea from '../../Form/LabelledTextarea';
+import SpinnerBox from '../../Form/SpinnerBox';
+import ErrorBox from '../../Form/ErrorBox';
 
 class AddProjectForm extends Component {
   constructor() {
@@ -114,11 +116,16 @@ class AddProjectForm extends Component {
             onClick={this.handleSubmit}
             disabled={this.state.saving.isSaving || !this.state.canSubmit}
           >Submit</button>
-          {this.state.saving.messageText !== ''
-            ? isError 
-              ? <div className="text-danger mt-3">{this.state.saving.messageText}</div> 
-              : <div className="mt-3">{this.state.saving.messageText}</div>
-            : null}
+          {
+            this.state.saving.isSaving ?
+            <SpinnerBox message={this.state.saving.messageText} /> :
+            null
+          }
+          {
+            isError ?
+            <ErrorBox errorMsg={this.state.saving.messageText} /> :
+            null
+          }
         </form>
       </div>
     );

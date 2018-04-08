@@ -1,0 +1,12 @@
+import React from 'react';
+
+const ErrorBox = (props) => {
+  // don't render anything if there is no error message
+  if (props.errorMsg === '') return null;
+
+  return (
+    <div className="ErrorBox text-danger mt-3">{props.errorMsg}</div>
+  );
+};
+
+export default ErrorBox;
