@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import LabelledInput from '../../Form/LabelledInput';
+import LabelledTextarea from '../../Form/LabelledTextarea';
 
 class AddProjectForm extends Component {
   constructor() {
@@ -85,38 +87,27 @@ class AddProjectForm extends Component {
       <div>
         <h1>Add New Project</h1>
         <form>
-          <div className="form-group">
-            <label className="d-block" htmlFor="title">Title</label>
-            <input
-              className="form-control"
-              type="text"
-              id="title"
-              value={this.state.title} 
-              onChange={this.handleTitleChange}
-              disabled={this.state.saving.isSaving}
-            />
-          </div>
-          <div className="form-group">
-            <label className="d-block" htmlFor="description">Description</label>
-            <textarea 
-              className="form-control" 
-              id="description"
-              value={this.state.description}
-              onChange={this.handleDescriptionChange}
-              disabled={this.state.saving.isSaving}
-            />
-          </div>
-          <div className="form-group">
-            <label className="d-block" htmlFor="keywords">Keywords</label>
-            <input 
-              className="form-control"
-              type="text"
-              id="keywords"
-              value={this.state.keywords[0]}
-              onChange={this.handleKeywordsChange}
-              disabled={this.state.saving.isSaving}
-            />
-          </div>
+          <LabelledInput
+            inputId="title" 
+            label="Title" 
+            inputText={this.state.title} 
+            onChange={this.handleTitleChange} 
+            disabled={this.state.saving.isSaving}
+          />
+          <LabelledTextarea
+            inputId="description" 
+            label="Description" 
+            inputText={this.state.description} 
+            onChange={this.handleDescriptionChange} 
+            disabled={this.state.saving.isSaving}
+          />
+          <LabelledInput
+            inputId="keywords" 
+            label="Keywords" 
+            inputText={this.state.keywords[0]} 
+            onChange={this.handleKeywordsChange} 
+            disabled={this.state.saving.isSaving}
+          />
           <button
             className="btn btn-primary"
             type="button"
