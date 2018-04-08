@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import AddProject from './AddProject';
+import AddProjectForm from './AddProjectForm/AddProjectForm';
 
-class ProjectCreate extends Component {
+class NewProjectPage extends Component {
   constructor(props) {
     super(props);
     this.state = { projects: [] };
@@ -20,10 +20,10 @@ class ProjectCreate extends Component {
   render() {
     return (
       <div className="container text-center">
-        <AddProject addProject={this.handleAddProject.bind(this)} />
+        <AddProjectForm addProject={this.handleAddProject.bind(this)} />
       </div>
     );
   }
 }
 
-export default ProjectCreate;
+export default NewProjectPage;

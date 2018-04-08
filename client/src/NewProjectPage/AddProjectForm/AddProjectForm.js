@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class AddProject extends Component {
+class AddProjectForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -134,4 +134,4 @@ class AddProject extends Component {
   }
 }
 
-export default AddProject;
+export default AddProjectForm;
