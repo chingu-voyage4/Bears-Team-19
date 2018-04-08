@@ -3,6 +3,7 @@ import { Redirect } from 'react-router';
 import axios from 'axios';
 import AddProjectForm from './AddProjectForm/AddProjectForm';
 import AsyncReportBox from '../Form/AsyncReportBox';
+import './NewProjectPage.css';
 
 class NewProjectPage extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class NewProjectPage extends Component {
   handleAddProject(project) {
     this.setState({ savingState: 'onGoing', message: 'Saving...' }, () => {
       setTimeout(() => {
-        this.setState({ message: 'Waiting for confirmation...'});
+        this.setState({ savingState: 'onGoing', message: 'Waiting for confirmation...'});
       }, 2000);      
     });
 
@@ -52,10 +53,12 @@ class NewProjectPage extends Component {
       );
     }
     return (
-      <div className="container text-center">
+      <div className="NewProjectPage container text-center">
         <h1>Add New Project</h1>
         <AddProjectForm disabled={this.state.savingState === 'onGoing'} addProject={this.handleAddProject.bind(this)} />
-        <AsyncReportBox state={this.state.savingState} message={this.state.message} />
+        <div className="mt-3">
+          <AsyncReportBox state={this.state.savingState} message={this.state.message} />
+        </div>
       </div>
     );
   }

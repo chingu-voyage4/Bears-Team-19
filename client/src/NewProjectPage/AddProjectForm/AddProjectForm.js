@@ -71,12 +71,14 @@ class AddProjectForm extends Component {
             onChange={this.handleKeywordsChange} 
             disabled={this.props.disabled}
           />
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={this.handleSubmit}
-            disabled={this.props.disabled || !this.state.canSubmit}
-          >Submit</button>
+          <div className="form-group">
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={this.handleSubmit}
+              disabled={this.props.disabled || !this.state.canSubmit}
+            >Submit</button>
+          </div>
         </form>
       </div>
     );

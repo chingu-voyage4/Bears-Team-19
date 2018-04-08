@@ -5,7 +5,7 @@ const ErrorBox = (props) => {
   if (props.errorMsg === '') return null;
 
   return (
-    <div className="ErrorBox text-danger mt-3">{props.errorMsg}</div>
+    <div className="ErrorBox text-danger">{props.errorMsg}</div>
   );
 };
 
