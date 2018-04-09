@@ -7,7 +7,7 @@
         "dev:start": "nodemon ./bin/www",
         "lint": "./node_modules/.bin/eslint . || exit 0",
         "test": "cross-env NODE_ENV=test jest unit",
-        "testint": "cross-env NODE_ENV=testint jest int",
+        "testint": "cross-env NODE_ENV=test jest -i int",
         "heroku-postbuild": "cd client && npm install && npm run build",
         "debug": "nodemon -r dotenv/config ./bin/www"
     },

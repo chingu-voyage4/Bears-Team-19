@@ -8,7 +8,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.find({ _id: id })
+  User.findOne({ _id: id })
     .select('-password')
     .then((doc) => {
       done(null, doc);
