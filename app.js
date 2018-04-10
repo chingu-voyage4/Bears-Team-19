@@ -11,6 +11,7 @@ const debug = require('debug')('bears-team-19:server');
 // Routes
 const index = require('./routes/index');
 const projects = require('./components/projects/projects');
+const contact = require('./components/contact/contact.js');
 
 const app = express();
 
@@ -74,6 +75,8 @@ app.use('/', index);
 app.use('/api/projects', projects);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
+app.use('/api/contact', contact);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
