@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LabelledInput from '../../Form/LabelledInput';
 import LabelledTextarea from '../../Form/LabelledTextarea';
+import LabelledTagInput from '../../Form/LabelledTagInput';
 
 class AddProjectForm extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class AddProjectForm extends Component {
     this.state = {
       title: '',
       description: '',
-      keywords: [''],
+      keywords: [],
       canSubmit: false,
     };
 
@@ -32,9 +33,9 @@ class AddProjectForm extends Component {
     });
   }
 
-  handleKeywordsChange(event) {
+  handleKeywordsChange(tags) {
     this.setState({ 
-      keywords: [event.target.value],
+      keywords: tags,
     });
   }
 
@@ -64,10 +65,10 @@ class AddProjectForm extends Component {
             onChange={this.handleDescriptionChange} 
             disabled={this.props.disabled}
           />
-          <LabelledInput
+          <LabelledTagInput
             inputId="keywords" 
             label="Keywords" 
-            inputText={this.state.keywords[0]} 
+            value={this.state.keywords} 
             onChange={this.handleKeywordsChange} 
             disabled={this.props.disabled}
           />
