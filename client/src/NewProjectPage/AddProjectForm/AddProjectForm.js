@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import LabelledInput from '../../Form/LabelledInput';
 import LabelledTextarea from '../../Form/LabelledTextarea';
 import LabelledTagInput from '../../Form/LabelledTagInput';
@@ -49,7 +49,7 @@ class AddProjectForm extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <form>
           <LabelledInput
             inputId="title" 
@@ -81,7 +81,7 @@ class AddProjectForm extends Component {
             >Submit</button>
           </div>
         </form>
-      </div>
+      </Fragment>
     );
   }
 }
