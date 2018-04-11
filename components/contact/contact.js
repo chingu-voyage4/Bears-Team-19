@@ -9,14 +9,63 @@ const Mailer = require('./mailer/mailer.js');
 
 const router = express.Router();
 
+// Mention projectId / Title in case of multiple projects
+// text version should be same cointent as html.
+// break up the text with linebreaks after a certain amount of chars
 
-function createEmailObject(subject, body, username, email, projectOwner, projectOwnerEmail) {
+function escapeBody(body, lineLimit) {
+  let text = '';
+
+  if (body.length < lineLimit) {
+    return body;
+  }
+
+  for (let i = 0; i < body.length; i += lineLimit) {
+    const endPoint = i + lineLimit;
+    const chunk = body.slice(i, endPoint);
+
+    // there are less than 60 chars left return rest of body
+    if (endPoint >= body.length) {
+      text += `${chunk} \n`;
+      return text;
+    }
+
+    // if last character in chunk is a letter, add a hyphen "-"
+
+    if (chunk[chunk.length - 1].match(/[a-z]/, i)) {
+      text += `${chunk}-\n`;
+    } else {
+      text += `${chunk}\n`;
+    }
+  }
+  return text;
+}
+
+
+function createEmailObject(
+  subject,
+  body,
+  username,
+  email,
+  projectOwner,
+  projectOwnerEmail,
+  project,
+) {
+  const { _id: projectId, published } = project;
+  const { title: projectTitle } = published;
+  const plainBody = escapeBody(body, 65);
+
   const mail = {
     from: `BearsTeam19: ${process.env.MAIL_USER}`,
     to: `${projectOwner} <${projectOwnerEmail}`,
     subject,
-    text: body,
-    html: `<p>${username} ${email} is trying to contact you about your project</p><p>${body}</p>`,
+    text: `${username} ${email} is trying to contact you about - ${projectTitle}. \n
+      ${plainBody}`,
+    html: `<div style="width: 400px"> 
+              <br/>
+              <p>${username} ${email} is trying to contact you about  ${projectId}: ${projectTitle}</p>
+              <p style="white-space: pre-wrap">${body}</p>.
+           </div>`,
   };
 
   return mail;
@@ -25,7 +74,7 @@ function createEmailObject(subject, body, username, email, projectOwner, project
 function filterRequest(req, res, next) {
   // user not logged in
   if (!req.user) {
-    return res.status(400).json({ message: 'Please login before contacting users.' });
+    return res.status(401).json({ message: 'Please login before contacting users.' });
   }
 
 
@@ -56,6 +105,7 @@ async function contactUser(req, res) {
     email,
     user.username,
     user.email,
+    project,
   );
 
   return Mailer.sendMail(message, (err, info) => {
