@@ -119,113 +119,108 @@ async function setupProjects(projects) {
 }
 
 // the actual tests
-describe('Projects routes', () => {
-  describe('GET route', () => {
-    describe('on a table with data', () => {
-      beforeAll(async () => {
-        await setupProjects(allProjects);
-      });
-      afterAll(async () => {
-        await removeAllProjects();
-      });
-
-      test('it returns a 406 status when the client doesn\'t accept json', async () => {
-        await request(app)
-          .get('/api/projects')
-          .set('Accept', 'text/plain')
-          .expect(406);
-      });
-
-      test('it returns a 200 status and data in json format when there are no query parameters', async () => {
-        const response = await request(app)
-          .get('/api/projects')
-          .set('Accept', 'application/json');
-
-        expect(response.type).toMatch(/json/);
-        expect(response.status).toEqual(200);
-        expect(Array.isArray(response.body)).toBe(true);
-        expect(response.body).toHaveLength(publicProjects.length);
-
-        // check the object structure
-        expect(response.body[0]).toHaveProperty('id');
-        expect(response.body[0]).toHaveProperty('title');
-        expect(response.body[0]).toHaveProperty('authorId');
-        expect(response.body[0]).toHaveProperty('authorName');
-        expect(response.body[0]).toHaveProperty('keywords');
-        expect(response.body[0]).toHaveProperty('description');
-        expect(response.body[0]).toHaveProperty('lastPublished');
-        expect(response.body[0]).toHaveProperty('created');
-      });
-
-
-      test('it only returns published projects', async () => {
-        const response = await request(app)
-          .get('/api/projects')
-          .set('Accept', 'application/json');
-
-        expect(response.type).toMatch(/json/);
-        expect(response.status).toEqual(200);
-        expect(Array.isArray(response.body)).toBe(true);
-        expect(response.body).not.toHaveLength(allProjects.length);
-        expect(response.body).toHaveLength(publicProjects.length);
-
-        const titles = publicProjects.map(el => el.published.title);
-        expect(titles).toContain(response.body[0].title);
-        expect(titles).toContain(response.body[1].title);
-        expect(titles).toContain(response.body[2].title);
-      });
-
-      // 422 rather than 404 so that there is no confusion if the parameters would actually be valid
-      // if parameters were accepted
-      test('it returns a 422 status when query parameters are supplied', async () => {
-        await request(app)
-          .get('/api/projects')
-          .set('Accept', 'application/json')
-          .query('authorName=Joe')
-          .expect(422);
-      });
+describe('Projects GET route', () => {
+  describe('on a table with data', () => {
+    beforeAll(async () => {
+      await setupProjects(allProjects);
+    });
+    afterAll(async () => {
+      await removeAllProjects();
     });
 
-    describe('on an empty table', () => {
-      beforeAll(async () => {
-        await removeAllProjects();
-      });
-
-      test('it returns a 200 status and an empty array when there are no projects in the database', async () => {
-        const response = await request(app)
-          .get('/api/projects')
-          .set('Accept', 'application/json');
-
-        expect(response.type).toMatch(/json/);
-        expect(response.status).toEqual(200);
-        expect(Array.isArray(response.body)).toBe(true);
-        expect(response.body).toHaveLength(0);
-      });
+    test('it returns a 406 status when the client doesn\'t accept json', async () => {
+      await request(app)
+        .get('/api/projects')
+        .set('Accept', 'text/plain')
+        .expect(406);
     });
 
-    describe('on a table with no published projects', async () => {
-      beforeAll(async () => {
-        await setupProjects(privateProjects);
-      });
+    test('it returns a 200 status and data in json format when there are no query parameters', async () => {
+      const response = await request(app)
+        .get('/api/projects')
+        .set('Accept', 'application/json');
 
-      afterAll(async () => {
-        await removeAllProjects();
-      });
+      expect(response.type).toMatch(/json/);
+      expect(response.status).toEqual(200);
+      expect(Array.isArray(response.body)).toBe(true);
+      expect(response.body).toHaveLength(publicProjects.length);
 
-      test('it returns a 200 status and an empty array when there are no public projects in the database', async () => {
-        const response = await request(app)
-          .get('/api/projects')
-          .set('Accept', 'application/json');
+      // check the object structure
+      expect(response.body[0]).toHaveProperty('id');
+      expect(response.body[0]).toHaveProperty('title');
+      expect(response.body[0]).toHaveProperty('authorId');
+      expect(response.body[0]).toHaveProperty('authorName');
+      expect(response.body[0]).toHaveProperty('keywords');
+      expect(response.body[0]).toHaveProperty('description');
+      expect(response.body[0]).toHaveProperty('lastPublished');
+      expect(response.body[0]).toHaveProperty('created');
+    });
 
-        expect(response.type).toMatch(/json/);
-        expect(response.status).toEqual(200);
-        expect(Array.isArray(response.body)).toBe(true);
-        expect(response.body).toHaveLength(0);
-      });
+
+    test('it only returns published projects', async () => {
+      const response = await request(app)
+        .get('/api/projects')
+        .set('Accept', 'application/json');
+
+      expect(response.type).toMatch(/json/);
+      expect(response.status).toEqual(200);
+      expect(Array.isArray(response.body)).toBe(true);
+      expect(response.body).not.toHaveLength(allProjects.length);
+      expect(response.body).toHaveLength(publicProjects.length);
+
+      const titles = publicProjects.map(el => el.published.title);
+      expect(titles).toContain(response.body[0].title);
+      expect(titles).toContain(response.body[1].title);
+      expect(titles).toContain(response.body[2].title);
+    });
+
+    // 422 rather than 404 so that there is no confusion if the parameters would actually be valid
+    // if parameters were accepted
+    test('it returns a 422 status when query parameters are supplied', async () => {
+      await request(app)
+        .get('/api/projects')
+        .set('Accept', 'application/json')
+        .query('authorName=Joe')
+        .expect(422);
     });
   });
 
-  describe('POST route', () => {
-    test('it replies with a 415 status if the Content-Type is anything other than "application/json"');
+  describe('on an empty table', () => {
+    beforeAll(async () => {
+      await removeAllProjects();
+    });
+
+    test('it returns a 200 status and an empty array when there are no projects in the database', async () => {
+      const response = await request(app)
+        .get('/api/projects')
+        .set('Accept', 'application/json');
+
+      expect(response.type).toMatch(/json/);
+      expect(response.status).toEqual(200);
+      expect(Array.isArray(response.body)).toBe(true);
+      expect(response.body).toHaveLength(0);
+    });
+  });
+
+  describe('on a table with no published projects', async () => {
+    beforeAll(async () => {
+      await setupProjects(privateProjects);
+    });
+
+    afterAll(async () => {
+      await removeAllProjects();
+    });
+
+    test('it returns a 200 status and an empty array when there are no public projects in the database', async () => {
+      const response = await request(app)
+        .get('/api/projects')
+        .set('Accept', 'application/json');
+
+      expect(response.type).toMatch(/json/);
+      expect(response.status).toEqual(200);
+      expect(Array.isArray(response.body)).toBe(true);
+      expect(response.body).toHaveLength(0);
+    });
   });
 });
+

@@ -19,23 +19,22 @@ describe('Create users route', () => {
   afterEach(async () => {
     await User.remove({});
   });
-
-  test('/api/users/create route returns a 404 status with get request', async () => {
-    const response = await request(app).get('/api/users/create');
+  test('/api/users route returns a 404 status with get request', async () => {
+    const response = await request(app).get('/api/users');
     expect(response.statusCode).toBe(404);
   });
 
   // Missing Fields
 
   test('Auth Route returns error response with post request missing object', async () => {
-    const response = await request(app).post('/api/users/create');
+    const response = await request(app).post('/api/users');
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('"username" is required');
     expect(response.statusCode).toEqual(400);
   });
 
   test('Create users route returns 400 error when post request has a missing username field', async () => {
-    const response = await request(app).post('/api/users/create');
+    const response = await request(app).post('/api/users');
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('"username" is required');
     expect(response.statusCode).toEqual(400);
@@ -47,7 +46,7 @@ describe('Create users route', () => {
       password: 'testpass',
     };
 
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.statusCode).toBe(400);
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('"email" is required');
@@ -59,7 +58,7 @@ describe('Create users route', () => {
       email: 'loginuser@test.com',
       password: '',
     };
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.statusCode).toBe(400);
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('"password" is not allowed to be empty');
@@ -74,7 +73,7 @@ describe('Create users route', () => {
       email: 'loginuser@loginemail.com',
     };
 
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('"username" is not allowed to be empty');
     expect(response.statusCode).toEqual(400);
@@ -87,7 +86,7 @@ describe('Create users route', () => {
       email: '',
     };
 
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('"email" is not allowed to be empty');
     expect(response.statusCode).toEqual(400);
@@ -100,7 +99,7 @@ describe('Create users route', () => {
       email: 'loginuser@loginemail.com',
     };
 
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('"password" is not allowed to be empty');
     expect(response.statusCode).toEqual(400);
@@ -114,7 +113,7 @@ describe('Create users route', () => {
       email: 'loginuser@test.com',
       password: 'loginuserpass',
     };
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.statusCode).toBe(400);
     expect(response.body).toHaveProperty('message');
   });
@@ -125,7 +124,7 @@ describe('Create users route', () => {
       email: 'loginuser@test.com',
       password: 'loginuserpass',
     };
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.statusCode).toBe(400);
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('"username" length must be less than or equal to 15 characters long');
@@ -137,7 +136,7 @@ describe('Create users route', () => {
       email: 'loginuser@test.com',
       password: 'loginuserpass',
     };
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.statusCode).toBe(400);
     expect(response.body).toHaveProperty('message');
   });
@@ -148,7 +147,7 @@ describe('Create users route', () => {
       email: 'loginuser@test.com',
       password: 'loginuserpass',
     };
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.statusCode).toBe(400);
     expect(response.body).toHaveProperty('message');
   });
@@ -159,7 +158,7 @@ describe('Create users route', () => {
       email: 'loginuser@test.com',
       password: 'loginuserpass',
     };
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.statusCode).toBe(400);
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('User exists');
@@ -174,7 +173,7 @@ describe('Create users route', () => {
       password: 'short',
     };
 
-    const response = await request(app).post('/api/users/create').send(emailShort);
+    const response = await request(app).post('/api/users').send(emailShort);
     expect(response.statusCode).toEqual(400);
     expect(response.body).toHaveProperty('message');
   });
@@ -186,7 +185,7 @@ describe('Create users route', () => {
       password: 'abcdefghijklmnop',
     };
 
-    const response = await request(app).post('/api/users/create').send(emailShort);
+    const response = await request(app).post('/api/users').send(emailShort);
     expect(response.statusCode).toEqual(400);
     expect(response.body).toHaveProperty('message');
     expect(response.body.message).toEqual('"password" length must be less than or equal to 15 characters long');
@@ -201,7 +200,7 @@ describe('Create users route', () => {
       password: 'newpass',
     };
 
-    const response = await request(app).post('/api/users/create').send(emailShort);
+    const response = await request(app).post('/api/users').send(emailShort);
     expect(response.statusCode).toEqual(400);
     expect(response.body).toHaveProperty('message');
   });
@@ -213,7 +212,7 @@ describe('Create users route', () => {
       password: 'testpass',
     };
 
-    const response = await request(app).post('/api/users/create').send(emailSpace);
+    const response = await request(app).post('/api/users').send(emailSpace);
     expect(response.statusCode).toEqual(400);
     expect(response.body).toHaveProperty('message');
   });
@@ -225,7 +224,7 @@ describe('Create users route', () => {
       password: 'testpass',
     };
 
-    const response = await request(app).post('/api/users/create').send(emailSymbol);
+    const response = await request(app).post('/api/users').send(emailSymbol);
     expect(response.statusCode).toEqual(400);
     expect(response.body).toHaveProperty('message');
   });
@@ -237,7 +236,7 @@ describe('Create users route', () => {
       password: 'ilikepasswords',
     };
 
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.statusCode).toEqual(400);
     expect(response.body.message).toBe('User exists');
   });
@@ -253,7 +252,7 @@ describe('Create users route', () => {
     const dbEntry = await User.findOne({ email: user.email });
     expect(dbEntry).toBe(null);
 
-    const response = await request(app).post('/api/users/create').send(user);
+    const response = await request(app).post('/api/users').send(user);
     expect(response.statusCode).toEqual(201);
     expect(response.body).toHaveProperty('success');
     expect(response.body.success).toEqual('User successfully registered.');
