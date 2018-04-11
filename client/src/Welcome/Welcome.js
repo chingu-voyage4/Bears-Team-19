@@ -26,9 +26,6 @@ class Welcome extends Component {
         <div>
           <Link to="/projects" className="btn btn-primary">Browse Projects</Link>
         </div>
-        <div>
-          <Link to="/projects/create" className="btn btn-primary">Create Project</Link>
-        </div>
       </div>
     );
   }
