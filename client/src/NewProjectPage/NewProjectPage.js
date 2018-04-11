@@ -11,6 +11,7 @@ class NewProjectPage extends Component {
     this.state = {
       savingState: 'idle',
       message: '',
+      timeoutId: -1,
     };
 
     this.handleError = this.handleError.bind(this);
@@ -28,14 +29,21 @@ class NewProjectPage extends Component {
       error += err.message;
     }
 
+    // get rid of any asynchronous info message in the queue
+    if (this.state.timeoutId >= 0){
+      clearTimeout(this.state.timeoutId);
+      this.setState({ timeoutId: -1 });
+    }
+
     this.setState({ savingState: 'error', message: error });
   }
 
   handleAddProject(project) {
     this.setState({ savingState: 'onGoing', message: 'Saving...' }, () => {
-      setTimeout(() => {
+      const id = setTimeout(() => {
         this.setState({ savingState: 'onGoing', message: 'Waiting for confirmation...'});
-      }, 2000);      
+      }, 2000);
+      this.setState({ timeoutId: id });    
     });
 
     // post
