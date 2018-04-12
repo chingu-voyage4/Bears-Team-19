@@ -40,10 +40,10 @@ describe('Register Component', () => {
     expect(button.length).toEqual(1);
   })
 
-  it.only('Component renders fourth input once password field is 6 or more characters long', () => {
+  it('Component renders fourth input once password field is 6 or more characters long', () => {
     const newInputs = {
       username: '',
-      password: 'passwo',
+      password: 'passw',
       email: '',
       confirmPassword: '',
       focus: ''
@@ -54,10 +54,10 @@ describe('Register Component', () => {
     );
 
     const inputs = wrapper.find('input');
-    const secondInput = inputs.at(1);
+    const passwordInput = inputs.at(2);
 
-    expect(inputs.length).toEqual(4);
-    expect(secondInput.props().value.length).toEqual(5);
+    expect(inputs.length).toEqual(3);
+    expect(passwordInput.props().value.length).toEqual(5);
 
     const longerInputs = {
       username: '',
@@ -69,8 +69,8 @@ describe('Register Component', () => {
 
     wrapper.setProps({inputs: longerInputs});
     const newInput = wrapper.find('input');
-    expect(newInput.length).toEqual(3);
-    expect(newInput.at(1).props().value.length).toEqual(6);
+    expect(newInput.length).toEqual(4);
+    expect(newInput.at(2).props().value.length).toEqual(6);
   })
 
   it('Inputs are empty by default', () => {
@@ -224,11 +224,11 @@ describe('Register Component', () => {
     expect(button.prop('disabled')).toBe(true);
   })
 
-  it('All 3 fields have valid inputs, button is enabled', () => {
+  it('All 4 fields have valid inputs, button is enabled', () => {
     const newInputs = {
       username: 'heyjpp',
       password: 'password',
-      email: '',
+      email: 'joebloggs@example.com',
       confirmPassword: 'password',
       focus: ''
     };
@@ -257,9 +257,7 @@ describe('Register Component', () => {
     expect(firstInput.props().value).toMatch('');
   })
 
-  it('Username input contains spaces, returns error message', () => {
-
-  })
-
+  it('Username input contains spaces, returns error message')
+  it('checks that email is valid')
   
 });

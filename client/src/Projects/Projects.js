@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import ProjectList from './ProjectList/ProjectList';
 import './Projects.css';
 
+
 class Projects extends Component {
-  
+
   constructor(props){
     super(props);
     this.state = { projects: [] };
   }
-  
+
   componentDidMount() {
     // requesting projects to backend
     fetch('/api/projects')

@@ -3,7 +3,8 @@ const Project = require('./projectmodel');
 
 function postProject(req, res, next) {
   // make sure we have the correct Content-Type
-  if (req.get('Content-Type') !== 'application/json') {
+  if (!req.is('json')) {
+    debug(`415: ${req.get('Content-Type')}`);
     res.status(415).send('Unsupported media type: expecting "application/json"');
     return;
   }

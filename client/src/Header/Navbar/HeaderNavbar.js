@@ -39,6 +39,9 @@ class HeaderNavbar extends Component {
               <NavLink tag={Link} to="#">About</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink tag={Link} to="/projects/create">New Project</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink tag={Link} to="/register">Register</NavLink>
             </NavItem>
             <NavItem>

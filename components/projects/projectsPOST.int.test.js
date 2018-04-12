@@ -51,12 +51,26 @@ describe('Projects POST route', () => {
       await UserModel.remove({});
     });
 
-    test('it replies with a 415 status if the Content-Type is anything other than "application/json"', async () => {
+    test('it replies with a 415 status if the Content-Type does not match "json"', async () => {
       await agent
         .post('/api/projects')
         .type('form')
         .send({ title: 'Example' })
         .expect(415);
+    });
+
+    test('it does not reply with a 415 status if the Content-Type is "json" with something else', async () => {
+      await agent
+        .post('/api/projects')
+        .type('application/json;charset=UTF-8')
+        .send({
+          project: {
+            title: 'Example',
+            description: 'this is a description',
+            keywords: ['one', 'two'],
+          },
+        })
+        .expect(200);
     });
 
     test('it returns a 200 status when a project was successfully created', async () => {

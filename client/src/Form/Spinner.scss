@@ -1,0 +1,18 @@
+$theme-color: 210;
+$spinner-color-dark: hsl($theme-color, 50%, 30%);
+$spinner-color-light: hsl($theme-color, 50%, 70%);
+
+/* spinner Animation */
+.Spinner {
+  border: 0.25em solid $spinner-color-dark;
+  border-left: 0.25em solid $spinner-color-light;
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
