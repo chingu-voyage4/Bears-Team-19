@@ -17,6 +17,7 @@ function postProject(req, res, next) {
 
   // validate data - reject if invalid
   if (!req.body || !req.body.project || !req.body.project.title) {
+    debug(`400: body: ${req.body} project: ${req.body.project}`);
     res.sendStatus(400);
     return;
   }

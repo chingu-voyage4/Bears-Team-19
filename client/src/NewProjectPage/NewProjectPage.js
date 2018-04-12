@@ -47,7 +47,7 @@ class NewProjectPage extends Component {
     });
 
     // post
-    axios.post('/api/projects', project)
+    axios.post('/api/projects', { project })
       // if successful, update the state to redirect
       .then(() => this.setState({ savingState: 'done' }))
       // if failed, change state to display error message
