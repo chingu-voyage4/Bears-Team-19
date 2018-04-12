@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import axios from 'axios';
-import debug from 'debug';
 import AddProjectForm from './AddProjectForm/AddProjectForm';
 import AsyncReportBox from '../Form/AsyncReportBox';
 import './NewProjectPage.css';
@@ -22,7 +21,6 @@ class NewProjectPage extends Component {
     let error = 'Error: The project was not saved. ';
     if (err.response) {
       error += `${err.response.status} ${err.response.data}`;
-      debug(`${err.response.status} ${err.response.data} ${err.response.headers}`);
     } else if (err.request) {
       // no response was received
       error += 'No response from server';
