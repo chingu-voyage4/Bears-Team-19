@@ -6,12 +6,22 @@ import './App.css';
 
 
 class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      user: null,
+      login: user => this.setState({ user }),
+      logout: () => this.setState({ user: null }),
+    };
+  }
+
   render() {
     return (
       <div className="App text-center d-flex flex-column">
-        <Header />
-        <Main />
-        <Footer />
+        <Header user={this.state.user} />
+        <Main user={this.state.user} />
+        <Footer user={this.state.user} />
       </div>
     );
   }

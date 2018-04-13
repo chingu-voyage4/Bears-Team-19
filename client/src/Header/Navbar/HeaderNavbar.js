@@ -20,11 +20,13 @@ class HeaderNavbar extends Component {
       isOpen: false
     };
   }
+  
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
+
   render() {
     return (
       <Navbar color="faded" light expand="sm" className="navbar-expand-sm">
@@ -38,15 +40,26 @@ class HeaderNavbar extends Component {
             <NavItem>
               <NavLink tag={Link} to="#">About</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/projects/create">New Project</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/register">Register</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/login">Login</NavLink>
-            </NavItem>
+            {this.props.user &&
+              <NavItem>
+                <NavLink tag={Link} to="/projects/create">New Project</NavLink>
+              </NavItem>
+            }
+            {this.props.user &&
+              <NavItem>
+                <NavLink tag={Link} to="/logout">Sign Out</NavLink>
+              </NavItem>
+            }
+            {!this.props.user &&
+              <NavItem>
+                <NavLink tag={Link} to="/login">Sign In</NavLink>
+              </NavItem>
+            }
+            {!this.props.user &&
+              <NavItem>
+                <NavLink tag={Link} to="/register">Join Now</NavLink>
+              </NavItem>
+            }
           </Nav>
         </Collapse>
       </Navbar>
