@@ -9,34 +9,37 @@ const Mailer = require('./mailer/mailer.js');
 
 const router = express.Router();
 
-// Mention projectId / Title in case of multiple projects
-// text version should be same cointent as html.
-// break up the text with linebreaks after a certain amount of chars
+function findWordBoundary(body, start, end) {
+  let chunk = body.slice(start, end);
+  let counter = 0;
+
+  while (chunk[chunk.length - 1].match(/[a-zA-Z]/)) {
+    counter += 1;
+    chunk = body.slice(start, end + counter);
+  }
+  return [chunk, counter];
+}
 
 function escapeBody(body, lineLimit) {
   let text = '';
 
+  // if entire message length is under linelimit return message
   if (body.length < lineLimit) {
     return body;
   }
 
   for (let i = 0; i < body.length; i += lineLimit) {
     const endPoint = i + lineLimit;
-    const chunk = body.slice(i, endPoint);
+    const [chunk, incrementIndex] = findWordBoundary(body, i, endPoint);
+
+    i += incrementIndex;
 
     // there are less than 60 chars left return rest of body
     if (endPoint >= body.length) {
       text += `${chunk} \n`;
       return text;
     }
-
-    // if last character in chunk is a letter, add a hyphen "-"
-
-    if (chunk[chunk.length - 1].match(/[a-z]/, i)) {
-      text += `${chunk}-\n`;
-    } else {
-      text += `${chunk}\n`;
-    }
+    text += `${chunk}\n`;
   }
   return text;
 }
