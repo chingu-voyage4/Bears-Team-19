@@ -62,9 +62,10 @@ class LoginForm extends Component {
   }
 }
 
+// those props are set up by AsyncFormPage, not LoginPage
 LoginForm.propTypes = {
-  disabled: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  onSubmit: PropTypes.func,
 };
 
 export default LoginForm;

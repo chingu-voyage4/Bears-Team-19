@@ -85,9 +85,10 @@ class AddProjectForm extends Component {
   }
 }
 
+// those props are set up by AsyncFormPage, not NewProjectPage
 AddProjectForm.propTypes = {
-  disabled: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  onSubmit: PropTypes.func,
 };
 
 export default AddProjectForm;
