@@ -16,6 +16,13 @@ class AsyncFormPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  resetTimeout() {
+    if (this.state.timeoutId >= 0){
+      clearTimeout(this.state.timeoutId);
+      this.setState({ timeoutId: -1 });
+    }    
+  }
+
   // Assumption: this.props.asyncAction involves an axios call.
   // The error handling is based on errors produced by axios.
   handleError(err) {
@@ -31,10 +38,12 @@ class AsyncFormPage extends Component {
     }
 
     // get rid of any asynchronous info message in the queue
+    this.resetTimeout();
+    /*
     if (this.state.timeoutId >= 0){
       clearTimeout(this.state.timeoutId);
       this.setState({ timeoutId: -1 });
-    }
+    }*/
 
     this.setState({ waitingState: 'error', message: error });
   }
@@ -52,7 +61,10 @@ class AsyncFormPage extends Component {
     // output: it returns a promise
     this.props.asyncAction(data)
       // if successful, update the state to enable redirect
-      .then(() => this.setState({ waitingState: 'done' }))
+      .then(() => {
+        this.resetTimeout();
+        this.setState({ waitingState: 'done' });
+      })
       // if failed, change state to display error message
       .catch(this.handleError);
   }
