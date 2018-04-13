@@ -35,6 +35,9 @@ class LoginForm extends Component {
           inputText={this.state.username} 
           onChange={this.handleChange} 
           disabled={this.props.disabled}
+          type="text"
+          placeholder="Enter your username"
+          autoComplete="username"
         />
         <LabelledInput
           inputId="password"
@@ -42,6 +45,9 @@ class LoginForm extends Component {
           inputText={this.state.password} 
           onChange={this.handleChange} 
           disabled={this.props.disabled}
+          type="password"
+          placeholder="Enter your password"
+          autoComplete="current-password"
         />
         <div className="form-group">
           <button

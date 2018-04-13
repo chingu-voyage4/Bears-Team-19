@@ -27,10 +27,17 @@ describe('LoginForm', () => {
   test('The form contains inputs for username and password and a submit button', () => {
     const wrapper = shallow(<LoginForm {...testProps} />);
     expect(wrapper.children()).toHaveLength(CHILDREN);
+
     expect(wrapper.childAt(USERNAME).type()).toEqual(LabelledInput);
     expect(wrapper.childAt(USERNAME).props().label).toEqual('Username');
+    expect(wrapper.childAt(USERNAME).props().type).toEqual('text');
+    expect(wrapper.childAt(USERNAME).props().autoComplete).toEqual('username');
+
     expect(wrapper.childAt(PASSWORD).type()).toEqual(LabelledInput);
     expect(wrapper.childAt(PASSWORD).props().label).toEqual('Password');
+    expect(wrapper.childAt(PASSWORD).props().type).toEqual('password');
+    expect(wrapper.childAt(PASSWORD).props().autoComplete).toEqual('current-password');
+
     expect(wrapper.childAt(SUBMIT)).toHaveLength(1);
     expect(wrapper.childAt(SUBMIT).childAt(0).type()).toEqual('button');
     expect(wrapper.childAt(SUBMIT).childAt(0).text()).toEqual('Log In');
