@@ -10,18 +10,20 @@ class App extends Component {
     super(props);
 
     this.state = {
-      user: null,
-      login: user => this.setState({ user }),
-      logout: () => this.setState({ user: null }),
+      auth: {
+        user: null,
+        login: user => this.setState({ auth: {...this.state.auth, user} }),
+        logout: () => this.setState({ auth: {...this.state.auth, user: null } }),
+      },
     };
   }
 
   render() {
     return (
       <div className="App text-center d-flex flex-column">
-        <Header user={this.state.user} />
-        <Main user={this.state.user} />
-        <Footer user={this.state.user} />
+        <Header auth={this.state.auth} />
+        <Main auth={this.state.auth} />
+        <Footer auth={this.state.auth} />
       </div>
     );
   }

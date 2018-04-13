@@ -3,7 +3,7 @@ import HeaderNavbar from './Navbar/HeaderNavbar';
 
 const Header = (props) => {
   return (
-    <HeaderNavbar user={props.user} />
+    <HeaderNavbar auth={props.auth} />
   );
 }
 

@@ -28,6 +28,7 @@ class HeaderNavbar extends Component {
   }
 
   render() {
+    const loggedIn = this.props.auth && this.props.auth.user;
     return (
       <Navbar color="faded" light expand="sm" className="navbar-expand-sm">
         <NavbarBrand tag={Link} to="/">
@@ -40,22 +41,22 @@ class HeaderNavbar extends Component {
             <NavItem>
               <NavLink tag={Link} to="#">About</NavLink>
             </NavItem>
-            {this.props.user &&
+            {loggedIn &&
               <NavItem>
                 <NavLink tag={Link} to="/projects/create">New Project</NavLink>
               </NavItem>
             }
-            {this.props.user &&
+            {loggedIn &&
               <NavItem>
-                <NavLink tag={Link} to="/logout">Sign Out</NavLink>
+                <NavLink tag={Link} to="#">Sign Out</NavLink>
               </NavItem>
             }
-            {!this.props.user &&
+            {!loggedIn &&
               <NavItem>
                 <NavLink tag={Link} to="/login">Sign In</NavLink>
               </NavItem>
             }
-            {!this.props.user &&
+            {!loggedIn &&
               <NavItem>
                 <NavLink tag={Link} to="/register">Join Now</NavLink>
               </NavItem>

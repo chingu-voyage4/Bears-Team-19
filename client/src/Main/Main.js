@@ -7,14 +7,17 @@ import Auth from '../Auth/Auth.js';
 import LoginPage from '../LoginPage/LoginPage';
 import './Main.css';
 
-const Main = () => (
+const Main = (props) => (
   <main className="Main d-flex">
     <Switch>
       <Route exact path='/' component={Welcome} />
       <Route exact path='/projects' component={Projects} />
       <Route exact path='/projects/create' component={NewProjectPage} />
       <Route exact path='/register' component={Auth} />
-      <Route exact path='/login' component={LoginPage} />
+      <Route 
+        exact path='/login' 
+        render={() => <LoginPage auth={props.auth} />}
+      />
     </Switch>
   </main>
 )

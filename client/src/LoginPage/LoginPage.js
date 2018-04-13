@@ -11,7 +11,11 @@ class LoginPage extends Component {
   }
 
   handleLogin(loginData){
-    return axios.post('/api/auth/login', loginData);
+    return axios.post('/api/auth/login', loginData)
+      .then((user) => {
+        console.log(this.props);
+        this.props.auth.login(user);
+      });
   }
 
   render(){
