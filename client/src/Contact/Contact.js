@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ContactForm from './ContactForm.js';
+import ContactForm from './ContactForm/ContactForm.js';
 import axios from 'axios';
 
 class Contact extends Component {
@@ -40,7 +40,7 @@ class Contact extends Component {
         axios.post(`/api/contact/${this.state.projectId}`)
             .then(res => {
                 console.log(res);
-                this.clearState();
+                return this.clearState();
             })
     }
 
@@ -53,6 +53,7 @@ class Contact extends Component {
                 body={this.state.body}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
+                disabled={this.state.body.length === 0 || this.state.subject.length === 0}
              />
         )
     }
