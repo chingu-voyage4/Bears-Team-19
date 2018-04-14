@@ -96,10 +96,18 @@ async function contactUser(req, res) {
 
   // First find if the project exist on the database
 
-  const project = await Projects.findById(projectId);
-  if (!project) return res.status(400).json({ message: 'Project does not exist' });
-  const user = await User.findById(project.authorId);
-  if (!user) return res.status(400).json({ message: 'User does not exist' });
+  const project = await Projects.findById(projectId)
+    .then(doc => doc)
+    .catch(err => err);
+  
+  // if an error is thrown object gets a message property
+  if (project.message || !project) return res.status(400).json({ message: 'Project does not exist' });
+
+  const user = await User.findById(project.authorId)
+    .then(res => res)
+    .catch(err => err);
+
+  if (!user) return res.status(400).json({ message: 'User not found.' });
 
   const message = createEmailObject(
     subject,
