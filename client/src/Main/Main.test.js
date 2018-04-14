@@ -1,12 +1,11 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { shallow } from 'enzyme';
+import { Switch, Route, Redirect, MemoryRouter } from 'react-router-dom';
+import { shallow, mount } from 'enzyme';
 import Main from './Main';
 
-const routes = [
+const publicRoutes = [
   '/',
   '/projects',
-  '/projects/create',
   '/register',
   '/login',
 ];
@@ -17,16 +16,59 @@ describe('Main', () => {
     expect(wrapper).toBeDefined();
   });
 
-  test('It handles all the routes for the app', () => {
+  test('It handles all the public routes for the app', () => {
     const wrapper = shallow(<Main />);
     expect(wrapper.find(Switch)).toHaveLength(1);
     const routesWrapper = wrapper.find(Route);
-    expect(routesWrapper).toHaveLength(routes.length);
-    routes.forEach((el, index) => {
+    expect(routesWrapper).toHaveLength(publicRoutes.length);
+    publicRoutes.forEach((el, index) => {
       expect(routesWrapper.find({ path: el })).toHaveLength(1);
     });
   });
 
-  test('It handles Create Project as a private route that redirects to Browse Projects');
-  test('It handles the Sign out route as a private route that redirects to Browse Projects');
+  describe('Private routes', () => {
+    describe('Create Project', () => {
+      test('It redirects to Login when the user is not logged in', () => {
+        const auth = {
+          user: null,
+          login: () => {},
+          logout: () => {},
+        };
+        const wrapper = mount(
+          <MemoryRouter
+            initialEntries={['/projects/create']}
+            initialIndex={0}
+          >
+            <Main auth={auth} />
+          </MemoryRouter>
+        );
+        expect(wrapper.find(Route)).toHaveLength(1);
+        expect(wrapper.find(Route).first().prop('path')).toEqual('/login');
+      });
+
+      test('It routes to Create Project when the user is logged in', () => {
+        const auth = {
+          user: {
+            username: 'tom',
+            email: 'tom@example.com',
+          },
+          login: () => {},
+          logout: () => {},
+        };
+        const wrapper = mount(
+          <MemoryRouter
+            initialEntries={['/projects/create']}
+            initialIndex={0}
+          >
+            <Main auth={auth}/>
+          </MemoryRouter>
+        );
+        expect(wrapper.find(Route)).toHaveLength(1);
+        expect(wrapper.find(Route).first().prop('path')).toEqual('/projects/create');
+      });
+    });
+    
+    test('It handles the Sign out route as a private route that redirects to Browse Projects');
+
+  });
 });
