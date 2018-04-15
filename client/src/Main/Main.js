@@ -17,7 +17,7 @@ const Main = (props) => (
       <Route exact path='/register' component={Auth} />
       <Route 
         exact path='/login' 
-        render={() => <LoginPage auth={props.auth} />}
+        render={(routeProps) => <LoginPage {...props} {...routeProps} />}
       />
     </Switch>
   </main>
