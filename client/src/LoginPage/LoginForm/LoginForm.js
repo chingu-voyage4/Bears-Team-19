@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LabelledInput from '../../Form/LabelledInput';
+import './LoginForm.css';
 
 class LoginForm extends Component {
   constructor(props){
@@ -28,7 +29,7 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <form>
+      <form className="LoginForm">
         <LabelledInput
           inputId="username"
           label="Username"

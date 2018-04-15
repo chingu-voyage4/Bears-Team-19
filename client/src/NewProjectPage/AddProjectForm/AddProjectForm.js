@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import LabelledInput from '../../Form/LabelledInput';
 import LabelledTextarea from '../../Form/LabelledTextarea';
 import LabelledTagInput from '../../Form/LabelledTagInput';
+import './AddProjectForm.css';
 
 class AddProjectForm extends Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class AddProjectForm extends Component {
 
   render() {
     return (
-      <form>
+      <form className="AddProjectForm">
         <LabelledInput
           inputId="title" 
           label="Title" 
