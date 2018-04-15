@@ -61,11 +61,11 @@ describe('Emails', () => {
     const response = await request(app).get('/api/contact');
     expect(response.statusCode).toBe(404);
   });
-  test('Post to contact requires returns 404 without query parameter', async () => {
+  test('Post request to contact requires returns 404 without query parameter', async () => {
     const response = await request(app).post('/api/contact/');
     expect(response.statusCode).toEqual(404);
   });
-  test('Post to contact requires user is logged in', async () => {
+  test('Post request to contact requires user is logged in', async () => {
     const message = {
       message: 'test subject',
       body: 'test message',
@@ -77,13 +77,24 @@ describe('Emails', () => {
     expect(response.body).toHaveProperty('message');
   });
 
-  test('Post to contact requires a subject and description to exist', async () => {
+  test('Post request to contact requires a subject and description to exist', async () => {
     // using the persistent session
     const response = await agent.post('/api/contact/5ad081ed1ffc65330082cc48').send({ subject: '', body: '' });
     expect(response.statusCode).toBe(400);
   });
 
-  test('Post to contact requires an existing user to contact', async () => {
+  test('Post requests fail if query param is not a valid objectId', async () => {
+    const message = {
+      subject: 'test subject',
+      body: 'test message',
+    };
+
+    const response = await agent.post('/api/contact/5ad081ed1ffc65330').send(message);
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.message).toMatch('Project does not exist.');
+  });
+
+  test('Post request to contact requires an existing user', async () => {
     const message = {
       subject: 'test subject',
       body: 'test message',

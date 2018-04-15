@@ -101,7 +101,7 @@ async function contactUser(req, res) {
     .catch(err => err);
   
   // if an error is thrown object gets a message property
-  if (project.message || !project) return res.status(400).json({ message: 'Project does not exist' });
+  if (project.message || !project) return res.status(400).json({ message: 'Project does not exist.' });
 
   const user = await User.findById(project.authorId)
     .then(res => res)
