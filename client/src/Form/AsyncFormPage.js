@@ -28,7 +28,7 @@ class AsyncFormPage extends Component {
   handleError(err) {
     let error = `Error: ${this.props.actionName} failed. `;
     if (err.response) {
-      error += `${err.response.status} ${err.response.data}`;
+      error += `${err.response.status} ${err.response.data.message ? err.response.data.message : err.response.data}`;
     } else if (err.request) {
       // no response was received
       error += 'No response from server';
