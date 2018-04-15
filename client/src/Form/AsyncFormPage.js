@@ -39,13 +39,13 @@ class AsyncFormPage extends Component {
 
     // get rid of any asynchronous info message in the queue
     this.resetTimeout();
-    /*
-    if (this.state.timeoutId >= 0){
-      clearTimeout(this.state.timeoutId);
-      this.setState({ timeoutId: -1 });
-    }*/
 
     this.setState({ waitingState: 'error', message: error });
+
+    // update the authentication status
+    if (err.response.status === 401 && this.props.auth){
+      this.props.auth.logout();
+    }
   }
 
   handleSubmit(data) {
@@ -98,6 +98,9 @@ AsyncFormPage.propTypes = {
   actionName: PropTypes.string.isRequired,
   redirect: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  auth: PropTypes.shape({
+    logout: PropTypes.func.isRequired,
+  }),
 };
 
 export default AsyncFormPage;

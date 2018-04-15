@@ -16,7 +16,14 @@ class NewProjectPage extends Component {
 
   render(){
     return (
-      <AsyncFormPage className="NewProjectPage" title="Add New Project" actionName="Saving" redirect="/projects" asyncAction={this.handleAddProject}>
+      <AsyncFormPage 
+        className="NewProjectPage" 
+        title="Add New Project" 
+        actionName="Saving" 
+        redirect="/projects" 
+        asyncAction={this.handleAddProject}
+        {...this.props}
+      >
         <AddProjectForm />
       </AsyncFormPage>
     );

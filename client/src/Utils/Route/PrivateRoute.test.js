@@ -11,17 +11,19 @@ describe('PrivateRoute', () => {
 
   test('It renders the component passed in if the user is authenticated', () => {
     const Protected = () => <h3>Protected</h3>;
-    const auth = {
-      user: {
-        username: 'name',
-      }
+    const componentProps = {
+      auth: {
+        user: {
+          username: 'name',
+        },
+      },
     };
     const wrapper = mount(
       <MemoryRouter
         initialEntries={['/protected']}
         initialIndex={0}
       >
-        <PrivateRoute path='/protected' component={Protected} auth={auth} />
+        <PrivateRoute path='/protected' component={Protected} componentProps={componentProps} />
       </MemoryRouter>
     );
     expect(wrapper.find(Route)).toHaveLength(1);

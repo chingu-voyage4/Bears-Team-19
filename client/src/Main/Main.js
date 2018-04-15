@@ -13,7 +13,7 @@ const Main = (props) => (
     <Switch>
       <Route exact path='/' component={Welcome} />
       <Route exact path='/projects' component={Projects} />
-      <PrivateRoute exact path='/projects/create' component={NewProjectPage} auth={props.auth} />
+      <PrivateRoute exact path='/projects/create' component={NewProjectPage} componentProps={props} />
       <Route exact path='/register' component={Auth} />
       <Route 
         exact path='/login' 
