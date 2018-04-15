@@ -66,7 +66,7 @@ function createEmailObject(
       ${plainBody}`,
     html: `<div style="width: 400px"> 
               <br/>
-              <p>${username} ${email} is trying to contact you about  ${projectId}: ${projectTitle}</p>
+              <p>${username} ${email} is trying to contact you about ${projectTitle}</p>
               <p style="white-space: pre-wrap">${body}</p>.
            </div>`,
   };
