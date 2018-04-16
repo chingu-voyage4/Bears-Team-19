@@ -109,6 +109,6 @@ describe('Emails', () => {
     const response = await agent.post(`/api/contact/${pRes.body._id}`).send(message);
     expect(response.statusCode).toEqual(200);
     expect(response.body).toHaveProperty('message');
-    expect(response.body.message).toEqual('Message Successfuly sent.');
+    expect(response.body.message).toEqual('Message Successfully sent.');
   });
 });

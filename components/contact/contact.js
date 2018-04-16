@@ -84,11 +84,8 @@ async function contactUser(req, res) {
   );
 
   return Mailer.sendMail(message, (err, info) => {
-    if (err) return res.status(500).json({ message: 'Error whilst sending email', err });
-
-    console.log('Message sent successfully');
-    console.log(info);
-    return res.status(200).json({ message: 'Message Successfuly sent.' });
+    if (err) return res.status(500).json({ message: 'Error whilst sending email.', err });
+    return res.status(200).json({ message: 'Message Successfully sent.' });
   });
 }
 
