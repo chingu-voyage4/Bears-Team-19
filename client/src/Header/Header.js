@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import HeaderNavbar from './Navbar/HeaderNavbar';
 
-class Header extends Component {
-  render() {
-    return (
-      <HeaderNavbar />
-    );
-  }
+const Header = (props) => {
+  return (
+    <HeaderNavbar auth={props.auth} />
+  );
 }
 
 export default Header;

@@ -6,7 +6,7 @@ const Projects = (props) => {
   if (props.projects && props.projects.length > 0){
     projectItems = props.projects.map(project => {
       return (
-        <ProjectItem key={project.title} project={project}/>
+        <ProjectItem key={project.id} project={project}/>
       );
     });
   } else {

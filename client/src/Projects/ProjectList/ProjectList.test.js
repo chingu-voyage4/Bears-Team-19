@@ -68,4 +68,38 @@ describe('ProjectList component', () => {
     expect(wrapper.find(ProjectItem)).toHaveLength(3);
   });
   
+  it('should use the project id as key for the ProjectItems', () => {
+    let projects = [
+      {
+        id:'1', 
+        title: 'Project one',
+        author:'Bears 19', 
+        category:['web' ,'development'], 
+        keywords:['web', 'react', 'js'], 
+        description:'lorem ipsum....'
+      },
+      {
+        id:'2', 
+        title: 'Project two',
+        author:'Bears 19', 
+        category:['web' ,'development'], 
+        keywords:['web', 'react', 'js'], 
+        description:'lorem ipsum....'
+      },
+      {
+        id:'3', 
+        title: 'Project three',
+        author:'Bears 19', 
+        category:['web' ,'development'], 
+        keywords:['web', 'react', 'js'], 
+        description:'lorem ipsum....'
+      }
+    ];
+    const wrapper = shallow(
+      <ProjectList projects={projects}/>
+    );
+    expect(wrapper.childAt(0).key()).toEqual('1');
+    expect(wrapper.childAt(1).key()).toEqual('2');
+    expect(wrapper.childAt(2).key()).toEqual('3');
+  });
 });
