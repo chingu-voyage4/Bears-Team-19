@@ -1,6 +1,5 @@
 import React from 'react';
 import TagsInput from 'react-tagsinput';
-import 'react-tagsinput/react-tagsinput.css';
 import './LabelledTagInput.css';
 
 const LabelledTagInput = (props) => {
