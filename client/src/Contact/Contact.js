@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import ContactForm from './ContactForm/ContactForm.js';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import NotificationSystem from 'react-notification-system';
 
 class Contact extends Component {
 
     constructor(props) {
         super(props);
-
 
         this.state = {
             subject: '',
@@ -21,6 +21,22 @@ class Contact extends Component {
         }
     }
 
+    handleError = (err) => {
+        this.refs.notificationSystem.addNotification({
+            message: err.message,
+            level: 'error',
+            position: 'tc'
+        });
+    }
+
+    handleSuccess = (res) => {
+        this.refs.notificationSystem.addNotification({
+            message: res.message,
+            level: 'warning',
+            position: 'tc'
+        })
+    }
+
     clearState = () => {
         return this.setState({
             subject: '',
@@ -30,17 +46,16 @@ class Contact extends Component {
 
     componentWillMount = () => {
         this.fetchProject();
+        this._notificationSystem = this.refs.notificationSystem;
     }
 
     fetchProject = () => {
         axios.get(`/api/projects/${this.props.match.params.id}`)
             .then(res => {
-                console.log(res, 'good req');
                 return this.setState({
                     project: res.data
                 })
             }).catch(err => {
-                console.log('bad req');
                 return this.setState({
                     redirect: true,
                 })
@@ -58,24 +73,29 @@ class Contact extends Component {
         const {subject, body} = this.state;
         axios.post(`/api/contact/${this.state.projectId}`, {subject, body})
             .then(res => {
-                console.log(res);
-                return this.clearState();
+                this.addNotification(res.data);
+                //return this.clearState();
+            })
+            .catch(err => {
+                this.handleError(err);
             })
     }
 
 
     render () {
         if (this.state.redirect) return (<Redirect to="/" />);
-        console.log(this.state.project, 'this is project from state');
         return (
-             <ContactForm 
-                projectTitle={this.state.project.published.title}
-                subject={this.state.subject} 
-                body={this.state.body}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-                disabled={this.state.body.length === 0 || this.state.subject.length === 0}
-             />
+            <div className="container-fluid">
+                <ContactForm 
+                    projectTitle={this.state.project.published.title}
+                    subject={this.state.subject} 
+                    body={this.state.body}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    disabled={this.state.body.length === 0 || this.state.subject.length === 0}
+                />
+                 <NotificationSystem ref="notificationSystem" />
+            </div>
         )
     }
 }
