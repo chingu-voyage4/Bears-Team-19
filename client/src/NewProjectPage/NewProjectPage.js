@@ -17,7 +17,7 @@ class NewProjectPage extends Component {
   render(){
     return (
       <AsyncFormPage 
-        title="Add New Project" 
+        title="Add a Project" 
         actionName="Saving" 
         redirect="/projects" 
         asyncAction={this.handleAddProject}

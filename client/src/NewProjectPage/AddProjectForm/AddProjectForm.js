@@ -58,6 +58,7 @@ class AddProjectForm extends Component {
           inputText={this.state.title} 
           onChange={this.handleTitleChange} 
           disabled={this.props.disabled}
+          placeholder="Enter a title"
         />
         <LabelledTextarea
           inputId="description" 
@@ -65,6 +66,8 @@ class AddProjectForm extends Component {
           inputText={this.state.description} 
           onChange={this.handleDescriptionChange} 
           disabled={this.props.disabled}
+          rows={10}
+          placeholder="Describe your project"
         />
         <LabelledTagInput
           inputId="keywords" 

@@ -77,4 +77,26 @@ describe('LabelledTextarea', () => {
     );
     expect(wrapper.find('textarea').first().attr('disabled')).toBeFalsy();
   });
+
+  test('It passes the other props to the textarea', () => {
+    const wrapper = shallow(
+      <LabelledTextarea {...testData} placeholder="Enter a long text" />
+    );
+    expect(wrapper.find('label').first().prop('placeholder')).toBeUndefined();
+    expect(wrapper.find('textarea').first().prop('placeholder')).toEqual('Enter a long text');
+  });
+
+  test('It passes labelProps to the label', () => {
+    const labelProps = {
+      id: 'labelId',
+      hidden: true,
+    };
+    const wrapper = shallow(
+      <LabelledTextarea {...testData} labelProps={labelProps} />
+    );
+    expect(wrapper.find('label').first().prop('id')).toEqual(labelProps.id);
+    expect(wrapper.find('label').first().prop('hidden')).toEqual(labelProps.hidden);
+    expect(wrapper.find('textarea').first().prop('id')).not.toEqual(labelProps.id);
+    expect(wrapper.find('textarea').first().prop('hidden')).toBeUndefined();
+  });
 });

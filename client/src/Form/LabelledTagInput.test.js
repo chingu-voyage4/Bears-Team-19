@@ -11,9 +11,10 @@ describe('LabelledTagInput', () => {
     expect(wrapper.hasClass('LabelledTagInput')).toBe(true);
     expect(wrapper.children()).toHaveLength(1);
     expect(wrapper.childAt(0).type()).toEqual('label');
-    expect(wrapper.childAt(0).children()).toHaveLength(2);
+    expect(wrapper.childAt(0).children()).toHaveLength(3);
     expect(wrapper.childAt(0).childAt(0).type()).toEqual('div');
     expect(wrapper.childAt(0).childAt(1).type()).toEqual(TagsInput);
+    expect(wrapper.childAt(0).childAt(2).type()).toEqual('small');
   });
 
   test('It displays text in the label', () => {
