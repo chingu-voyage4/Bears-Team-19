@@ -38,6 +38,7 @@ describe('AddProjectForm', () => {
     expect(wrapper.childAt(TITLE).props().label).toEqual('Title');
     expect(wrapper.childAt(DESCRIPTION).type()).toEqual(LabelledTextarea);
     expect(wrapper.childAt(DESCRIPTION).props().label).toEqual('Description');
+    expect(wrapper.childAt(DESCRIPTION).props().rows).toEqual(10);
     expect(wrapper.childAt(KEYWORDS).type()).toEqual(LabelledTagInput);
     expect(wrapper.childAt(KEYWORDS).props().label).toEqual('Keywords');
     expect(wrapper.childAt(SUBMIT).type()).toEqual('div');

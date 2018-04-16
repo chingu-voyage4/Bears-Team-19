@@ -1,9 +1,10 @@
 import React from 'react';
 
 const LabelledTextarea = (props) => {
+  const { inputId, label, inputText, onChange, disabled, labelProps, ...other } = props;
   return (
     <div className="LabelledTextarea form-group">
-      <label className="d-block" htmlFor={props.inputId}>
+      <label className="d-block" htmlFor={props.inputId} {...labelProps}>
         {props.label}
       </label>
       <textarea
@@ -12,6 +13,7 @@ const LabelledTextarea = (props) => {
         value={props.inputText} 
         onChange={props.onChange}
         disabled={props.disabled}
+        {...other}
       />
     </div>
   );
