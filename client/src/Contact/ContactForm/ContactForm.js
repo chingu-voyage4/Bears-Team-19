@@ -54,7 +54,6 @@ ContactForm.defaultProps = {
 
 ContactForm.propTypes = {
     projectTitle: PropTypes.string,
-    handleClick: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     disabled: PropTypes.bool,

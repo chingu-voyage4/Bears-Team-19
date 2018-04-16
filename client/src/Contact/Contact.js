@@ -8,7 +8,6 @@ class Contact extends Component {
     constructor(props) {
         super(props);
 
-        this.fetchProject();
 
         this.state = {
             subject: '',
@@ -29,13 +28,19 @@ class Contact extends Component {
         });
     }
 
+    componentWillMount = () => {
+        this.fetchProject();
+    }
+
     fetchProject = () => {
         axios.get(`/api/projects/${this.props.match.params.id}`)
             .then(res => {
+                console.log(res, 'good req');
                 return this.setState({
                     project: res.data
                 })
             }).catch(err => {
+                console.log('bad req');
                 return this.setState({
                     redirect: true,
                 })
@@ -50,7 +55,8 @@ class Contact extends Component {
     }
 
     handleSubmit = () => {
-        axios.post(`/api/contact/${this.state.projectId}`)
+        const {subject, body} = this.state;
+        axios.post(`/api/contact/${this.state.projectId}`, {subject, body})
             .then(res => {
                 console.log(res);
                 return this.clearState();
@@ -59,7 +65,7 @@ class Contact extends Component {
 
 
     render () {
-        if (this.state.redirect) <Redirect to="/" />
+        if (this.state.redirect) return (<Redirect to="/" />);
         console.log(this.state.project, 'this is project from state');
         return (
              <ContactForm 
