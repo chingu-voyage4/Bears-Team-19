@@ -14,7 +14,7 @@ describe('NewProjectPage', () => {
     const wrapper = shallow(<NewProjectPage />);
     expect(wrapper.type()).toEqual(AsyncFormPage);
     expect(wrapper.prop('title')).toBeDefined();
-    expect(wrapper.prop('title')).toEqual('Add New Project');
+    expect(wrapper.prop('title')).toEqual('Add a Project');
     expect(wrapper.prop('actionName')).toBeDefined();
     expect(wrapper.prop('actionName')).toEqual('Saving');
     expect(wrapper.prop('asyncAction')).toBeDefined();
