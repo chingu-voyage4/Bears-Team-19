@@ -1,6 +1,7 @@
 import React from 'react';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
+import './LabelledTagInput.css';
 
 const LabelledTagInput = (props) => {
   return (
@@ -12,7 +13,9 @@ const LabelledTagInput = (props) => {
           value={props.value} 
           onChange={props.onChange}
           disabled={props.disabled}
+          aria-describedby="taginput-help"
         />
+        <small className="form-text text-muted text-left LabelledTagInput_Help" id="taginput-help">Use Tab or Enter to add your tag to the list</small>
       </label>
     </div>
   );
