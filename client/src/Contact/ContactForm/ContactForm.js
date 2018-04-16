@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ContactForm.css';
 
 const ContactForm = (props) => {
@@ -6,13 +7,13 @@ const ContactForm = (props) => {
         <div className="container-fluid">
             <div className="col-xl-5 col-lg-5 col-md-7 col-sm-10 col-xs-11 my-5 mx-auto">
                 <div className="card contact-card">
-                    <div class="card-header text-black bg-light text-left">
-                       {props.projectTitle || "Project Name"}
+                    <div className="card-header text-black bg-light text-left">
+                       {props.projectTitle}
                     </div>
-                    <div class="card-body text-left">
+                    <div className="card-body text-left">
                         <form>
                             <div className="form-group">
-                                <label for="subjectLine">Subject</label>
+                                <label htmlFor="subjectLine">Subject</label>
                                 <input  type="text" 
                                     className="form-control" 
                                     id="subjectLine" 
@@ -21,8 +22,8 @@ const ContactForm = (props) => {
                                     value={props.subject}
                                 />
                             </div>
-                            <div class="form-group">
-                                <label for="exampleTextarea">Message</label>
+                            <div className="form-group">
+                                <label htmlFor="exampleTextarea">Message</label>
                                 <textarea className="form-control" 
                                     id="exampleTextarea" 
                                     rows="3"
@@ -44,5 +45,22 @@ const ContactForm = (props) => {
         </div>
     )
 };
+
+ContactForm.defaultProps = {
+    projectTitle: 'No ProjectTitle',
+    disabled: true,
+}
+
+
+ContactForm.propTypes = {
+    projectTitle: PropTypes.string,
+    handleClick: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+    subject: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired
+}
+
 
 export default ContactForm;

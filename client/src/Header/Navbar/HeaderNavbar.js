@@ -20,15 +20,18 @@ class HeaderNavbar extends Component {
       isOpen: false
     };
   }
+  
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
+
   render() {
+    const loggedIn = this.props.auth && this.props.auth.user;
     return (
       <Navbar color="faded" light expand="sm" className="navbar-expand-sm">
-        <NavbarBrand tag={Link} to="/">
+        <NavbarBrand tag={Link} to="/projects">
           <img src={logo} className="Header-logo" alt="logo" />
           Projects
         </NavbarBrand>
@@ -36,14 +39,28 @@ class HeaderNavbar extends Component {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink tag={Link} to="#">About</NavLink>
+              <NavLink tag={Link} to="/">About</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/register">Register</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="#">Login</NavLink>
-            </NavItem>
+            {loggedIn &&
+              <NavItem>
+                <NavLink tag={Link} to="/projects/create">New Project</NavLink>
+              </NavItem>
+            }
+            {loggedIn &&
+              <NavItem>
+                <NavLink tag={Link} to="#">Sign Out</NavLink>
+              </NavItem>
+            }
+            {!loggedIn &&
+              <NavItem>
+                <NavLink tag={Link} to="/login">Sign In</NavLink>
+              </NavItem>
+            }
+            {!loggedIn &&
+              <NavItem>
+                <NavLink tag={Link} to="/register">Join Now</NavLink>
+              </NavItem>
+            }
           </Nav>
         </Collapse>
       </Navbar>
