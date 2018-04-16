@@ -50,13 +50,6 @@ describe('Emails', () => {
     await User.remove({});
   });
 
-  test('Email returns a 250 response code accepted', async () => {
-    const sentMessage = await transporter.sendMail(mail);
-
-    expect(sentMessage.response).toMatch('250');
-    expect(sentMessage.envelope.from).toEqual('q2qwv34vgtex34yl@ethereal.email');
-  });
-
   test('Get contact page returns a 404', async () => {
     const response = await request(app).get('/api/contact');
     expect(response.statusCode).toBe(404);
@@ -91,7 +84,7 @@ describe('Emails', () => {
 
     const response = await agent.post('/api/contact/5ad081ed1ffc65330').send(message);
     expect(response.body).toHaveProperty('message');
-    expect(response.body.message).toMatch('Project does not exist.');
+    expect(response.body.message).toMatch('Invalid document id.');
   });
 
   test('Post request to contact requires an existing user', async () => {
@@ -99,6 +92,7 @@ describe('Emails', () => {
       subject: 'test subject',
       body: 'test message',
     };
+
     const projectObj = {
       project: {
         title: 'test title',

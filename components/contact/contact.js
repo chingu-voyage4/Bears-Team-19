@@ -9,42 +9,6 @@ const Mailer = require('./mailer/mailer.js');
 
 const router = express.Router();
 
-function findWordBoundary(body, start, end) {
-  let chunk = body.slice(start, end);
-  let counter = 0;
-
-  while (chunk[chunk.length - 1].match(/[a-zA-Z]/)) {
-    counter += 1;
-    chunk = body.slice(start, end + counter);
-  }
-  return [chunk, counter];
-}
-
-function escapeBody(body, lineLimit) {
-  let text = '';
-
-  // if entire message length is under linelimit return message
-  if (body.length < lineLimit) {
-    return body;
-  }
-
-  for (let i = 0; i < body.length; i += lineLimit) {
-    const endPoint = i + lineLimit;
-    const [chunk, incrementIndex] = findWordBoundary(body, i, endPoint);
-
-    i += incrementIndex;
-
-    // there are less than 60 chars left return rest of body
-    if (endPoint >= body.length) {
-      text += `${chunk} \n`;
-      return text;
-    }
-    text += `${chunk}\n`;
-  }
-  return text;
-}
-
-
 function createEmailObject(
   subject,
   body,
@@ -56,14 +20,13 @@ function createEmailObject(
 ) {
   const { _id: projectId, published } = project;
   const { title: projectTitle } = published;
-  const plainBody = escapeBody(body, 65);
 
   const mail = {
     from: `BearsTeam19: ${process.env.MAIL_USER}`,
     to: `${projectOwner} <${projectOwnerEmail}`,
     subject,
     text: `${username} ${email} is trying to contact you about - ${projectTitle}. \n
-      ${plainBody}`,
+      ${body}`,
     html: `<div style="width: 400px"> 
               <br/>
               <p>${username} ${email} is trying to contact you about ${projectTitle}</p>
@@ -99,10 +62,10 @@ async function contactUser(req, res) {
   const project = await Projects.findById(projectId)
     .then(doc => doc)
     .catch(err => err);
-  
+
   // if an error is thrown object gets a message property
-  if (!project) return res.status(400).json({ message: 'Project does not exist.'})
-  if (project.message) return res.status(404).json({ message: 'Invalid document.' });
+  if (!project) return res.status(400).json({ message: 'Project does not exist.' });
+  if (project.message) return res.status(404).json({ message: 'Invalid document id.' });
 
   const user = await User.findById(project.authorId)
     .then(res => res)
