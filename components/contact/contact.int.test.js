@@ -3,26 +3,8 @@ const request = require('supertest');
 const nodemailer = require('nodemailer');
 const app = require('../../app.js');
 const User = require('../user/usermodel.js');
-const Project = require('../projects/projectmodel.js');
 
 const agent = request.agent(app);
-
-const transporter = nodemailer.createTransport({
-  host: process.env.TEST_MAIL_HOST,
-  port: process.env.TEST_MAIL_PORT,
-  auth: {
-    user: process.env.TEST_MAIL_USER,
-    pass: process.env.TEST_MAIL_PASS,
-  },
-});
-
-const mail = {
-  from: `BearsTeam19: ${process.env.TEST_MAIL_USER}`,
-  to: 'testperson <test@testproject.com>',
-  subject: 'Test email]',
-  text: 'test body',
-  html: '<p>Test HTML</p>',
-};
 
 async function authenticatedRequest(done) {
   const testUser = {
