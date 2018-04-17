@@ -8,6 +8,7 @@ const publicRoutes = [
   '/projects',
   '/register',
   '/login',
+  '/contact/:id'
 ];
 
 describe('Main', () => {
