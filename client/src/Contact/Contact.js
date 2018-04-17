@@ -49,7 +49,6 @@ class Contact extends Component {
 
     componentWillMount = () => {
         this.fetchProject();
-        this._notificationSystem = this.refs.notificationSystem;
     }
 
     fetchProject = () => {
@@ -74,10 +73,9 @@ class Contact extends Component {
 
     handleSubmit = () => {
         const {subject, body} = this.state;
-        axios.post(`/api/contact/${this.state.projectId}`, {subject, body})
+        axios.post(`/api/contact/${this.state.project._id}`, {subject, body})
             .then(res => {
-                this.addNotification(res.data);
-                //return this.clearState();
+                this.handleSuccess(res.data);
             })
             .catch(err => {
                 this.handleError(err);
