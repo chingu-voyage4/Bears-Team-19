@@ -42,16 +42,12 @@ function getAllProjects(req, res, next) {
 }
 
 function getSingleProject(req, res, next) {
-
   Project.findById(req.params.id)
     .select('-draft')
     .then((project) => {
-      console.log(project, 'this is project');
-
       return res.status(200).json(project);
     })
     .catch((err) => {
-      console.log(err, 'this is err');
       return res.status(400).json(err);
     });
 }
