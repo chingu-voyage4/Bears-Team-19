@@ -82,7 +82,7 @@ class AddProjectForm extends Component {
             type="button"
             onClick={this.handleSubmit}
             disabled={this.props.disabled || !this.state.canSubmit}
-          >Submit</button>
+          >Add Your Project</button>
         </div>
       </form>
     );

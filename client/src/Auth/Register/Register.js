@@ -1,6 +1,4 @@
 import React from 'react';
-// https://www.flaticon.com/free-icon/circular-avatar_108331
-import avatar from './avatar.png';
 import './Register.css';
 
 const USERNAME_LENGTH_MIN = 5
@@ -39,10 +37,6 @@ const Register = (props) => {
     return (
         <div className="container-fluid d-flex flex-column my-auto">
                 <div className="d-flex flex-column col-xl-4 col-lg-5 col-md-6 col-sm-8 col-9 mx-auto">
-                    <div className="align-center pt-2 mb-3">
-                        <h2 className="register-text">Register</h2>
-                    </div>
-                    <img alt="avatar icon" src={avatar} className="align-self-center my-3" width="120px" />
                     <div>
                         <label>Username</label>
                         <input type="text"
@@ -94,7 +88,7 @@ const Register = (props) => {
                             {focus === 'confirmPassword' && errors.confirmPassword && <p className="error-text">Passwords do not match</p>}
                         </div>
                     }
-                    <button disabled={isEnabled} className={`btn btn-outline-primary ${errors.confirmPassword ? "mt-1" : "mt-3"}`} onClick={props.handleSubmit}>Submit</button>
+                    <button disabled={isEnabled} className={`btn btn-outline-primary ${errors.confirmPassword ? "mt-1" : "mt-3"}`} onClick={props.handleSubmit}>Join</button>
                 </div>
         </div>
     )

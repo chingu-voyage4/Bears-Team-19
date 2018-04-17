@@ -82,8 +82,10 @@ class AsyncFormPage extends Component {
       );
     }
     return (
-      <div className="AsyncFormPage container text-center d-flex flex-column align-items-center justify-content-around justify-content-sm-center">
-          <h1 className="mb-3 mb-sm-4 mb-md-5">{this.props.title}</h1>
+      <div className="AsyncFormPage container text-center py-3 d-flex flex-column align-items-center justify-content-around justify-content-sm-center">
+        {
+          this.props.title ? <h1 className="mb-3 mb-sm-4 mb-md-5">{this.props.title}</h1> : null
+        }
         {formChild}
         <div className="mt-3 mt-sm-4 mt-md-5">
           <AsyncReportBox state={this.state.waitingState} message={this.state.message} />
@@ -97,7 +99,7 @@ AsyncFormPage.propTypes = {
   asyncAction: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
   redirect: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   auth: PropTypes.shape({
     logout: PropTypes.func.isRequired,
   }),

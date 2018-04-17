@@ -56,7 +56,7 @@ class LoginForm extends Component {
             type="button"
             onClick={this.handleSubmit}
             disabled={this.props.disabled || this.state.username === '' || this.state.password === ''}
-          >Log In</button>
+          >Sign In</button>
         </div>
       </form>
     );

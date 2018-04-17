@@ -19,8 +19,8 @@ class Projects extends Component {
 
   render() {
     return (
-      <div className="Projects container text-center">
-        <h1>Browse All Projects</h1>
+      <div className="Projects container text-center py-3">
+        <p className="lead">Current Projects</p>
         <ProjectList projects={ this.state.projects } />
       </div>
     )

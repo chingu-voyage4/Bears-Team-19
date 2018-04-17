@@ -40,7 +40,7 @@ describe('LoginForm', () => {
 
     expect(wrapper.childAt(SUBMIT)).toHaveLength(1);
     expect(wrapper.childAt(SUBMIT).childAt(0).type()).toEqual('button');
-    expect(wrapper.childAt(SUBMIT).childAt(0).text()).toEqual('Log In');
+    expect(wrapper.childAt(SUBMIT).childAt(0).text()).toEqual('Sign In');
   });
 
   test('When props.disabled is true all elements are disabled', () => {

@@ -5,8 +5,6 @@ class Welcome extends Component {
   render() {
     return (
       <div className="container-fluid text-center py-3 d-flex flex-column my-auto">
-        <h1>Projects</h1>
-
         <p className="lead">
           Find your next collaborative project
         </p>
