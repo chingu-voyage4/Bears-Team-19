@@ -1,6 +1,5 @@
 require('dotenv').config();
 const request = require('supertest');
-const nodemailer = require('nodemailer');
 const app = require('../../app.js');
 const User = require('../user/usermodel.js');
 
