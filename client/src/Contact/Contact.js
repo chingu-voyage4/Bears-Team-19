@@ -31,10 +31,13 @@ class Contact extends Component {
 
     handleSuccess = (res) => {
         this.refs.notificationSystem.addNotification({
-            message: res.message,
-            level: 'warning',
+            message: `${res.message}, redirecting in 3 seconds.`,
+            level: 'success',
             position: 'tc'
         })
+
+        // force redirect
+        setTimeout(() => this.setState({redirect: true}), 3000);
     }
 
     clearState = () => {
