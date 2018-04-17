@@ -1,4 +1,5 @@
 const express = require('express');
+const debug = require('debug')('bears-team-19:server');
 
 // Models
 
@@ -18,7 +19,7 @@ function createEmailObject(
   projectOwnerEmail,
   project,
 ) {
-  const { _id: projectId, published } = project;
+  const { published } = project;
   const { title: projectTitle } = published;
 
   const mail = {
@@ -68,7 +69,7 @@ async function contactUser(req, res) {
   if (project.message) return res.status(404).json({ message: 'Invalid document id.' });
 
   const user = await User.findById(project.authorId)
-    .then(res => res)
+    .then(doc => doc)
     .catch(err => err);
 
   if (!user) return res.status(400).json({ message: 'User not found.' });
@@ -84,7 +85,10 @@ async function contactUser(req, res) {
   );
 
   return Mailer.sendMail(message, (err, info) => {
-    if (err) return res.status(500).json({ message: 'Error whilst sending email.', err });
+    if (err) {
+      debug(info);
+      return res.status(500).json({ message: 'Error whilst sending email.', err });
+    }
     return res.status(200).json({ message: 'Message Successfully sent.' });
   });
 }
