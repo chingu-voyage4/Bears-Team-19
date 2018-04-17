@@ -6,6 +6,7 @@ import Projects from '../Projects/Projects';
 import NewProjectPage from '../NewProjectPage/NewProjectPage';
 import Auth from '../Auth/Auth.js';
 import LoginPage from '../LoginPage/LoginPage';
+import Contact from '../Contact/Contact.js';
 import './Main.css';
 
 const Main = (props) => (
@@ -14,6 +15,7 @@ const Main = (props) => (
       <Route exact path='/' component={Welcome} />
       <Route exact path='/projects' component={Projects} />
       <PrivateRoute exact path='/projects/create' component={NewProjectPage} componentProps={props} />
+      <PrivateRoute path='/contact/:id' component={Contact} />
       <Route exact path='/register' component={Auth} />
       <Route 
         exact path='/login' 

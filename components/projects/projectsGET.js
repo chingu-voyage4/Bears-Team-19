@@ -41,4 +41,16 @@ function getAllProjects(req, res, next) {
     });
 }
 
-module.exports = getAllProjects;
+function getSingleProject(req, res, next) {
+  Project.findById(req.params.id)
+    .select('-draft')
+    .then((project) => {
+      return res.status(200).json(project);
+    })
+    .catch((err) => {
+      return res.status(400).json(err);
+    });
+}
+
+
+module.exports = { getAllProjects, getSingleProject };

@@ -222,5 +222,40 @@ describe('Projects GET route', () => {
       expect(response.body).toHaveLength(0);
     });
   });
+
+  describe('Get a single project from api', async () => {
+    beforeAll(async () => {
+      await setupProjects(publicProjects);
+    });
+    afterAll(async () => {
+      await removeAllProjects();
+    });
+
+    test.only('Get a 200 status code when requesting the server with a valid', async () => {
+      const newProject = new ProjectModel({
+        authorName: 'Test User',
+        authorId: new ObjectId(),
+        draft: {
+          title: 'Test Project',
+          keywords: ['web app'],
+          description: 'Test description',
+        },
+        published: {
+          title: 'Test Project',
+          keywords: ['web app'],
+          description: 'Test description',
+        },
+      });
+
+      newProject.save();
+      const response = await request(app).get(`/api/projects/${newProject._id}`);
+      expect(typeof response.body).toBe('object');
+      expect(response.body).toHaveProperty('authorId');
+      expect(response.body).toHaveProperty('authorName');
+      expect(response.body.published).toHaveProperty('keywords');
+      expect(response.body.published).toHaveProperty('description');
+      expect(response.body.published).toHaveProperty('title');
+    });
+  });
 });
 
