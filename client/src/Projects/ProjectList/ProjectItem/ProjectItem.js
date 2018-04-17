@@ -31,7 +31,7 @@ const ProjectItem = (props) => {
   if (props.project) {
     let descriptionItems;
     if (props.project.description && typeof props.project.description === 'string'){
-      descriptionItems = props.project.description.split(/\r\n\s*/)
+      descriptionItems = props.project.description.split(/[\r\n]+\s*/)
         .reduce((acc, paragraph) => paragraph !== '' ? acc.concat(paragraph) : acc, [])
         .map((paragraph, index) => {
         return <CardText key={index} className="ProjectDescriptionItem">{paragraph}</CardText>;
