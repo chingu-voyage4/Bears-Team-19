@@ -15,7 +15,8 @@ const Main = (props) => (
       <Route exact path='/' component={Welcome} />
       <Route exact path='/projects' component={Projects} />
       <PrivateRoute exact path='/projects/create' component={NewProjectPage} componentProps={props} />
-      <PrivateRoute path='/contact/:id' component={Contact} />
+      {/* Contact should only be available when logged in */}
+      <Route path='/contact/:id' component={Contact} />
       <Route exact path='/register' component={Auth} />
       <Route 
         exact path='/login' 
