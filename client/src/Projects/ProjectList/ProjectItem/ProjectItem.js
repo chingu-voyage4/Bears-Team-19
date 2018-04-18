@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardHeader, CardText, CardBody,
   CardTitle, CardFooter } from 'reactstrap';
 import KeywordList from './KeywordList/KeywordList';
+import './ProjectItem.css';
 
 function toLocaleDateStringSupportsLocales() {
   try {
@@ -41,13 +42,13 @@ const ProjectItem = (props) => {
     }
 
     return (
-      <Card className="Project mt-3 text-left">
+      <Card className="Project text-left">
         <CardHeader>
           <CardTitle>{props.project.title ? props.project.title : 'Untitled'}</CardTitle>
           <KeywordList keywords={props.project.keywords} />
         </CardHeader>
         <CardBody className="ProjectDescription">{descriptionItems}</CardBody>
-        <CardFooter className="d-flex flex-row justify-content-between text-muted">
+        <CardFooter className="d-flex flex-row justify-content-between text-muted bg-transparent">
           <div className="ProjectOwner">{props.project.authorName}</div>
           <div className="ProjectDateSaved">
             {props.project.lastPublished? formatDate(props.project.lastPublished) : ''}
