@@ -1,6 +1,8 @@
+@import '../../theme.scss';
+
 .Header-logo1 {
   margin-right: .5rem;
-  color: red;
+  color: $color-main;
 }
 
 .Header-name1 {
@@ -10,5 +12,5 @@
 
 .Header-name2 {
   font-style: oblique;
-  color: red;
+  color: $color-main;
 }
