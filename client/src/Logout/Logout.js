@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import SpinnerBox from '../Form/SpinnerBox.js';
 
 class Logout extends Component {
@@ -14,26 +14,24 @@ class Logout extends Component {
     }
 
     componentWillMount () {
-        console.log(this.props.auth.user);
         this.logoutUser();
     }
 
     logoutUser = () => {
         axios.post('/api/auth/logout')
-            .then(() => {
-                setTimeout(() => this.props.auth.logout(), 2000);         
-            }  
-        );
+            .then(res => {
+                setTimeout(() => this.props.auth.logout(), 2000);
+            })
     }
 
     render () {
-        if (!this.props.auth.user) {
-            return (<Redirect to="/" />);
-        }
-        
+        if (!this.props.auth.user) return (<Redirect to="/" />);
+
         return (
-            <div>
-               <SpinnerBox message={this.state.message} />}
+            <div className="container-fluid">
+                <div className="d-flex justify-content-center align-items-center h-80">
+                    <SpinnerBox message={this.state.message} />
+                </div>
             </div>
         )
     }
