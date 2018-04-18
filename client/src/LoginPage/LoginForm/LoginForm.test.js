@@ -8,10 +8,11 @@ const testProps = {
   onSubmit: () => {},
 };
 
-const USERNAME = 0;
-const PASSWORD = 1;
-const SUBMIT = 2;
-const CHILDREN = 3;
+const ICON = 0;
+const USERNAME = 1;
+const PASSWORD = 2;
+const SUBMIT = 3;
+const CHILDREN = 4;
 
 describe('LoginForm', () => {
   test('It exists', () => {

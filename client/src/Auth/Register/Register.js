@@ -35,8 +35,11 @@ const Register = (props) => {
     const isEnabled = Object.keys(errors).some(e => errors[e]);
 
     return (
-        <div className="container-fluid d-flex flex-column my-auto">
+        <div className="container-fluid d-flex flex-column my-auto py-3">
                 <div className="d-flex flex-column col-xl-4 col-lg-5 col-md-6 col-sm-8 col-9 mx-auto">
+                    <div className="Register-icon mb-4">
+                        <i className="far fa-user fa-5x"></i>
+                    </div>
                     <div>
                         <label>Username</label>
                         <input type="text"

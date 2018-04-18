@@ -30,6 +30,9 @@ class LoginForm extends Component {
   render() {
     return (
       <form className="LoginForm">
+        <div className="LoginForm-icon mb-4">
+          <i className="fas fa-user fa-5x"></i>
+        </div>
         <LabelledInput
           inputId="username"
           label="Username"
