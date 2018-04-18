@@ -6,6 +6,7 @@ import Projects from '../Projects/Projects';
 import NewProjectPage from '../NewProjectPage/NewProjectPage';
 import Auth from '../Auth/Auth.js';
 import LoginPage from '../LoginPage/LoginPage';
+import Logout from '../Logout/Logout';
 import './Main.css';
 
 const Main = (props) => (
@@ -19,6 +20,9 @@ const Main = (props) => (
         exact path='/login' 
         render={(routeProps) => <LoginPage {...props} {...routeProps} />}
       />
+      <Route exact path='/logout' render={ (routeProps) => {
+        return (<Logout {...props} {...routeProps} />);
+      }}/>
     </Switch>
   </main>
 )
