@@ -87,9 +87,11 @@ class AsyncFormPage extends Component {
           this.props.title ? <h1 className="mb-3 mb-sm-4 mb-md-5">{this.props.title}</h1> : null
         }
         {formChild}
-        <div className="mt-3 mt-sm-4 mt-md-5">
-          <AsyncReportBox state={this.state.waitingState} message={this.state.message} />
-        </div>
+        {(this.state.waitingState === 'onGoing' || this.state.waitingState === 'error') &&
+          <div className="mt-3 mt-sm-4 mt-md-5">
+            <AsyncReportBox state={this.state.waitingState} message={this.state.message} />
+          </div>
+        }
       </div>
     );
   }

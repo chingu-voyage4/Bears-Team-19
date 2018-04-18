@@ -50,14 +50,12 @@ class LoginForm extends Component {
           placeholder="Enter your password"
           autoComplete="current-password"
         />
-        <div className="form-group">
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={this.handleSubmit}
-            disabled={this.props.disabled || this.state.username === '' || this.state.password === ''}
-          >Sign In</button>
-        </div>
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={this.handleSubmit}
+          disabled={this.props.disabled || this.state.username === '' || this.state.password === ''}
+        >Sign In</button>
       </form>
     );
   }
