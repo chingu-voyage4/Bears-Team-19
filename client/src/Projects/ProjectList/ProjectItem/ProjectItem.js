@@ -43,7 +43,7 @@ const ProjectItem = (props) => {
 
     return (
       <Card className="Project text-left">
-        <CardHeader>
+        <CardHeader className="ProjectHeader">
           <CardTitle>{props.project.title ? props.project.title : 'Untitled'}</CardTitle>
           <KeywordList keywords={props.project.keywords} />
         </CardHeader>
