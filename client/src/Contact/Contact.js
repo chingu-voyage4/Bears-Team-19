@@ -84,10 +84,12 @@ class Contact extends Component {
 
 
     render () {
+        console.log(this.state.project.published, 'this is project')
         if (this.state.redirect) return (<Redirect to="/" />);
         return (
             <div className="container-fluid">
                 <ContactForm 
+                    authorName={this.state.project.authorName}
                     projectTitle={this.state.project.published.title}
                     subject={this.state.subject} 
                     body={this.state.body}

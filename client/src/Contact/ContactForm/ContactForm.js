@@ -5,7 +5,10 @@ import './ContactForm.css';
 const ContactForm = (props) => {
     return (
         <div className="container-fluid">
-            <div className="col-xl-5 col-lg-5 col-md-7 col-sm-10 col-xs-11 my-5 mx-auto">
+            <div className="mx-auto">
+                <h2>{`Contact ${props.authorName}`}</h2>
+            </div>
+            <div className="col-xl-5 col-lg-5 col-md-7 col-sm-10 col-xs-11 my-3 mx-auto">
                 <div className="card contact-card">
                     <div className="card-header text-black bg-light text-left">
                        {props.projectTitle}
@@ -47,12 +50,14 @@ const ContactForm = (props) => {
 };
 
 ContactForm.defaultProps = {
-    projectTitle: 'No ProjectTitle',
+    authorName: 'No Author',
+    projectTitle: 'No Project Title',
     disabled: true,
 }
 
 
 ContactForm.propTypes = {
+    authorName: PropTypes.string,
     projectTitle: PropTypes.string,
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
