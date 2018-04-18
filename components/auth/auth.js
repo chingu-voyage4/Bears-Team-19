@@ -66,4 +66,10 @@ router.post(
   },
 );
 
+router.get('/logout', (req, res) => {
+  if (!req.user) res.status(400).json({ message: 'User is not logged in.' });
+  req.logout();
+  res.status(200).json({ message: 'Logout successful.' });
+});
+
 module.exports = router;
