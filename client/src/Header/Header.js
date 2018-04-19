@@ -1,9 +1,12 @@
 import React from 'react';
 import HeaderNavbar from './Navbar/HeaderNavbar';
+import './Header.css';
 
 const Header = (props) => {
   return (
-    <HeaderNavbar auth={props.auth} />
+    <div className="Header">
+      <HeaderNavbar auth={props.auth} />
+    </div>
   );
 }
 

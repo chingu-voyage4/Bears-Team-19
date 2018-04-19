@@ -29,7 +29,7 @@ class HeaderNavbar extends Component {
   render() {
     const loggedIn = this.props.auth && this.props.auth.user;
     return (
-      <Navbar color="light" light expand="sm" className="navbar-expand-sm">
+      <Navbar light expand="sm" className="navbar-expand-sm Navbar">
         <NavbarBrand tag={Link} to="/projects">
           <span className="Header-logo1"><i className="fas fa-code"></i></span>
           <span className="Header-name1">Project</span>
