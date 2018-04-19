@@ -84,7 +84,6 @@ class Contact extends Component {
 
 
     render () {
-        console.log(this.state.project.published, 'this is project')
         if (this.state.redirect) return (<Redirect to="/" />);
         return (
             <div className="container-fluid">
