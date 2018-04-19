@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardHeader, CardText, CardBody,
   CardTitle, CardFooter } from 'reactstrap';
 import KeywordList from './KeywordList/KeywordList';
+import { Link } from 'react-router-dom';
 
 function toLocaleDateStringSupportsLocales() {
   try {
@@ -52,6 +53,7 @@ const ProjectItem = (props) => {
           <div className="ProjectDateSaved">
             {props.project.lastPublished? formatDate(props.project.lastPublished) : ''}
           </div>
+          <Link to={`/contact/${props.project.id}`}>Contact</Link>
         </CardFooter>
       </Card>
     );

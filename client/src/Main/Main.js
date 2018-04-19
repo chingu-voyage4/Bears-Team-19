@@ -6,7 +6,11 @@ import Projects from '../Projects/Projects';
 import NewProjectPage from '../NewProjectPage/NewProjectPage';
 import Auth from '../Auth/Auth.js';
 import LoginPage from '../LoginPage/LoginPage';
+
 import Logout from '../Logout/Logout';
+
+import Contact from '../Contact/Contact.js';
+
 import './Main.css';
 
 const Main = (props) => (
@@ -16,6 +20,8 @@ const Main = (props) => (
       <Route exact path='/projects' component={Projects} />
       <PrivateRoute exact path='/projects/create' component={NewProjectPage} componentProps={props} />
       <PrivateRoute exact path='/logout' component={Logout} componentProps={props} />
+      {/* Contact should only be available when logged in */}
+      <PrivateRoute path='/contact/:id' component={Contact} componentProps={props} />
       <Route exact path='/register' component={Auth} />
       <Route 
         exact path='/login' 
