@@ -19,6 +19,7 @@ function createEmailObject(
   projectOwnerEmail,
   project,
 ) {
+
   const { published } = project;
   const { title: projectTitle } = published;
 
