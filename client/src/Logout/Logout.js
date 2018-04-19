@@ -29,7 +29,7 @@ class Logout extends Component {
 
         return (
             <div className="container-fluid">
-                <div className="d-flex justify-content-center align-items-center h-80">
+                <div className="d-flex justify-content-center align-items-center my-auto h-75">
                     <SpinnerBox message={this.state.message} />
                 </div>
             </div>

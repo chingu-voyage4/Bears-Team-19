@@ -10,20 +10,8 @@ describe("Logout Page", async () => {
 
     it('Logout Component renders', async () => {
 
-        const warpper = shallow(<Logout />);
+        const wrapper = shallow(<Logout />);
         const spinner = wrapper.find(SpinnerBox);
         expect(spinner).toHaveLength(1);
-    })
-
-    it('Componennt redirects to home page if user is not logged in', () => {
-        const wrapper = shallow(
-            <MemoryRouter initialEntries={[ '/', '/logout' ]}>
-                <Logout />
-            </MemoryRouter>
-        );
-
-    })
-
-    it('Component redirects if components successful logs out', async () => {
-    })
+    });
 })

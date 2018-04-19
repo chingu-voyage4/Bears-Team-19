@@ -15,14 +15,12 @@ const Main = (props) => (
       <Route exact path='/' component={Welcome} />
       <Route exact path='/projects' component={Projects} />
       <PrivateRoute exact path='/projects/create' component={NewProjectPage} componentProps={props} />
+      <PrivateRoute exact path='/logout' component={Logout} componentProps={props} />
       <Route exact path='/register' component={Auth} />
       <Route 
         exact path='/login' 
         render={(routeProps) => <LoginPage {...props} {...routeProps} />}
       />
-      <Route exact path='/logout' render={ (routeProps) => {
-        return (<Logout {...props} {...routeProps} />);
-      }}/>
     </Switch>
   </main>
 )
