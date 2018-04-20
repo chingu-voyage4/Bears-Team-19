@@ -14,7 +14,10 @@ const Main = (props) => (
       <Route exact path='/' component={Welcome} />
       <Route exact path='/projects' component={Projects} />
       <PrivateRoute exact path='/projects/create' component={NewProjectPage} componentProps={props} />
-      <Route exact path='/register' component={Auth} />
+      <Route 
+        exact path='/register' 
+        render={(routeProps) => <Auth {...props} {...routeProps} />}
+      />
       <Route 
         exact path='/login' 
         render={(routeProps) => <LoginPage {...props} {...routeProps} />}
