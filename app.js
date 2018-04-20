@@ -38,8 +38,10 @@ const mongoDB = url.format({
   port: process.env.DB_PORT,
   pathname: process.env.NODE_ENV && process.env.NODE_ENV.startsWith('test') ? process.env.DB_TEST_PATH : process.env.DB_PATH,
 });
+
+
 debug(`Connecting to ${mongoDB}`);
-mongoose.connect(mongoDB);
+mongoose.connect(process.env.DB_PRODUCTION);
 mongoose.Promise = global.Promise;
 
 const db = mongoose.connection;
