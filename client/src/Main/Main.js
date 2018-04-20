@@ -22,7 +22,10 @@ const Main = (props) => (
       <PrivateRoute exact path='/logout' component={Logout} componentProps={props} />
       {/* Contact should only be available when logged in */}
       <PrivateRoute path='/contact/:id' component={Contact} componentProps={props} />
-      <Route exact path='/register' component={Auth} />
+      <Route 
+        exact path='/register' 
+        render={(routeProps) => <Auth {...props} {...routeProps} />}
+      />
       <Route 
         exact path='/login' 
         render={(routeProps) => <LoginPage {...props} {...routeProps} />}

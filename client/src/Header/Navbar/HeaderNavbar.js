@@ -8,7 +8,6 @@ import {
   NavItem,
   NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import logo from './logo.svg';
 import './HeaderNavbar.css';
 
 class HeaderNavbar extends Component {
@@ -30,14 +29,18 @@ class HeaderNavbar extends Component {
   render() {
     const loggedIn = this.props.auth && this.props.auth.user;
     return (
-      <Navbar color="faded" light expand="sm" className="navbar-expand-sm">
+      <Navbar light expand="sm" className="navbar-expand-sm Navbar">
         <NavbarBrand tag={Link} to="/projects">
-          <img src={logo} className="Header-logo" alt="logo" />
-          Projects
+          <span className="Header-logo1"><i className="fas fa-code"></i></span>
+          <span className="Header-name1">Project</span>
+          <span className="Header-name2">Zone</span>          
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink tag={Link} to="/projects">Browse</NavLink>
+            </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/">About</NavLink>
             </NavItem>

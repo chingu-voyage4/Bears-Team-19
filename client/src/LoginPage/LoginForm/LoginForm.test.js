@@ -8,10 +8,11 @@ const testProps = {
   onSubmit: () => {},
 };
 
-const USERNAME = 0;
-const PASSWORD = 1;
-const SUBMIT = 2;
-const CHILDREN = 3;
+const ICON = 0;
+const USERNAME = 1;
+const PASSWORD = 2;
+const SUBMIT = 3;
+const CHILDREN = 4;
 
 describe('LoginForm', () => {
   test('It exists', () => {
@@ -38,9 +39,8 @@ describe('LoginForm', () => {
     expect(wrapper.childAt(PASSWORD).props().type).toEqual('password');
     expect(wrapper.childAt(PASSWORD).props().autoComplete).toEqual('current-password');
 
-    expect(wrapper.childAt(SUBMIT)).toHaveLength(1);
-    expect(wrapper.childAt(SUBMIT).childAt(0).type()).toEqual('button');
-    expect(wrapper.childAt(SUBMIT).childAt(0).text()).toEqual('Log In');
+    expect(wrapper.childAt(SUBMIT).type()).toEqual('button');
+    expect(wrapper.childAt(SUBMIT).text()).toEqual('Sign In');
   });
 
   test('When props.disabled is true all elements are disabled', () => {
@@ -51,14 +51,14 @@ describe('LoginForm', () => {
     const wrapper = shallow(<LoginForm {...props} />);
     expect(wrapper.childAt(USERNAME).props().disabled).toEqual(true);
     expect(wrapper.childAt(PASSWORD).props().disabled).toEqual(true);
-    expect(wrapper.childAt(SUBMIT).childAt(0).props().disabled).toEqual(true);
+    expect(wrapper.childAt(SUBMIT).props().disabled).toEqual(true);
   });
 
   test('When props.disabled is false username and password input is possible', () => {
     const wrapper = shallow(<LoginForm {...testProps} />);
     expect(wrapper.childAt(USERNAME).props().disabled).toEqual(false);
     expect(wrapper.childAt(PASSWORD).props().disabled).toEqual(false);
-    expect(wrapper.childAt(SUBMIT).childAt(0).props().disabled).toBeDefined();
+    expect(wrapper.childAt(SUBMIT).props().disabled).toBeDefined();
   });
 
   test('When username is empty the submit button is disabled');

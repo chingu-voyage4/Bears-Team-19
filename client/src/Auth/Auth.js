@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import AsyncFormPage from '../Form/AsyncFormPage'
 import Register from './Register/Register.js';
 import axios from 'axios';
 
@@ -7,14 +9,15 @@ const defaultState = {
     email: '',
     password: '',
     confirmPassword: '',
-    focus: ''
+    focus: '',
 };
 
 class Auth extends Component {
     constructor (props) {
-        super();
+        super(props);
          
         this.state = defaultState;
+        this.handleRegister = this.handleRegister.bind(this);
     }
 
     clearState = () => {
@@ -22,23 +25,14 @@ class Auth extends Component {
     }
 
     handleChange = (input, e) => {
-        console.log(input, e , 'this is handlechange')
         this.setState({
             [input]: e.target.value
         })
     }
 
-    handleSubmit = () => {
-        const {username, email, password } = this.state; 
-        axios.post('/api/users', {username, email, password})
-            .then(res => {       
-                return res.data;
-            })
-            .catch(err => {
-                console.log(err, 'this is err');
-            })
-        return this.clearState();
-    }
+    handleRegister = (userData) => {
+        return axios.post('/api/users', userData);
+    };
 
     onFocus = (element) => {
         return this.setState({
@@ -53,16 +47,26 @@ class Auth extends Component {
     }
 
     render () {
+        const redirect = this.props.location.state && this.props.location.state.from && this.props.location.state.from.pathname
+            ? this.props.location.state.from.pathname 
+            : '/login';
         return(
-            <Register 
-                handleChange={this.handleChange} 
-                inputs={this.state} 
-                handleSubmit={this.handleSubmit}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-                />
+            <AsyncFormPage actionName="Registering" 
+                redirect={redirect} asyncAction={this.handleRegister}
+            >
+                <Register 
+                    handleChange={this.handleChange} 
+                    inputs={this.state} 
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
+                    />
+            </AsyncFormPage>
         )
     }
+};
+
+Auth.propTypes = {
+  location: PropTypes.object.isRequired,
 };
 
 export default Auth;

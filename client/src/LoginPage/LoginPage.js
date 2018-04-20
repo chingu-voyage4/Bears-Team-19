@@ -23,7 +23,7 @@ class LoginPage extends Component {
       ? this.props.location.state.from.pathname 
       : '/projects';
     return (
-      <AsyncFormPage className="LoginPage" title="Log In" actionName="Logging in" 
+      <AsyncFormPage className="LoginPage" actionName="Signing in" 
         redirect={redirect} asyncAction={this.handleLogin}
       >
         <LoginForm />

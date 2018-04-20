@@ -30,6 +30,9 @@ class LoginForm extends Component {
   render() {
     return (
       <form className="LoginForm">
+        <div className="LoginForm-icon mb-4">
+          <i className="fas fa-user fa-5x"></i>
+        </div>
         <LabelledInput
           inputId="username"
           label="Username"
@@ -50,14 +53,12 @@ class LoginForm extends Component {
           placeholder="Enter your password"
           autoComplete="current-password"
         />
-        <div className="form-group">
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={this.handleSubmit}
-            disabled={this.props.disabled || this.state.username === '' || this.state.password === ''}
-          >Log In</button>
-        </div>
+        <button
+          className="btn btn-outline-primary"
+          type="button"
+          onClick={this.handleSubmit}
+          disabled={this.props.disabled || this.state.username === '' || this.state.password === ''}
+        >Sign In</button>
       </form>
     );
   }

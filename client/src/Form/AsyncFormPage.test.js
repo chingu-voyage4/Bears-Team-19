@@ -27,10 +27,9 @@ describe('AsyncFormPage', () => {
       </AsyncFormPage>
     );
     expect(wrapper.hasClass('AsyncFormPage')).toEqual(true);
-    expect(wrapper.children()).toHaveLength(3);
+    expect(wrapper.children()).toHaveLength(2);
     expect(wrapper.childAt(0).type()).toEqual('h1');
     expect(wrapper.childAt(1).type()).toEqual('form');
-    expect(wrapper.childAt(2).containsMatchingElement(<AsyncReportBox />)).toEqual(true);
   });
 
   test('It gives the disabled and onSubmit props to the form', () => {
@@ -43,6 +42,7 @@ describe('AsyncFormPage', () => {
     expect(wrapper.childAt(1).props('onSubmit')).toBeDefined;
   });
 
+  test('It creates an AsyncReportBox dynamically when there is something to report to the user');
   test('It provides the form with a submit callback');
   test('the submit callback disables any input in the form');
   test('The submit callback keeps the user informed with the AsyncReportBox');

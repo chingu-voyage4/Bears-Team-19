@@ -41,10 +41,8 @@ describe('AddProjectForm', () => {
     expect(wrapper.childAt(DESCRIPTION).props().rows).toEqual(10);
     expect(wrapper.childAt(KEYWORDS).type()).toEqual(LabelledTagInput);
     expect(wrapper.childAt(KEYWORDS).props().label).toEqual('Keywords');
-    expect(wrapper.childAt(SUBMIT).type()).toEqual('div');
-    expect(wrapper.childAt(SUBMIT).children()).toHaveLength(1);
-    expect(wrapper.childAt(SUBMIT).childAt(0).type()).toEqual('button');
-    expect(wrapper.childAt(SUBMIT).childAt(0).text()).toEqual('Submit');
+    expect(wrapper.childAt(SUBMIT).type()).toEqual('button');
+    expect(wrapper.childAt(SUBMIT).text()).toEqual('Add Your Project');
   });
 
   test('It disables the submit button when the title is empty', () => {

@@ -1,10 +1,16 @@
-.Header-logo {
-  animation: Header-logo-spin infinite 20s linear;
-  height: 80px;
+@import '../../theme.scss';
+
+.Header-logo1 {
+  margin-right: .5rem;
+  color: $color-main;
 }
 
-@keyframes Header-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.Header-name1 {
+  color: #333333;
+  font-weight: bold;
 }
 
+.Header-name2 {
+  font-style: oblique;
+  color: $color-main;
+}

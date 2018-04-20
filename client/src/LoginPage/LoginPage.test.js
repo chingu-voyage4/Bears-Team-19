@@ -22,10 +22,8 @@ describe('LoginPage', () => {
     const wrapper = shallow(<LoginPage {...props}/>);
     expect(wrapper.type()).toEqual(AsyncFormPage);
     expect(wrapper.hasClass('LoginPage')).toBe(true);
-    expect(wrapper.prop('title')).toBeDefined();
-    expect(wrapper.prop('title')).toEqual('Log In');
     expect(wrapper.prop('actionName')).toBeDefined();
-    expect(wrapper.prop('actionName')).toEqual('Logging in');
+    expect(wrapper.prop('actionName')).toEqual('Signing in');
     expect(wrapper.prop('asyncAction')).toBeDefined();
     expect(wrapper.prop('redirect')).toBeDefined();
     expect(wrapper.prop('redirect')).toEqual('/projects');

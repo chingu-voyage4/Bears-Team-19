@@ -86,7 +86,7 @@ class Contact extends Component {
     render () {
         if (this.state.redirect) return (<Redirect to="/" />);
         return (
-            <div className="container-fluid">
+            <div className="container-fluid py-3 d-flex flex-column justify-content-around">
                 <ContactForm 
                     authorName={this.state.project.authorName}
                     projectTitle={this.state.project.published.title}
