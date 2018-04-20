@@ -1,40 +1,10 @@
 const express = require('express');
 const passport = require('passport');
-const Joi = require('joi');
 
 const router = express.Router();
 
-const validateForm = (req, res, next) => {
-  const { username, password } = req.body;
-
-  const user = {
-    username,
-    password,
-  };
-
-  const schema = Joi.object().keys({
-    username: Joi.string()
-      .regex(/^[a-zA-Z0-9]{5,15}/)
-      .required(),
-    password: Joi.string()
-      .alphanum()
-      .min(6)
-      .required(),
-  });
-
-  Joi.validate(user, schema, (err, value) => {
-    if (err) {
-      return res.status(400).json(err.details[0]);
-    }
-
-    if (!value) return false;
-    return next();
-  });
-};
-
 router.post(
   '/login',
-  validateForm,
   (req, res) => {
     passport.authenticate('local-login', (err, user, info) => {
       // if error return an internal server error
