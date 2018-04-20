@@ -28,6 +28,18 @@ function checkDirty (focus, {username, email, password, confirmPassword}, errors
 }
 
 const Register = (props) => {
+    const handleSubmit = (e) => {
+        // prevent submission of form by browser
+        e.preventDefault();
+
+        // get the data from the form
+        const {username, email, password } = props.inputs;
+
+        // pass the data to the AsyncFormPage for processing
+        // This will cause handleRegister to be called
+        props.onSubmit({username, email, password});
+    };
+
 
     const { focus } = props.inputs;
     const errors = validateInputs(props.inputs);
@@ -35,7 +47,7 @@ const Register = (props) => {
     const isEnabled = Object.keys(errors).some(e => errors[e]);
 
     return (
-        <form className="d-flex flex-column col-xl-4 col-lg-5 col-md-6 col-sm-8 col-9 mx-auto">
+        <form className="Register d-flex flex-column">
             <div className="Register-icon mb-4">
                 <i className="far fa-user fa-5x"></i>
             </div>
@@ -95,7 +107,7 @@ const Register = (props) => {
                     {focus === 'confirmPassword' && errors.confirmPassword && <p className="error-text">Passwords do not match</p>}
                 </div>
             }
-            <button disabled={isEnabled} className={`btn btn-outline-primary ${errors.confirmPassword ? "mt-1" : "mt-3"}`} onClick={props.handleSubmit}>Join</button>
+            <button disabled={isEnabled} className={`btn btn-outline-primary ${errors.confirmPassword ? "mt-1" : "mt-3"}`} onClick={handleSubmit}>Join</button>
         </form>
     )
 };

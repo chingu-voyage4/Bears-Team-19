@@ -1,5 +1,10 @@
 @import '../../theme.scss';
 
+.Register {
+  width: 100%;
+  max-width: 20em;
+}
+
 button:disabled {
     cursor: not-allowed;
 }

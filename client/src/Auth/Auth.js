@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
+import PropTypes from 'prop-types';
+import AsyncFormPage from '../Form/AsyncFormPage'
 import Register from './Register/Register.js';
 import axios from 'axios';
 
@@ -9,7 +10,6 @@ const defaultState = {
     password: '',
     confirmPassword: '',
     focus: '',
-    done: false,
 };
 
 class Auth extends Component {
@@ -17,7 +17,7 @@ class Auth extends Component {
         super(props);
          
         this.state = defaultState;
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRegister = this.handleRegister.bind(this);
     }
 
     clearState = () => {
@@ -30,22 +30,9 @@ class Auth extends Component {
         })
     }
 
-    handleSubmit = (e) => {
-        // prevent submission of form by browser
-        e.preventDefault();
-
-        const {username, email, password } = this.state;
-        axios.post('/api/users', {username, email, password})
-            .then(res => {
-                // set the state so we can redirect next time we render
-                this.setState({ done: true });
-                // tell the App we are logged in
-                this.props.auth.login(res.data);
-            })
-            .catch(err => {
-                console.log(err, 'this is err');
-            })
-    }
+    handleRegister = (userData) => {
+        return axios.post('/api/users', userData);
+    };
 
     onFocus = (element) => {
         return this.setState({
@@ -60,26 +47,26 @@ class Auth extends Component {
     }
 
     render () {
-        if (this.state.done){
-            const redirect = this.props.location.state && this.props.location.state.from && this.props.location.state.from.pathname
-                ? this.props.location.state.from.pathname 
-                : '/projects';
-            return(
-                <Redirect push to={redirect} />
-            );
-        }
+        const redirect = this.props.location.state && this.props.location.state.from && this.props.location.state.from.pathname
+            ? this.props.location.state.from.pathname 
+            : '/login';
         return(
-            <div className="container-fluid d-flex flex-column my-auto py-3">
+            <AsyncFormPage actionName="Registering" 
+                redirect={redirect} asyncAction={this.handleRegister}
+            >
                 <Register 
                     handleChange={this.handleChange} 
                     inputs={this.state} 
-                    handleSubmit={this.handleSubmit}
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
                     />
-            </div>
+            </AsyncFormPage>
         )
     }
+};
+
+Auth.propTypes = {
+  location: PropTypes.object.isRequired,
 };
 
 export default Auth;
