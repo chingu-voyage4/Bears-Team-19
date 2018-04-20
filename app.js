@@ -39,7 +39,7 @@ const mongoDB = url.format({
 });
 
 debug(`Connecting to ${mongoDB}`);
-mongoose.connect(process.env.DB_PRODUCTION);
+mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 
 const db = mongoose.connection;
