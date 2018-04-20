@@ -1,0 +1,29 @@
+@import '../../theme.scss';
+
+.Register {
+  width: 100%;
+  max-width: 20em;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+.error-text {
+    color: $color-error;
+    align-self: flex-start;
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.dirty { 
+    outline: none;
+    border-color: $color-error;
+    border-width: 1px;
+    box-shadow: none;
+    transition: border-color 1s ease-in-out;
+}
+
+.Register-icon {
+  color: $color-main;
+}

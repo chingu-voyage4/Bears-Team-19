@@ -1,0 +1,67 @@
+{
+    "name": "bears-team-19",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node ./bin/www",
+        "dev:start": "nodemon ./bin/www",
+        "lint": "./node_modules/.bin/eslint . || exit 0",
+        "test": "cross-env NODE_ENV=test jest unit",
+        "testint": "cross-env NODE_ENV=test jest -i int",
+        "heroku-postbuild": "cd client && npm install && npm run build",
+        "debug": "nodemon -r dotenv/config ./bin/www"
+    },
+    "dependencies": {
+        "bcrypt": "^1.0.3",
+        "body-parser": "~1.18.2",
+        "cookie-parser": "~1.4.3",
+        "debug": "~3.1.0",
+        "dotenv": "^5.0.1",
+        "express": "~4.16.2",
+        "express-session": "^1.15.6",
+        "jade": "~1.11.0",
+        "joi": "^13.1.2",
+        "mongoose": "^5.0.10",
+        "morgan": "~1.9.0",
+        "node-sass-chokidar": "^1.0.1",
+        "nodemailer": "^4.6.4",
+        "passport": "^0.4.0",
+        "passport-local": "^1.0.0",
+        "serve-favicon": "~2.4.5"
+    },
+    "devDependencies": {
+        "babel-eslint": "^8.2.2",
+        "cross-env": "^5.1.4",
+        "eslint": "^4.18.2",
+        "eslint-config-airbnb": "^16.1.0",
+        "eslint-plugin-import": "^2.9.0",
+        "eslint-plugin-jest": "^21.15.0",
+        "eslint-plugin-jsx-a11y": "^6.0.3",
+        "eslint-plugin-react": "^7.7.0",
+        "jest": "^22.4.2",
+        "nodemon": "^1.17.1",
+        "superagent": "^3.8.2",
+        "supertest": "^3.0.0"
+    },
+    "eslintConfig": {
+        "env": {
+            "node": true,
+            "es6": true,
+            "jest/globals": true
+        },
+        "plugins": [
+            "jest"
+        ],
+        "rules": {
+            "no-underscore-dangle": 0
+        },
+        "extends": "airbnb",
+        "parser": "babel-eslint"
+    },
+    "jest": {
+        "testPathIgnorePatterns": [
+            "/client/",
+            "/node_modules/"
+        ]
+    }
+}

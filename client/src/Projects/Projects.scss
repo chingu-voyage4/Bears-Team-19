@@ -1,0 +1,15 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+.Projects {
+  /* override the container's padding for container-fluid look on small devices only */
+  @include media-breakpoint-down(xs){
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  @include media-breakpoint-up(lg){
+    max-width: 750px;
+  }
+}

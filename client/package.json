@@ -1,0 +1,33 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bootstrap": "^4.0.0",
+    "node-sass-chokidar": "^1.1.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-notification-system": "^0.2.17",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1",
+    "react-tagsinput": "^3.19.0",
+    "react-transition-group": "^2.2.1",
+    "reactstrap": "^5.0.0-beta"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start": "npm run build-css && react-scripts start",
+    "build": "npm run build-css && react-scripts build && rm -rf ../public/build",
+    "postbuild": "mv build ../public",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1"
+  }
+}
