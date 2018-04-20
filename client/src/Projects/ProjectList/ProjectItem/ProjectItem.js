@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardText, CardBody,
   CardTitle, CardFooter } from 'reactstrap';
 import KeywordList from './KeywordList/KeywordList';
@@ -53,6 +54,7 @@ const ProjectItem = (props) => {
           <div className="ProjectDateSaved">
             {props.project.lastPublished? formatDate(props.project.lastPublished) : ''}
           </div>
+          <Link to={`/contact/${props.project.id}`}>Contact</Link>
         </CardFooter>
       </Card>
     );

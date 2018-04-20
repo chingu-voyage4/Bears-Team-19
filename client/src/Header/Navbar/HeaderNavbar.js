@@ -51,7 +51,7 @@ class HeaderNavbar extends Component {
             }
             {loggedIn &&
               <NavItem>
-                <NavLink tag={Link} to="#">Sign Out</NavLink>
+                <NavLink tag={Link} to="/logout">Sign Out</NavLink>
               </NavItem>
             }
             {!loggedIn &&
