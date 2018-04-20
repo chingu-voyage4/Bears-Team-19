@@ -32,7 +32,7 @@ const url = require('url');
 const mongoDB = url.format({
   protocol: 'mongodb',
   slashes: true,
-  auth: `${process.env.DB_USER}:${process.env.DB_PASSWORD }`,
+  auth: process.env.DB_AUTH ? process.env.DB_AUTH : undefined,
   hostname: process.env.DB_HOST,
   port: process.env.DB_PORT,
   pathname: process.env.NODE_ENV && process.env.NODE_ENV.startsWith('test') ? process.env.DB_TEST_PATH : process.env.DB_PATH,
