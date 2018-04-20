@@ -90,3 +90,8 @@ describe('Login Route', () => {
     expect(response.body).not.toHaveProperty('password');
   });
 });
+
+describe('Logout route', async () => {
+  it('Should return an error if a user attempts to logout with no login session');
+  it('Should return a message if a user successfully logs out');
+});
