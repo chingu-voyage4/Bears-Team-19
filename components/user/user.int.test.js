@@ -241,7 +241,18 @@ describe('Create users route', () => {
     expect(response.body.message).toBe('User exists');
   });
 
-  test('Create users route returns a 200 status code and object matching email registered', async () => {
+  test('Create users route returns 201 if a username has uppercase letters', async () => {
+    const user = {
+      username: 'Heyjp',
+      email: 'heyjp@test.com',
+      password: 'testpass',
+    };
+
+    const response = await request(app).post('/api/users').send(user);
+    expect(response.statusCode).toEqual(201);
+  });
+
+  test('Create users route returns a 201 status code and object matching email registered', async () => {
     const user = {
       username: 'heyjp',
       email: 'heyjp@test.com',
