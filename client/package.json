@@ -19,7 +19,8 @@
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "npm run build-css && react-scripts start",
-    "build": "npm run build-css && react-scripts build && cp -r build ../public/build",
+    "build": "npm run build-css && react-scripts build && rm -rf ../public/build",
+    "postbuild": "mv build ../public",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
