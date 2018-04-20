@@ -18,10 +18,8 @@ passport.deserializeUser((id, done) => {
 // https://github.com/RisingStack/nodehero-authentication/blob/master/app/authentication/init.js
 
 passport.use('local-login', new LocalStrategy((username, password, done) => {
-  console.log(username, password, 'this is username and password');
   User.findOne({ username })
     .then((user) => {
-      console.log(user, 'this is user');
       // User does not exist
       if (!user) {
         return done(null, false, { message: 'Username does not exist' });
