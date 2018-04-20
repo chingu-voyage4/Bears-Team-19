@@ -70,15 +70,13 @@ class Auth extends Component {
         }
         return(
             <div className="container-fluid d-flex flex-column my-auto py-3">
-                <div className="d-flex flex-column col-xl-4 col-lg-5 col-md-6 col-sm-8 col-9 mx-auto">
-                    <Register 
-                        handleChange={this.handleChange} 
-                        inputs={this.state} 
-                        handleSubmit={this.handleSubmit}
-                        onFocus={this.onFocus}
-                        onBlur={this.onBlur}
-                        />
-                </div>
+                <Register 
+                    handleChange={this.handleChange} 
+                    inputs={this.state} 
+                    handleSubmit={this.handleSubmit}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
+                    />
             </div>
         )
     }
