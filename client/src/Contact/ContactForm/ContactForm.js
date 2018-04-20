@@ -6,7 +6,8 @@ const ContactForm = (props) => {
     return (
         <div className="container-fluid">
             <div className="mx-auto">
-                <h2>{`Contact ${props.authorName}`}</h2>
+                <p className="lead">{`Contact ${props.authorName}`}</p>
+                <p className="text-muted small">Note: Your email address will be included in the message. The recipient will then contact you directly.</p>
             </div>
             <div className="col-xl-5 col-lg-5 col-md-7 col-sm-10 col-xs-11 my-3 mx-auto">
                 <div className="card contact-card">
@@ -36,7 +37,7 @@ const ContactForm = (props) => {
                             </div>
                             <div>
                                 <button type="button" 
-                                    className="btn btn-primary btn-block"
+                                    className="btn btn-outline-primary btn-block"
                                     onClick={()=> {props.handleSubmit()}}
                                     disabled={props.disabled}
                                     >Submit</button>
