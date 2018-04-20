@@ -54,7 +54,7 @@ class LoginForm extends Component {
           autoComplete="current-password"
         />
         <button
-          className="btn btn-primary"
+          className="btn btn-outline-primary"
           type="button"
           onClick={this.handleSubmit}
           disabled={this.props.disabled || this.state.username === '' || this.state.password === ''}
