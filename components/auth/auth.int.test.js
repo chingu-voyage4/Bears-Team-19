@@ -38,7 +38,7 @@ describe('Login Route', () => {
     const response = await request(app).post('/api/auth/login').send(noUsername);
     expect(response.statusCode).toBe(400);
     expect(response.body).toHaveProperty('message');
-    expect(response.body.message).toEqual('"username" is not allowed to be empty');
+    expect(response.body.message).toEqual('Missing credentials');
   });
 
   test('Login route returns an error message  when a post request is made without a password ', async () => {
@@ -48,7 +48,7 @@ describe('Login Route', () => {
     };
     const response = await request(app).post('/api/auth/login').send(noPassword);
     expect(response.body).toHaveProperty('message');
-    expect(response.body.message).toEqual('"password" is not allowed to be empty');
+    expect(response.body.message).toEqual('Missing credentials');
   });
 
   test('Login route returns an error when a post request is made with a username that does not exist ', async () => {
